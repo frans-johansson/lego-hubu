@@ -1,0 +1,116 @@
+body {
+   margin: 0;
+   background: lightGray;
+   color: white;
+   font-size: 25px;
+   font-family: sans-serif;
+}
+
+h1 {
+   font-size: 30px;
+   text-align: center;
+}
+
+/* Navigationsmeny med logga och användare */
+#header {
+   background: darkBlue;
+   height: 70px;
+   margin: 0;
+   display: flex;
+}
+
+#logo {
+   width: 200px;
+   margin-right: 20px;
+   margin-left: 10px;
+   align-self: center;
+
+   color: gold;
+   font-size: 30px;
+}
+
+#nav {
+   width: 100vw;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+.navOption {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 150px;
+   height: 100%;
+}
+
+.navOption:hover {
+   background: gold;
+   color: darkBlue;
+}
+
+.navOption p {
+   margin: 0;
+}
+
+#profile {
+   height: 70px;
+   width: 70px;
+   background: gold;
+
+   /* För att inte mosa användarrutan med flex*/
+   flex-shrink: 0;
+}
+
+/* Inledande innehåll: Antal bitar, satser och lite text */
+#page {
+   color: black;
+   width: 70%;
+   margin: 50px auto 0 auto;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+}
+
+/* Generell wrapper-div */
+.wrapper {
+   width: 450px;
+}
+
+/* Antal bitar/satser */
+#amountsWrapper {
+   display: flex;
+   flex-direction: column;
+}
+
+.amountBox {
+   background: gold;
+   margin-bottom: 25px;
+}
+
+/* Intressant och lärorik textruta */
+#homeTextBox {
+   margin-bottom: 25px;
+   background: white;
+   width: 600px;
+}
+
+#homeTextBox h1 {
+   margin-top: 0;
+}
+
+#homeTextBox p {
+   margin: 0 5px;
+}
+
+/* Diagram-sektion */
+#diagrams {
+   width: 100%;
+   background: lightBlue;
+}
+
+#diagrams h1 {
+   margin: 0;
+   color: white;
+   background: darkBlue;
+}
