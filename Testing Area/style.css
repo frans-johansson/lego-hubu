@@ -6,6 +6,7 @@ body {
    font-family: sans-serif;
 }
 
+/* Navigationsmeny med logga och användare */
 #header {
    background: darkBlue;
    height: 70px;
@@ -52,5 +53,36 @@ body {
    width: 70px;
    background: gold;
 
+   /* För att inte mosa användarrutan med flex*/
    flex-shrink: 0;
+}
+
+/* Inledande innehåll: Antal bitar, satser och lite text */
+#page {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+
+/* Diagram-del */
+#diagrams{
+	background: LightSkyBlue;
+}
+
+.amountBox {
+   display: flex;
+   flex-direction: columns;
+   justify-content: center;
+   width: 200px;
+   margin: 50px;
+   background: gold;
+}
+
+#textBox{
+	color:black;
+}	
+
+.wrapper{
+	display: flex;
+	justify-content: center;
 }
