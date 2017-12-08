@@ -1,0 +1,56 @@
+body {
+   margin: 0;
+   background: white;
+   color: white;
+   font-size: 25px;
+   font-family: sans-serif;
+}
+
+#header {
+   background: darkBlue;
+   height: 70px;
+   margin: 0;
+   display: flex;
+}
+
+#logo {
+   width: 200px;
+   margin-right: 20px;
+   margin-left: 10px;
+   align-self: center;
+
+   color: gold;
+   font-size: 30px;
+}
+
+#nav {
+   width: 100vw;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+.navOption {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 150px;
+   height: 100%;
+}
+
+.navOption:hover {
+   background: gold;
+   color: darkBlue;
+}
+
+.navOption p {
+   margin: 0;
+}
+
+#profile {
+   height: 70px;
+   width: 70px;
+   background: gold;
+
+   flex-shrink: 0;
+}
