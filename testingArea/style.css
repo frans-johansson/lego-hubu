@@ -1,9 +1,14 @@
 body {
    margin: 0;
-   background: white;
+   background: lightGray;
    color: white;
    font-size: 25px;
    font-family: sans-serif;
+}
+
+h1 {
+   font-size: 30px;
+   text-align: center;
 }
 
 /* Navigationsmeny med logga och användare */
@@ -59,30 +64,53 @@ body {
 
 /* Inledande innehåll: Antal bitar, satser och lite text */
 #page {
-	display: flex;
-	flex-wrap: wrap;
+   color: black;
+   width: 70%;
+   margin: 50px auto 0 auto;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
 }
 
+/* Generell wrapper-div */
+.wrapper {
+   width: 450px;
+}
 
-/* Diagram-del */
-#diagrams{
-	background: LightSkyBlue;
+/* Antal bitar/satser */
+#amountsWrapper {
+   display: flex;
+   flex-direction: column;
 }
 
 .amountBox {
-   display: flex;
-   flex-direction: columns;
-   justify-content: center;
-   width: 200px;
-   margin: 50px;
    background: gold;
+   margin-bottom: 25px;
 }
 
-#textBox{
-	color:black;
-}	
+/* Intressant och lärorik textruta */
+#homeTextBox {
+   margin-bottom: 25px;
+   background: white;
+   width: 600px;
+}
 
-.wrapper{
-	display: flex;
-	justify-content: center;
+#homeTextBox h1 {
+   margin-top: 0;
+}
+
+#homeTextBox p {
+   margin: 0 5px;
+}
+
+/* Diagram-sektion */
+#diagrams {
+   width: 100%;
+   background: lightBlue;
+}
+
+#diagrams h1 {
+   margin: 0;
+   color: white;
+   background: darkBlue;
 }
