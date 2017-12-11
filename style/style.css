@@ -30,21 +30,20 @@
    align-items: center;
 }
 
-
 .navOption {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   width: 150px;
-   height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	color: white;
+	height: 100%;
+	width: 150px;
 }
-
 
 .navOption:hover {
-   background: gold;
-   color: darkBlue;
+	background: gold;
+	color: darkBlue;
 }
-
 
 .navOption p {
    margin: 0;
