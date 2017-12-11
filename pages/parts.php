@@ -14,7 +14,7 @@
 		?>
 		<!-- Inkluderar sidinnehållet -->
 		<?php
-			include "homePage.html";
+			include "partsPage.html";
 		?>
    </body>
 </html>
