@@ -76,6 +76,7 @@ body {
 h1 {
    font-size: 30px;
    text-align: center;
+   margin: 0;
 }
 
 
@@ -104,7 +105,6 @@ h1 {
    display: flex;
    flex-direction: column;
 }
-
 
 .amountBox {
    background: gold;
@@ -149,31 +149,50 @@ h1 {
 }
 
 
-	/* Parts */
+	/* Sökfält för parts och sets	*/
 
 	
 #searchBar {
-	
+	background: darkBlue;
+	padding: 0 10px;
+	display: flex;
+	align-items: center;
+	width: 100vw;
+	height: 50px;
 }
 
 
 #searchField {
-	
+	width: 300px;
+	margin: 0 20px 0 0;
+	background: white;
 }
 
 
 #searchFilters {
-	
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 
 .navFilter {
-	
+	background: gold;
+	width: 100px;
+	text-align: center;
+	margin: 0 20px;
+}
+
+.navFilter p {
+	margin: 0;
+	color: darkBlue;
 }
 
 
 .table {
-	
+	background: lightBlue;
+	width: 100%;
+	height: 100%;
 }
 
 	/* Sets */
