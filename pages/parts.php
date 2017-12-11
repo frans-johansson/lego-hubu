@@ -10,7 +10,7 @@
    <body>
 		<!-- Inkluderar nav-fil -->
 		<?php
-			include "nav.html";
+			include "header.html";
 		?>
 		<!-- Inkluderar sidinnehållet -->
 		<?php
