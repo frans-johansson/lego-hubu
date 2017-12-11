@@ -157,10 +157,16 @@ h1 {
 	padding: 0 10px;
 	display: flex;
 	align-items: center;
-	width: 100vw;
+	width: 100%;
 	height: 50px;
 }
 
+#searchBar form {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: 30px;
+}
 
 #searchField {
 	width: 300px;
@@ -168,13 +174,22 @@ h1 {
 	background: white;
 }
 
-
-#searchFilters {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+/* Borde ligga under textruta!!! */
+#tagList {
+	background: white;
+	width: 300px;
+	float: left;
+	flex: none;
 }
 
+#tagContainer {
+	width: 100%;
+}
+
+label {
+	margin: 0 10px;
+	color: white;
+}
 
 .navFilter {
 	background: gold;
@@ -187,7 +202,6 @@ h1 {
 	margin: 0;
 	color: darkBlue;
 }
-
 
 .table {
 	background: lightBlue;
