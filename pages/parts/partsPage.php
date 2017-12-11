@@ -1,10 +1,10 @@
 <div id="page">
 	<!-- Inkludera sökfält-->
 	<?php
-		include "./res/searchBar.html";
+		include "pages/res/searchbar.html";
 	?>
 	<!-- Inkludera tabell med sökresultat-->
 	<?php
-	 	include "partsTable.html";
+	 	include "pages/parts/partsTable.html";
 	?>
 </div>

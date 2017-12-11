@@ -4,17 +4,17 @@
    <head>
 		<!-- Inkluderar head-fil -->
 		<?php
-			include "res/head.html";
+			include "pages/res/head.html";
 		?>
    </head>
    <body>
 		<!-- Inkluderar nav-fil -->
 		<?php
-			include "res/header.html";
+			include "pages/res/header.html";
 		?>
 		<!-- Inkluderar sidinnehållet -->
 		<?php
-			include "home/homePage.php";
+			include "pages/home/homePage.php";
 		?>
    </body>
 </html>
