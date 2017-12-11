@@ -1,16 +1,22 @@
 <div id="searchBar">
-    <div id="searchField">
-      search
-    </div>
-    <div id="searchFilters">
-        <div class="navFilter">
-            <p>filter1</p>
-        </div>
-        <div class="navFilter">
-            <p>filter2</p>
-        </div>
-        <div class="navFilter">
-            <p>filter3</p>
-        </div>
-    </div>
+	<form action="" method="get">
+		<input type="text" id="searchField" name="q">
+		
+		<!-- Hur får vi denna att bli bra? -->
+		<div id="tagList">
+			massa taggar
+		</div>
+		<div id="tagContainer">
+			tags
+		</div>
+		<label>
+			Filter
+		</label>
+		<select id="searchFilter" name="f">
+			<option value="ageAsc">Oldest - Newest</option>
+			<option value="ageDesc">Newest - Oldest</option>
+			<option value="rarityAsc">Common - Rare</option>
+			<option value="rarityDesc">Rare - Common</option>
+		</select>
+	</form>
 </div>
