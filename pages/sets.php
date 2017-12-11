@@ -14,7 +14,7 @@
 		?>
 		<!-- Inkluderar sidinnehållet -->
 		<?php
-			include "setsPage.html";
+			include "setsPage.php";
 		?>
    </body>
 </html>
