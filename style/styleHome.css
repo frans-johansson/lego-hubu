@@ -27,6 +27,7 @@ h1 {
 
    color: gold;
    font-size: 30px;
+   flex-shrink: 0;
 }
 
 #nav {
