@@ -4,13 +4,13 @@
    <head>
 		<!-- Inkluderar head-fil -->
 		<?php
-			include "head.html";
+			include "res/head.html";
 		?>
    </head>
    <body>
 		<!-- Inkluderar nav-fil -->
 		<?php
-			include "header.html";
+			include "res/header.html";
 		?>
 		<!-- Inkluderar sidinnehållet -->
 		<?php
