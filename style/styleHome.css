@@ -1,23 +1,15 @@
-body {
-   margin: 0;
-   background: lightGray;
-   color: white;
-   font-size: 25px;
-   font-family: sans-serif;
-}
+	/* Fonts etc */
 
-h1 {
-   font-size: 30px;
-   text-align: center;
-}
 
-/* Navigationsmeny med logga och användare */
+	/* Nav */
+
 #header {
    background: darkBlue;
    height: 70px;
    margin: 0;
    display: flex;
 }
+
 
 #logo {
    width: 200px;
@@ -30,12 +22,14 @@ h1 {
    flex-shrink: 0;
 }
 
+
 #nav {
    width: 100vw;
    display: flex;
    justify-content: flex-start;
    align-items: center;
 }
+
 
 .navOption {
    display: flex;
@@ -45,14 +39,17 @@ h1 {
    height: 100%;
 }
 
+
 .navOption:hover {
    background: gold;
    color: darkBlue;
 }
 
+
 .navOption p {
    margin: 0;
 }
+
 
 #profile {
    height: 70px;
@@ -62,6 +59,26 @@ h1 {
    /* För att inte mosa användarrutan med flex*/
    flex-shrink: 0;
 }
+
+
+	/* Page */
+
+	
+body {
+   margin: 0;
+   background: lightGray;
+   color: white;
+   font-size: 25px;
+   font-family: sans-serif;
+}
+
+
+/* Eventuellt flytta till home om ej används någon annanstans */
+h1 {
+   font-size: 30px;
+   text-align: center;
+}
+
 
 /* Inledande innehåll: Antal bitar, satser och lite text */
 #page {
@@ -73,10 +90,15 @@ h1 {
    justify-content: space-between;
 }
 
+
+	/* Home */
+
+	
 /* Generell wrapper-div */
 .wrapper {
    width: 450px;
 }
+
 
 /* Antal bitar/satser */
 #amountsWrapper {
@@ -84,10 +106,12 @@ h1 {
    flex-direction: column;
 }
 
+
 .amountBox {
    background: gold;
    margin-bottom: 25px;
 }
+
 
 /* Intressant och lärorik textruta */
 #homeTextBox {
@@ -96,13 +120,16 @@ h1 {
    width: 600px;
 }
 
+
 #homeTextBox h1 {
    margin-top: 0;
 }
 
+
 #homeTextBox p {
    margin: 0 5px;
 }
+
 
 /* Diagram-sektion */
 #diagrams {
@@ -110,8 +137,21 @@ h1 {
    background: lightBlue;
 }
 
+
 #diagrams h1 {
    margin: 0;
    color: white;
    background: darkBlue;
 }
+
+
+	/* Parts */
+
+
+
+	/* Sets */
+
+
+
+	/* Pop-up */
+
