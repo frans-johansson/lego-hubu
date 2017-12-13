@@ -2,10 +2,11 @@
 	<form action="" method="get">
 		<div id="searchField">
 			<!-- Skriv in sökord -->
-			<input type="text" id="searchText" onkeyup="updateTagList()" onclick="updateTagList()">
-			
+			<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()">
+
+
 			<!-- Lista med val av taggar -->
-			<div id="tagList">
+			<div id="tagList" tabindex="0">
 				<p class="tagOption" id="colorTag">Color: <span class="searchContent"></span> </p>
 				<p class="tagOption" id="setTag">Set: <span class="searchContent"></span> </p>
 				<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
@@ -22,14 +23,13 @@
 			<!-- Samla taggar -->
 			<input id="colorTagList" type="hidden" name="col">
 			<input id="setTagList" type="hidden" name="set">
-			<input id="partTagList" type="hidden" name="bri">
+			<input id="partTagList" type="hidden" name="par">
 			<input id="yearTagList" type="hidden" name="yea">
 			<input id="catTagList" type="hidden" name="cat">
 		</div>
 		
-		<div id="tagContainer">
-			tags hererrr
-		</div>
+		<div id="tagContainer"></div>
+		
 		<label>
 			Filter
 		</label>
