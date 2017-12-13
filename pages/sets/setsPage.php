@@ -1,7 +1,7 @@
 <div id="page">
     <!-- Inkludera sökfält -->
     <?php
-        include "pages/res/searchbar.html";
+        include "pages/res/searchbar.php";
     ?>
 
 	<!-- Inkludera tabellen med histogram-->

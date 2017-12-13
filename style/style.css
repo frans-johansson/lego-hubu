@@ -185,6 +185,10 @@ h1 {
 	overflow: hidden;
 }
 
+.searchContent {
+	pointer-events: none;
+}
+
 #tagContainer {
 	width: 100%;
 }

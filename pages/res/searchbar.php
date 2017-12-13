@@ -2,7 +2,7 @@
 	<form action="" method="get">
 		<div id="searchField">
 			<!-- Skriv in sökord -->
-			<input type="text" id="searchText" onkeyup="updateTagList()">
+			<input type="text" id="searchText" onkeyup="updateTagList()" onclick="updateTagList()">
 			
 			<!-- Lista med val av taggar -->
 			<div id="tagList">
@@ -13,12 +13,18 @@
 				<p class="tagOption" id="catTag">Category: <span class="searchContent"></span> </p>
 			</div>
 			
+			<!-- För att få med sidans GET-variabel i sökningen (annars blir det okul) -->
+			<?php
+				$page = $_GET['p'];
+				echo "<input type=\"hidden\" name=\"p\" value=\"$page\">";
+			?>
+			
 			<!-- Samla taggar -->
-			<input id="colorTagList" type="hidden" name="col" value="">
-			<input id="setTagList" type="hidden" name="set" value="">
-			<input id="partTagList" type="hidden" name="bri" value="">
-			<input id="yearTagList" type="hidden" name="yea" value="">
-			<input id="catTagList" type="hidden" name="cat" value="">
+			<input id="colorTagList" type="hidden" name="col">
+			<input id="setTagList" type="hidden" name="set">
+			<input id="partTagList" type="hidden" name="bri">
+			<input id="yearTagList" type="hidden" name="yea">
+			<input id="catTagList" type="hidden" name="cat">
 		</div>
 		
 		<div id="tagContainer">

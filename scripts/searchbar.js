@@ -1,6 +1,13 @@
+var searchText
+
 function updateTagList() {
-	document.getElementById("tagList").style.display = "inline-block";	
-	var searchText = document.getElementById("searchText").value;
+	searchText = document.getElementById("searchText").value;
+	
+	if (searchText)
+		document.getElementById("tagList").style.display = "inline-block";
+	else 
+		document.getElementById("tagList").style.display = "none";
+	
 	var listthing = document.getElementsByClassName("searchContent");
 	
 	for (var i=0; i < listthing.length; i++) 
@@ -9,18 +16,17 @@ function updateTagList() {
 
 window.onclick = function(click) {
 	if (click.target.className == "tagOption") {
-		var tagID = click.target.id;
-		var tagContent = document.getElementById(tagID).lastChild.innerHTML;
+		var hiddenInputId = click.target.id + "List";
 		
+		if(document.getElementById(hiddenInputId).value == "")
+			document.getElementById(hiddenInputId).value = searchText;
+		else {
+			document.getElementById(hiddenInputId).value += ('&' + searchText);
+		}
 		
-		alert(tagContent);
+		alert(document.getElementById(hiddenInputId).value);
 	}
-	else if (click.target.className == "searchContent") {
-	
-		var tagContent = click.target.innerHTML;
-		alert(tagContent);
-	}
-	else if (click.target.className != "tagList") {
+	else if (!(click.target.className == "tagList" || click.target.id == "searchText")) {
 		document.getElementById("tagList").style.display = "none";
 	}
 }
