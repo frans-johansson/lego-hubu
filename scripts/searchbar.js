@@ -1,12 +1,13 @@
 var searchText;
 
-/* Arrays för arr hålla de olika tag-objekten
-var colTags[];
-var setTags[];
-var parTags[];
-var yeaTags[];
-var catTags[];
-*/
+/* Arrays för arr hålla de olika tag-objekten */
+
+var colTags = new Array();
+var setTags = new Array();
+var parTags = new Array();
+var yeaTags = new Array();
+var catTags = new Array();
+
 
 function updateTagList() {
 	searchText = document.getElementById("searchText").value;
@@ -22,13 +23,14 @@ function updateTagList() {
 		listthing[i].innerHTML = searchText;
 }
 
-/* Lägger till ny klass för taggar
+/* Lägger till ny klass för taggar*/
+
 function Tag(type, content) {
 	this.type = type;
 	this.content = content;
 	var ID;
 }
-*/
+
 
 window.onclick = function(click) {
 	if (click.target.className == "tagOption") {
