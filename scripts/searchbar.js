@@ -8,7 +8,19 @@ function updateTagList() {
 }
 
 window.onclick = function(click) {
-	if (click.target.id != "tagList") {
+	if (click.target.className == "tagOption") {
+		var tagID = click.target.id;
+		var tagContent = document.getElementById(tagID).lastChild.innerHTML;
+		
+		
+		alert(tagContent);
+	}
+	else if (click.target.className == "searchContent") {
+	
+		var tagContent = click.target.innerHTML;
+		alert(tagContent);
+	}
+	else if (click.target.className != "tagList") {
 		document.getElementById("tagList").style.display = "none";
 	}
 }

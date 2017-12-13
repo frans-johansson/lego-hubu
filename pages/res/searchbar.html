@@ -1,15 +1,24 @@
 <div id="searchBar">
 	<form action="" method="get">
 		<div id="searchField">
-			<input type="text" id="searchText" name="q" onkeyup="updateTagList()">
+			<!-- Skriv in sökord -->
+			<input type="text" id="searchText" onkeyup="updateTagList()">
 			
+			<!-- Lista med val av taggar -->
 			<div id="tagList">
-				<p>Color: <span class="searchContent"></span> </p>
-				<p>Set: <span class="searchContent"></span> </p>
-				<p>Brick: <span class="searchContent"></span> </p>
-				<p>Year: <span class="searchContent"></span> </p>
-				<p>Category: <span class="searchContent"></span> </p>
+				<p class="tagOption" id="colorTag">Color: <span class="searchContent"></span> </p>
+				<p class="tagOption" id="setTag">Set: <span class="searchContent"></span> </p>
+				<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
+				<p class="tagOption" id="yearTag">Year: <span class="searchContent"></span> </p>
+				<p class="tagOption" id="catTag">Category: <span class="searchContent"></span> </p>
 			</div>
+			
+			<!-- Samla taggar -->
+			<input id="colorTagList" type="hidden" name="col" value="">
+			<input id="setTagList" type="hidden" name="set" value="">
+			<input id="partTagList" type="hidden" name="bri" value="">
+			<input id="yearTagList" type="hidden" name="yea" value="">
+			<input id="catTagList" type="hidden" name="cat" value="">
 		</div>
 		
 		<div id="tagContainer">
