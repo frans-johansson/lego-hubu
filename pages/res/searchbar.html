@@ -1,13 +1,19 @@
 <div id="searchBar">
 	<form action="" method="get">
-		<input type="text" id="searchField" name="q">
-		
-		<!-- Hur får vi denna att bli bra? -->
-		<div id="tagList">
-			massa taggar
+		<div id="searchField">
+			<input type="text" id="searchText" name="q" onkeyup="updateTagList()">
+			
+			<div id="tagList">
+				<p>Color: <span class="searchContent"></span> </p>
+				<p>Set: <span class="searchContent"></span> </p>
+				<p>Brick: <span class="searchContent"></span> </p>
+				<p>Year: <span class="searchContent"></span> </p>
+				<p>Category: <span class="searchContent"></span> </p>
+			</div>
 		</div>
+		
 		<div id="tagContainer">
-			tags
+			tags hererrr
 		</div>
 		<label>
 			Filter
