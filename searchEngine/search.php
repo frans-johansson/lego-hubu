@@ -21,8 +21,6 @@ else if($_GET["condition"] == "parts"){
 	$where1 = "PartID";	
 	$where2 = "Partname";
 	$or = "OR " . $where2 . " LIKE '%" . $search . "%'";
-SELECT DISTINCT Partname, Year, Setname FROM parts, sets, inventory
-	WHERE ItemID = '32073' AND PartID = '32073' AND sets.SetID = inventory.SetID ORDER BY Year ASC LIMIT 15	$or = "OR " . $where2 . " LIKE '%" . $search . "%'";
 }
 else if($_GET["condition"] == "color"){
 	$table = ", colors";
@@ -44,7 +42,7 @@ else if($_GET["condition"] == "category"){
 if (!empty($_GET["search"])) {
 		$search = $_GET["search"];
 	}
-	$searchQuery = "SELECT	PartID, Partname, Colorname FROM parts, inventory, sets" . $table . " WHERE " . $where1 . " LIKE '%" . $search . "%' 
+	$searchQuery = "SELECT	PartID, Partname, Colorname FROM parts, inventory, sets, colors" . $table . " WHERE PartID = ItemID AND inventory.ColorID = colors.ColorID AND " . $where1 . " LIKE '%" . $search . "%' 
 	" . $or . " LIMIT " . $lowerLimit * $displaylimit . " ," . $displaylimit;
 	
 	// parts, inventory, sets, colors, categories
@@ -99,4 +97,12 @@ while($row = mysqli_fetch_array($result)) {
 	}
 }
 
+/*
+	$searchQuery = "SELECT	PartID, Partname, Colorname, COUNT(DISTINCT SetID) FROM parts, inventory, sets" . $table . " WHERE ItemTypeID = 'P' AND " . $where1 . " LIKE '%" . $search . "%' 
+	" . $or . " GROUP BY ItemID ORDER BY COUNT(DISTINCT SetID) LIMIT " . $lowerLimit * $displaylimit . " ," . $displaylimit;
+
+	
+	SELECT	PartID, Partname, Colorname, COUNT(DISTINCT inventory.SetID) FROM parts, inventory, colors WHERE PartID = ItemID AND inventory.ColorID = colors.ColorID 
+	AND ItemTypeID = 'P' AND PartID LIKE '%320%' GROUP BY ItemID ORDER BY COUNT(DISTINCT inventory.SetID) DESC LIMIT 20
+*/
 ?>
