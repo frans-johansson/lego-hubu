@@ -25,10 +25,10 @@ if($_GET["set"] != ""){
 	
 	$table = "";
 	$whereSets = "(" . $whereSetsString . ")";				// Kom på bättre variabelnamn!
+	// Lägg ihop till en fråga
+	$where += " AND" . $whereSets;
 }
-else {
-	$whereSets = "";
-}
+
 
 if($_GET["par"] != ""){
 	$par = "par";
@@ -44,10 +44,10 @@ if($_GET["par"] != ""){
 	
 	$table = "";
 	$wherePart = "(" . $wherePartsString . ")";
+	// Lägg ihop till en fråga
+	$where += " AND" . $wherePart;
 }
-else {
-	$wherePart = "";
-}
+
 
 if($_GET["col"] != ""){
 	$col = "col";
@@ -63,6 +63,8 @@ if($_GET["col"] != ""){
 	
 	$table = "";
 	$whereColor = "(" . $whereColString . ")";
+	// Lägg ihop till en fråga
+	$where += " AND" . $whereColor;
 }
 
 if($_GET["yea"] != ""){
@@ -79,10 +81,10 @@ if($_GET["yea"] != ""){
 	
 	$table = "";
 	$whereYear = "(" . $whereYearString . ")";
+	// Lägg ihop till en fråga
+	$where += " AND" . $whereYear;
 }
-else {
-	$whereYear = "";
-}
+
 
 if($_GET["cat"] != ""){
 	$cat = "cat";
@@ -98,10 +100,10 @@ if($_GET["cat"] != ""){
 	
 	$table = ", categories";
 	$whereCat = "(" . $whereCatString . ") AND parts.CatID = categories.CatID AND categories.CatID = sets.SetID";
+	// Lägg ihop till en fråga
+	$where += " AND" . $whereCat;
 }
-else {
-	$whereCat = "";
-}
+
 
 
 // Få fram i vilken ordning obejekten ska visas
@@ -122,14 +124,10 @@ $group = "Colorname, PartID";
 // Eller $group = vad? Eventuellt group by Colorname and group by PartID
 
 
-//Sök
-if (!empty($_GET["search"])) {
-		$search = $_GET["search"];
-	}
 	
 // Skapa sökfrågan
 $searchQuery = "SELECT	PartID, Partname, Colorname, COUNT(DISTINCT inventory.SetID), MIN(Year) FROM parts, inventory, sets, colors" . $table . " WHERE PartID = ItemID AND inventory.ColorID = colors.ColorID AND 
-				ItemTypeID = 'P' AND inventory.SetID = sets.SetID AND" . $where . " GROUP BY " . $group . " ORDER BY " . $order . " LIMIT " . $lowerLimit * $displaylimit . " ," . $displaylimit;
+				ItemTypeID = 'P' AND inventory.SetID = sets.SetID" . $where . " GROUP BY " . $group . " ORDER BY " . $order . " LIMIT " . $lowerLimit * $displaylimit . " ," . $displaylimit;
 
 	
 // Testa om det går bra att koppla upp mot databasen
