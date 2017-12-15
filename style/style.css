@@ -4,20 +4,22 @@
 	/* Nav */
 
 #header {
-   background: darkBlue;
+   background: #3872A9;
    height: 70px;
    margin: 0;
    display: flex;
+   align-items: center;
 }
 
 
 #logo {
    width: 200px;
    margin-right: 20px;
-   margin-left: 10px;
-   align-self: center;
+   padding-left: 10px;
+   height: 100%;
 
-   color: gold;
+   background: #458BCF;
+   color: #F0C247;
    font-size: 30px;
    flex-shrink: 0;
 }
@@ -41,8 +43,8 @@
 }
 
 .navOption:hover {
-	background: gold;
-	color: darkBlue;
+	background: #F0C247;
+	color: #3872A9;
 }
 
 .navOption p {
@@ -53,7 +55,7 @@
 #profile {
    height: 70px;
    width: 70px;
-   background: gold;
+   background: #F0C247;
 
    /* För att inte mosa användarrutan med flex*/
    flex-shrink: 0;
@@ -65,7 +67,7 @@
 	
 body {
    margin: 0;
-   background: lightGray;
+   background: #EEE;
    color: white;
    font-size: 25px;
    font-family: sans-serif;
@@ -107,7 +109,7 @@ h1 {
 }
 
 .amountBox {
-   background: gold;
+   background: #F0C247;
    margin-bottom: 25px;
    text-decoration: none;
    color: black;
@@ -135,14 +137,14 @@ h1 {
 /* Diagram-sektion */
 #diagrams {
    width: 100%;
-   background: lightBlue;
+   background: #9CC4EA;
 }
 
 
 #diagrams h1 {
    margin: 0;
    color: white;
-   background: darkBlue;
+   background: #3872A9;
 }
 
 
@@ -155,7 +157,7 @@ h1 {
 
 	
 #searchBar {
-	background: darkBlue;
+	background: #3872A9;
 	padding: 0 10px;
 	display: flex;
 	align-items: center;
@@ -226,6 +228,12 @@ label {
 	background: lightBlue;
 	width: 100%;
 	height: 100%;
+}
+
+#canvas{
+	
+border: 1px solid black;
+	
 }
 
 	/* Sets */
