@@ -22,19 +22,9 @@ function Tag(type, content, ID) {
 	this.ID = ID;
 }
 
-
-
 window.onclick = function(click) {
 	if (click.target.className == "tagOption") {
 		var inputID = click.target.id + "List";
-		
-		/*
-		if(document.getElementById(hiddenInputId).value == "")
-			document.getElementById(hiddenInputId).value = searchText;
-		else {
-			document.getElementById(hiddenInputId).value += ('&' + searchText);
-		}
-		*/
 		
 		tag = new Tag(click.target.id, searchText, inputID);
 	
@@ -43,6 +33,56 @@ window.onclick = function(click) {
 	else if (!(click.target.className == "tagList" || click.target.id == "searchText")) {
 		document.getElementById("tagList").style.display = "none";
 	}
+}
+
+function DecodeURLParameter(Parameter)
+{
+	var FullURL = window.location.search.substring(1);
+	var ParametersArray = FullURL.split('&');
+	for (var i = 0; i < ParametersArray.length; i++)
+	{
+		var CurrentParameter = ParametersArray[i].split('=');
+		if(CurrentParameter[0] == Parameter && CurrentParameter[1] != "")
+		{
+			var fullGet = CurrentParameter[1];
+			fullGet = decodeURIComponent(fullGet);
+			var getArray = fullGet.split('&');
+			return getArray;
+		}
+	}
+}
+
+function recreateTags(tagArray, type) {
+	for(var i = 0; i < tagArray.length; i++) {
+		var ID = type + "List";
+		tag = new Tag(type, tagArray[i], ID);
+		
+		makeTag(tag);
+	}
+}
+
+window.onload = function() {
+	var colors = DecodeURLParameter("col");
+	var sets = DecodeURLParameter("set");
+	var parts = DecodeURLParameter("par");
+	var years = DecodeURLParameter("yea");
+	var categories = DecodeURLParameter("cat");
+	
+	/*lägg till taggar*/
+	if (colors)
+		recreateTags(colors, "colorTag");
+	
+	if (sets)
+		recreateTags(sets, "setTag");
+	
+	if (parts)
+		recreateTags(parts, "partTag");
+	
+	if (years)
+		recreateTags(years, "yearTag");
+	
+	if (categories)
+		recreateTags(categories, "catTag");
 }
 
 function makeTag(tag) {
