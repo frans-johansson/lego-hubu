@@ -2,6 +2,7 @@
         <!--Inkludera fil med övre sidinnehållet-->
         <?php
             include "upperHome.html"
+			
         ?>
         <!--Inkludera diagram-fil-->
         <?php

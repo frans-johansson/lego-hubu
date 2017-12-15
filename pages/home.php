@@ -7,7 +7,7 @@
 			include "pages/res/head.html";
 		?>
    </head>
-   <body>
+   <body onload="line()">
 		<!-- Inkluderar nav-fil -->
 		<?php
 			include "pages/res/header.html";
