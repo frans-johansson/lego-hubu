@@ -1,4 +1,6 @@
 <?php
+	include "pages/profile.php";
+
     if (!isset($_GET['p']))
     {
         include "pages/home.php";

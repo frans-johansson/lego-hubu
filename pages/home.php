@@ -16,5 +16,6 @@
 		<?php
 			include "pages/home/homePage.php";
 		?>
+
    </body>
 </html>

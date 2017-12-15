@@ -1,5 +1,4 @@
-<!-- Gör kanske till klass beroende på om fler popups behövs -->
-<div id="profilePopup">
+<div id="profilePopup" onclick="togglePopup()">
  <div id="profileSets">
     <p>Sets</p>
  </div>

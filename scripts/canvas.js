@@ -3,6 +3,14 @@ window.onload = function(){
 	
 	var c=document.getElementById("canvas");
 	var ctx=c.getContext("2d");
+	
+	/* Bestämma bredd och höjd */
+	
+	var parentWidth = c.parentNode.getBoundingClientRect().width;
+	
+	c.width = parentWidth;
+	c.height = 400px;
+
 	ctx.beginPath();
 	ctx.moveTo(0,0);
 	ctx.lineTo(100,150);
