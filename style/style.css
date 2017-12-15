@@ -236,23 +236,31 @@ label {
 	
 }
 
+	/* Användarens pop-up */
+
 #profilePopup{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	width: 300px;
-	height: 160px;
+	position: absolute;
 	display: none;
 	float: right;
+	width: 300px;
+	height: 160px;
 	background: #F0C247;
-	
+	text-align: center;
+}
+
+#profileWrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
 #profileParts{
-	border: 1px solid #3872A9;
+	width: 100%;
+	border: 5px solid #3872A9;
 }
 #profileSets{
-	border: 1px solid #3872A9;
+	border: 5px solid #3872A9;
+	width: 100%;
 }
 
 	/* Sets */
