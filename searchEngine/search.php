@@ -11,104 +11,145 @@ if(!$lowerLimit || $lowerLimit < 0) {
 
 $displaylimit = 20;
 
-// Frågan som ska fyllas på beroende på sökningen
-$where = "";
 
+function getToSQL($getpara, $condition1, $condition2, $tableAdd, $whereAdd){
+	$getArray = splitGet($getpara);
+	$length = count($getArray);
+	
+	for($i = 0; $i < $length; $i++) {
+		$whereString .= $condition1 . " LIKE '%" . $getArray[$i] . "%'";
+		
+		if($condition2) {
+			$whereString .= " OR " . $condition2 . " LIKE '%" . $getArray[$i] . "%'";
+		}
+		
+		if($i != $length-1) {
+			$whereString .= " OR ";
+		}
+	}
+	
+	$table .= "";
+	
+	$whereGet = "(" . $whereString . ")";				// Kom på bättre variabelnamn!
+	// Lägg ihop till en fråga
+	$where .= " AND " . $whereGet . $whereAdd;
+	
+	
+	return $where;
+}
+
+if($_GET["set"])
+	$where .= getToSQL("set", "inventory.SetID", "Setname", "", "");
+
+if($_GET["par"])
+	$where .= getToSQL("par", "PartID", "Partname", "", "");
+
+if($_GET["col"])
+	$where .= getToSQL("col", "Colorname", "", "", "");
+
+if($_GET["yea"])
+	$where .= getToSQL("yea", "MIN(Year)", "", "", "");
+
+if($_GET["cat"])
+	$where .= getToSQL("cat", "Categoryname", "", ", categories", " AND parts.CatID = categories.CatID AND categories.CatID = sets.SetID");
+
+
+/*
 // Få fram vilka frågor som ska ställas
-if(isset($_GET["set"])){
+if($_GET["set"]){
 	$set = "set";
 	$setGetArray = splitGet($set);
 	$length = count($setGetArray);
 	
 	for($i = 0; $i < $length; $i++) {
-		$whereSetsString += "inventory.SetID LIKE '%" . $setGetArray[$i] . "%' OR Setname LIKE '%" . $setGetArray[$i] . "%'";
+		$whereSetsString .= "inventory.SetID LIKE '%" . $setGetArray[$i] . "%' OR Setname LIKE '%" . $setGetArray[$i] . "%'";
 		if($i != $length-1) {
-			$whereSetsString += " OR ";
+			$whereSetsString .= " OR ";
 		}
 	}
 	
-	$table = "";
+	$table .= "";
 	$whereSets = "(" . $whereSetsString . ")";				// Kom på bättre variabelnamn!
 	// Lägg ihop till en fråga
-	$where += " AND" . $whereSets;
+	$where .= " AND " . $whereSets;
 }
 
 
-if(isset($_GET["par"])){
+if($_GET["par"]){
 	$par = "par";
 	$parGetArray = splitGet($par);
 	$length = count($parGetArray);
 	
 	for($i = 0; $i < $length; $i++) {
-		$wherePartsString += "PartID LIKE '%" . $parGetArray[$i] . "%' OR Partname LIKE '%" . $parGetArray[$i] . "%'";
+		$wherePartsString .= "PartID LIKE '%" . $parGetArray[$i] . "%' OR Partname LIKE '%" . $parGetArray[$i] . "%'";
 		if($i != $length-1) {
-			$wherePartsString += " OR ";
+			$wherePartsString .= " OR ";
 		}
 	}
 	
-	$table = "";
+	$table .= "";
 	$wherePart = "(" . $wherePartsString . ")";
 	// Lägg ihop till en fråga
-	$where += " AND" . $wherePart;
+	$where .= " AND " . $wherePart;
 }
 
 
-if(isset($_GET["col"])){
+if($_GET["col"]){
 	$col = "col";
 	$colGetArray = splitGet($col);
 	$length = count($colGetArray);
 	
 	for($i = 0; $i < $length; $i++) {
-		$whereColString += "Colorname LIKE '%" . $colGetArray[$i] . "%'";
+		$whereColString .= "Colorname LIKE '%" . $colGetArray[$i] . "%'";
 		if($i != $length-1) {
-			$whereColString += " OR ";
+			$whereColString .= " OR ";
 		}
 	}
 	
-	$table = "";
+	$table .= "";
 	$whereColor = "(" . $whereColString . ")";
 	// Lägg ihop till en fråga
-	$where += " AND" . $whereColor;
+	$where .= " AND " . $whereColor;
 }
 
-if(isset($_GET["yea"])){
+if($_GET["yea"]){
 	$yea = "yea";
 	$yeaGetArray = splitGet($yea);
 	$length = count($yeaGetArray);
 	
 	for($i = 0; $i < $length; $i++) {
-		$whereYearString += "MIN(Year) LIKE '%" . $yeaGetArray[$i] . "%'";
+		$whereYearString .= "MIN(Year) LIKE '%" . $yeaGetArray[$i] . "%'";
 		if($i != $length-1) {
-			$whereYearString += " OR ";
+			$whereYearString .= " OR ";
 		}
 	}
 	
-	$table = "";
+	$table .= "";
 	$whereYear = "(" . $whereYearString . ")";
 	// Lägg ihop till en fråga
-	$where += " AND" . $whereYear;
+	$where .= " AND " . $whereYear;
 }
 
 
-if(isset($_GET["cat"])){
+if($_GET["cat"]){
 	$cat = "cat";
 	$catGetArray = splitGet($cat);
 	$length = count($catGetArray);
 	
 	for($i = 0; $i < $length; $i++) {
-		$whereCatString += "Categoryname LIKE '%" . $catGetArray[$i] . "%'";
+		$whereCatString .= "Categoryname LIKE '%" . $catGetArray[$i] . "%'";
 		if($i != $length-1) {
-			$whereCatString += " OR ";
+			$whereCatString .= " OR ";
 		}
 	}
 	
-	$table = ", categories";
+	$table .= ", categories";
 	$whereCat = "(" . $whereCatString . ") AND parts.CatID = categories.CatID AND categories.CatID = sets.SetID";
 	// Lägg ihop till en fråga
-	$where += " AND" . $whereCat;
+	$where .= " AND " . $whereCat;
 }
 
-
+*/
 
 // Kolla om något sökts på
 
@@ -135,8 +176,15 @@ $group = "Colorname, PartID";
 // Eller $group = vad? Eventuellt group by Colorname and group by PartID
 
 
+// Kolla om sökningen ska vara inom den egna samlingen
+if($_GET["c"]) {
+	$where .= " AND collection.SetID = inventory.SetID";
+	$table .= ", collection";
+}
+
+
 if(!$where) {
-	// DO nothing
+	// Do nothing
 }
 else {	
 // Skapa sökfrågan
@@ -158,8 +206,17 @@ $connection = mysqli_connect("mysql.itn.liu.se","lego","","lego");
 	
 //	Ställ	frågan																																																			
 	$result	= mysqli_query($connection, "$searchQuery");
+
+	$row = mysqli_fetch_array($result);
 }
-	
+
+
+// Ge felmeddelande om sökningen inte ger några resultat
+if(!$row && $where) {
+	print "Your search generated no results. Please search for something else!";
+}
+
+
 while($row = mysqli_fetch_array($result)) {
 	// Lägg informationen som ska visas i separata variabler
 	$ID = $row["PartID"];
@@ -168,16 +225,16 @@ while($row = mysqli_fetch_array($result)) {
 	$numSets = $row["COUNT(DISTINCT inventory.SetID)"];
 	$Year = $row["MIN(Year)"];
 
-		
+	
 	// Fråga efter den information som är relevant för att få fram en bild
 	$info = mysqli_query($connection, "SELECT colors.ColorID, ItemTypeID, has_gif, has_jpg, has_largegif, has_largejpg FROM images, colors 
-		WHERE ItemID = '$ID' AND Colorname = '$Color' AND colors.ColorID = images.ColorID");
-	
+	WHERE ItemID = '$ID' AND Colorname = '$Color' AND colors.ColorID = images.ColorID");
+
 	$format = mysqli_fetch_array($info);
-	
+
 	// Lägg den nödvändiga informationen för bildnamnet i variabler
 	$Itemtype = $format["ItemTypeID"];
-	$ColorID = $format["ColorID"];
+		$ColorID = $format["ColorID"];
 	
 								
 	// Bilda länken till den bild som ska visas
@@ -201,6 +258,7 @@ while($row = mysqli_fetch_array($result)) {
 	// Skriv ut detta i tabellen
 	print "<tr><td><img src=\"$link\" alt=\"$name\"></td><td>" . $ID . "</td><td>" . $Partname . "</td><td>" . $Color . "</td><td>" . $numSets . "</td><td>" . $Year . "</td></tr>";
 }
+
 
 
 /*

@@ -5,7 +5,7 @@
 window.onload = function(){
 	
 	// Hämtar URL:en, delar upp den och hämtar värdet för GET-parametern med samma namn som funktionsparametern
-	function DecodeURLParameter(Parameter)
+	function DecodeURLPageParameter(Parameter)
 	{
 		var FullURL = window.location.search.substring(1);
 		var ParametersArray = FullURL.split('&');
@@ -20,10 +20,9 @@ window.onload = function(){
 	}
 	
 	//Hämta vad man sökt på från URL
-	var Search = DecodeURLParameter('search');
 	
 	//Hämta sidonummer från URL
-	var PageName = parseInt(DecodeURLParameter('page'));
+	var PageName = parseInt(DecodeURLPageParameter('page'));
 
 	
 	//Förhindrar sidonummer från att vara negativt
