@@ -1,6 +1,8 @@
 <div id="searchBar">
+
+	<!-- Vänliga hjälpmeddelanden -->
 	<noscript>
-		VÄNLIGEN AKTIVERA JAVASCRIPT TACK!
+		VÄNLIGEN AKTIVERA JAVASCRIPT, TACK!
 	</noscript>
 
 	<form action="" method="get" onsubmit="setParams()">
@@ -33,6 +35,19 @@
 		
 		<div id="tagContainer"></div>
 		
+		<label>
+			Show only my collection
+		</label>
+		
+		<!-- Lägg till checkbox och se till att den är markerad även efter sökning -->
+		<?php
+			if (isset($_GET['c']))
+				echo "<input type=\"checkbox\" name=\"c\" value=\"true\" checked=\"checked\">";
+			else
+				echo "<input type=\"checkbox\" name=\"c\" value=\"true\">";
+		?>
+		
+		<!-- Drop-down-lista för sorteringsalternativ -->
 		<label>
 			Filter
 		</label>
