@@ -5,6 +5,6 @@
 	?>
 	<!-- Inkludera tabell med sökresultat-->
 	<?php
-	 	include "pages/parts/partsTable.html";
+	 	include "pages/parts/partsTable.php";
 	?>
 </div>

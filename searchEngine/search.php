@@ -2,6 +2,7 @@
 //Hämta sida
 $lowerLimit = $_GET["page"];
 
+include "searchEngine/separate.php";
 
 //Nollställ sida om ingen finns eller är mindre än noll
 if(!$lowerLimit || $lowerLimit < 0) {
@@ -14,7 +15,7 @@ $displaylimit = 20;
 $where = "";
 
 // Få fram vilka frågor som ska ställas
-if($_GET["set"] != ""){
+if(isset($_GET["set"])){
 	$set = "set";
 	$setGetArray = splitGet($set);
 	$length = count($setGetArray);
@@ -33,7 +34,7 @@ if($_GET["set"] != ""){
 }
 
 
-if($_GET["par"] != ""){
+if(isset($_GET["par"])){
 	$par = "par";
 	$parGetArray = splitGet($par);
 	$length = count($parGetArray);
@@ -52,7 +53,7 @@ if($_GET["par"] != ""){
 }
 
 
-if($_GET["col"] != ""){
+if(isset($_GET["col"])){
 	$col = "col";
 	$colGetArray = splitGet($col);
 	$length = count($colGetArray);
@@ -70,7 +71,7 @@ if($_GET["col"] != ""){
 	$where += " AND" . $whereColor;
 }
 
-if($_GET["yea"] != ""){
+if(isset($_GET["yea"])){
 	$yea = "yea";
 	$yeaGetArray = splitGet($yea);
 	$length = count($yeaGetArray);
@@ -89,7 +90,7 @@ if($_GET["yea"] != ""){
 }
 
 
-if($_GET["cat"] != ""){
+if(isset($_GET["cat"])){
 	$cat = "cat";
 	$catGetArray = splitGet($cat);
 	$length = count($catGetArray);
@@ -106,6 +107,7 @@ if($_GET["cat"] != ""){
 	// Lägg ihop till en fråga
 	$where += " AND" . $whereCat;
 }
+
 
 
 // Kolla om något sökts på
@@ -133,7 +135,10 @@ $group = "Colorname, PartID";
 // Eller $group = vad? Eventuellt group by Colorname and group by PartID
 
 
-	
+if(!$where) {
+	// DO nothing
+}
+else {	
 // Skapa sökfrågan
 $searchQuery = "SELECT	PartID, Partname, Colorname, COUNT(DISTINCT inventory.SetID), MIN(Year) FROM parts, inventory, sets, colors" . $table . " WHERE PartID = ItemID AND inventory.ColorID = colors.ColorID AND 
 				ItemTypeID = 'P' AND inventory.SetID = sets.SetID" . $where . " GROUP BY " . $group . " ORDER BY " . $order . " LIMIT " . $lowerLimit * $displaylimit . " ," . $displaylimit;
@@ -142,15 +147,18 @@ $searchQuery = "SELECT	PartID, Partname, Colorname, COUNT(DISTINCT inventory.Set
 // Testa om det går bra att koppla upp mot databasen
 $connection = mysqli_connect("mysql.itn.liu.se","lego","","lego");
 	
-	if (!$link) {
+	if (!$connection) {
 		echo "Error: Unable to connect to MySQL." . PHP_EOL;
-		echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+		echo "Debugging error: " . mysqli_connect_errno() . PHP_EOL;
 		echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
 		exit;
 	}
 	
+	print "$searchQuery";
+	
 //	Ställ	frågan																																																			
 	$result	= mysqli_query($connection, "$searchQuery");
+}
 	
 while($row = mysqli_fetch_array($result)) {
 	// Lägg informationen som ska visas i separata variabler
@@ -162,9 +170,10 @@ while($row = mysqli_fetch_array($result)) {
 
 		
 	// Fråga efter den information som är relevant för att få fram en bild
-	$format = mysqli_query($connection, "SELECT colors.ColorID, ItemTypeID, has_gif, has_jpg, has_largegif, has_largejpg FROM images, colors 
+	$info = mysqli_query($connection, "SELECT colors.ColorID, ItemTypeID, has_gif, has_jpg, has_largegif, has_largejpg FROM images, colors 
 		WHERE ItemID = '$ID' AND Colorname = '$Color' AND colors.ColorID = images.ColorID");
 	
+	$format = mysqli_fetch_array($info);
 	
 	// Lägg den nödvändiga informationen för bildnamnet i variabler
 	$Itemtype = $format["ItemTypeID"];
@@ -174,24 +183,25 @@ while($row = mysqli_fetch_array($result)) {
 	// Bilda länken till den bild som ska visas
 	if($format["has_jpg"]) {
 		$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.jpg';
-		$link = 'http://www.itn.liu.se/~stegu76/img.bricklink.com/$name';
+		$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
 	}
 	else if($format["has_gif"]) {
 		$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.gif';
-		$link = 'http://www.itn.liu.se/~stegu76/img.bricklink.com/$name';
+		$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
 	}
 	else if($format["has_largejpg"]) {
 		$name = $Itemtype . 'L/' . $ID . '.jpg';
-		$link = 'http://www.itn.liu.se/~stegu76/img.bricklink.com/$name';
+		$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
 	}
 	else if($format["has_largegif"]) {
 		$name = $Itemtype . 'L/' . $ID . '.gif';
-		$link = 'http://www.itn.liu.se/~stegu76/img.bricklink.com/$name';
+		$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
 	}
 	
 	// Skriv ut detta i tabellen
-	print "<tr><td>" . $link . "</td><td>" . $ID . "</td><td>" . $Partname . "</td><td>" . $Color . "</td><td>" . $numSets . "</td><td>" . $Year . "</td></tr>";
+	print "<tr><td><img src=\"$link\" alt=\"$name\"></td><td>" . $ID . "</td><td>" . $Partname . "</td><td>" . $Color . "</td><td>" . $numSets . "</td><td>" . $Year . "</td></tr>";
 }
+
 
 /*
 	$searchQuery = "SELECT	PartID, Partname, Colorname, COUNT(DISTINCT SetID) FROM parts, inventory, sets" . $table . " WHERE ItemTypeID = 'P' AND " . $where1 . " LIKE '%" . $search . "%' 
