@@ -5,6 +5,4 @@ function splitGet($parameter) {
 	$getArray = explode("&", $fullGet);
 	return $getArray;
 }
-$test = "test";
-print_r (splitGet($test));
 ?>

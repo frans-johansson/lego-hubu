@@ -10,6 +10,9 @@ if(!$lowerLimit || $lowerLimit < 0) {
 
 $displaylimit = 20;
 
+// Frågan som ska fyllas på beroende på sökningen
+$where = "";
+
 // Få fram vilka frågor som ska ställas
 if($_GET["set"] != ""){
 	$set = "set";
@@ -105,6 +108,8 @@ if($_GET["cat"] != ""){
 }
 
 
+// Kolla om något sökts på
+
 
 // Få fram i vilken ordning obejekten ska visas
 if($_GET["f"] == "ageAsc") {
@@ -117,6 +122,10 @@ else if($_GET["f"] == "rarityAsc") {
 	$order = "COUNT(DISTINCT inventory.SetID) ASC";
 }
 else if($_GET["f"] == "rarityDesc") {
+	$order = "COUNT(DISTINCT inventory.SetID) DESC";
+}
+else {
+	// Ett default till innan användaren valt sortering
 	$order = "COUNT(DISTINCT inventory.SetID) DESC";
 }
 
@@ -179,6 +188,9 @@ while($row = mysqli_fetch_array($result)) {
 		$name = $Itemtype . 'L/' . $ID . '.gif';
 		$link = 'http://www.itn.liu.se/~stegu76/img.bricklink.com/$name';
 	}
+	
+	// Skriv ut detta i tabellen
+	print "<tr><td>" . $link . "</td><td>" . $ID . "</td><td>" . $Partname . "</td><td>" . $Color . "</td><td>" . $numSets . "</td><td>" . $Year . "</td></tr>";
 }
 
 /*
