@@ -46,7 +46,7 @@ window.onclick = function(click) {
 }
 
 function makeTag(tag) {
-	/* Skapar ny tag och lägger till den i dokumentet*/
+	/* Skapar ny tag (div) och lägger till den i dokumentet*/
 	
 	var newTag = document.createElement("div");
 	newTag.className = tag.type;
@@ -67,6 +67,19 @@ function setParams() {
 	var tags = tagContainer.childNodes;
 	
 	for (var i = 0; i < tags.length; i++) {
-		tags[i] /*Hantera GET-parametrar till hidden här*/
+		
+		if(document.getElementById(tags[i].className + "List").value == "") {
+			document.getElementById(tags[i].className + "List").value = tags[i].textContent;
+		}
+		else {
+			document.getElementById(tags[i].className + "List").value += "&" + tags[i].textContent;
+		}
 	}
 }
+
+
+
+
+
+
+
