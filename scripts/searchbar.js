@@ -1,15 +1,6 @@
 var searchText;
 
-/* Arrays för arr hålla de olika tag-objekten */
-
-var colTags = new Array();
-var setTags = new Array();
-var parTags = new Array();
-var yeaTags = new Array();
-var catTags = new Array();
-
-
-function updateTagList() {
+updateTagList = function() {
 	searchText = document.getElementById("searchText").value;
 	
 	if (searchText)
@@ -23,22 +14,21 @@ function updateTagList() {
 		listthing[i].innerHTML = searchText;
 }
 
-/* Lägger till ny klass för taggar*/
+/* Lägger till ny klass för taggar */
 
-function Tag(type, content) {
+function Tag(type, content, ID) {
 	this.type = type;
 	this.content = content;
-	var ID;
+	this.ID = ID;
 }
+
 
 
 window.onclick = function(click) {
 	if (click.target.className == "tagOption") {
+		var inputID = click.target.id + "List";
 		
 		/*
-		var hiddenInputId = click.target.id + "List";
-		
-		
 		if(document.getElementById(hiddenInputId).value == "")
 			document.getElementById(hiddenInputId).value = searchText;
 		else {
@@ -46,31 +36,37 @@ window.onclick = function(click) {
 		}
 		*/
 		
-		/* Skapar tag beroende på vad som klickades på */
-		
-		tag = new Tag(click.target.id, document.getElementById(hiddenInputId).value);
-		
-		/* Bestäm vilken array tag-objektet ska ligga i */
-		if (tag.type == "colorTag") {
-			colTags.push(tag);
-			tag.ID = colTags.length; /* Bestäm ID beroende på array length */
-			alert(tag.ID);
-		}
+		tag = new Tag(click.target.id, searchText, inputID);
+	
+		makeTag(tag);
 	}
 	else if (!(click.target.className == "tagList" || click.target.id == "searchText")) {
 		document.getElementById("tagList").style.display = "none";
 	}
 }
 
-/*
 function makeTag(tag) {
-	var newTag = document.createElement("DIV");
+	/* Skapar ny tag och lägger till den i dokumentet*/
 	
-	newTag.appendChild(document.createTextNode(content));
+	var newTag = document.createElement("div");
+	newTag.className = tag.type;
+	
+	var tagContent = document.createTextNode(tag.content);
+	newTag.appendChild(tagContent);
+	
+	var removeButton = document.createElement("div");
+	removeButton.className = "removeButton";
+	removeButton.onclick = function() { newTag.parentNode.removeChild(newTag); };
+	newTag.appendChild(removeButton);
 	
 	document.getElementById("tagContainer").appendChild(newTag);
 }
-*/
 
-/* LÄGG TILL: 	funktion som tar bort tagga
-				funktion som lägger ihop taggar till en sökning(?)
+function setParams() {
+	var tagContainer = document.getElementById("tagContainer");
+	var tags = tagContainer.childNodes;
+	
+	for (var i = 0; i < tags.length; i++) {
+		tags[i] /*Hantera GET-parametrar till hidden här*/
+	}
+}

@@ -185,6 +185,8 @@ h1 {
 	overflow: hidden;
 }
 
+/* Gör så att söktexten i tag-drop-downen inte går att klicka på*/
+
 .searchContent {
 	pointer-events: none;
 }
@@ -192,6 +194,13 @@ h1 {
 
 #tagContainer {
 	width: 100%;
+}
+
+.removeButton {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background: red;
 }
 
 label {
