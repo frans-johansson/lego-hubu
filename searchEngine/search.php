@@ -151,21 +151,20 @@ if($_GET["cat"]){
 
 */
 
-// Kolla om något sökts på
-
+$filter = $_GET["f"];
 
 // Få fram i vilken ordning obejekten ska visas
-if($_GET["f"] == "ageAsc") {
+if($filter == "ageAsc") {
 	$order = "MIN(Year) ASC";
 }
-else if($_GET["f"] == "ageDesc") {
+else if($filter == "ageDesc") {
 	$order = "MIN(Year) DESC";
 }
-else if($_GET["f"] == "rarityAsc") {
-	$order = "COUNT(DISTINCT inventory.SetID) ASC";
-}
-else if($_GET["f"] == "rarityDesc") {
+else if($filter == "rarityAsc") {
 	$order = "COUNT(DISTINCT inventory.SetID) DESC";
+}
+else if($filter == "rarityDesc") {
+	$order = "COUNT(DISTINCT inventory.SetID) ASC";
 }
 else {
 	// Ett default till innan användaren valt sortering
