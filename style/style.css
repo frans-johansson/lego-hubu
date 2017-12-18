@@ -169,7 +169,8 @@ h1 {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	height: 30px;	
+	height: 30px;
+	margin: 0;
 }
 
 #searchText {
@@ -189,11 +190,13 @@ h1 {
 	overflow: hidden;
 }
 
-/* Gör så att söktexten i tag-drop-downen inte går att klicka på*/
+/* Gör så att söktexten i tag-drop-downen inte går att klicka på
 
 .searchContent {
 	pointer-events: none;
 }
+
+*/
 
 
 #tagContainer {
