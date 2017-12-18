@@ -5,7 +5,7 @@
 		VÄNLIGEN AKTIVERA JAVASCRIPT, TACK!
 	</noscript>
 
-	<form action="" method="get" onsubmit="setParams()">
+	<form method="get" onsubmit="setParams()">
 		<div id="searchField">
 			<!-- Skriv in sökord -->
 			<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()">
