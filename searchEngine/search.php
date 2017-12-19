@@ -12,15 +12,29 @@ if(!$lowerLimit || $lowerLimit < 0) {
 $displaylimit = 20;
 
 
+
+
+
 function getToSQL($getpara, $condition1, $condition2, $whereAdd){
 	$getArray = splitGet($getpara);
 	$length = count($getArray);
 	
+	$precision = $_GET["exact"];
+	
 	for($i = 0; $i < $length; $i++) {
-		$whereString .= $condition1 . " LIKE '%" . $getArray[$i] . "%'";
-		
-		if($condition2) {
-			$whereString .= " OR " . $condition2 . " LIKE '%" . $getArray[$i] . "%'";
+		if(!$precision) {
+			$whereString .= $condition1 . " LIKE '%" . $getArray[$i] . "%'";
+			
+			if($condition2) {
+				$whereString .= " OR " . $condition2 . " LIKE '%" . $getArray[$i] . "%'";
+			}
+		}
+		else if($precision){
+			$whereString .= $condition1 . " = '" . $getArray[$i] . "'";
+			
+			if($condition2) {
+				$whereString .= " OR " . $condition2 . " = '" . $getArray[$i] . "'";
+			}
 		}
 		
 		if($i != $length-1) {
@@ -36,17 +50,36 @@ function getToSQL($getpara, $condition1, $condition2, $whereAdd){
 	return $where;
 }
 
+
+// Läs in om vi är inne på sidan parts eller sets
+$page = $_GET["p"];
+
+
 if($_GET["set"])
 	$where .= getToSQL("set", "inventory.SetID", "Setname", "");
 
-if($_GET["par"])
-	$where .= getToSQL("par", "PartID", "Partname", "");
-
-if($_GET["col"])
-	$where .= getToSQL("col", "Colorname", "", "");
+if($_GET["par"]) {
+	if($page == parts) {
+		$where .= getToSQL("par", "PartID", "Partname", "");
+	}
+	else if($page == sets) {
+		$where .= getToSQL("par", "PartID", "Partname", " AND PartID = ItemID");
+		$table .= ", parts";
+	}
+}
+	
+if($_GET["col"]) {
+	if($page == parts) {
+		$where .= getToSQL("col", "Colorname", "", "");
+	}
+	else if($page == sets) {
+		$where .= getToSQL("col", "Colorname", "", " AND inventory.ColorID = colors.ColorID");
+		$table .= ", colors";
+	}
+}
 
 if($_GET["yea"])
-	$where .= getToSQL("yea", "MIN(Year)", "", "");
+	$where .= getToSQL("yea", "Year", "", "");
 
 
 $filter = $_GET["f"];
@@ -77,9 +110,6 @@ if($_GET["c"]) {
 }
 
 
-// Läs in om vi är inne på sidan parts eller sets
-$page = $_GET["p"];
-
 if($page == parts) {
 	$group = "Colorname, PartID";
 }
@@ -88,24 +118,21 @@ else if($page == sets) {
 }
 
 
+
 if(!$where) {
 	// Do nothing
 }
 else if($page == parts) {	
-// Skapa sökfrågan
-$searchQuery = "SELECT	PartID, Partname, Colorname, COUNT(DISTINCT inventory.SetID), MIN(Year) FROM parts, inventory, sets, colors " . $table . " WHERE PartID = ItemID AND inventory.ColorID = colors.ColorID AND 
-				ItemTypeID = 'P' AND inventory.SetID = sets.SetID" . $where . " GROUP BY " . $group . " ORDER BY " . $order . " LIMIT " . $lowerLimit * $displaylimit . " ," . $displaylimit;
-
-				
-				// "SELECT SetID, Setname, MIN(Year), SUM(Quantity) FROM sets, inventory" . $table . "WHERE ItemTypeID = 'P' AND sets.SetID = inventory.SetID" . $where . " GROUP BY " . $group . " ORDER BY "
-				// . $order . " LIMIT " .  $lowerLimit * $displaylimit . ", " . $displaylimit;
+	// Skapa sökfrågan
+	$searchQuery = "SELECT	PartID, Partname, Colorname, COUNT(DISTINCT inventory.SetID), MIN(Year) FROM parts, inventory, sets, colors " . $table . " WHERE PartID = ItemID AND inventory.ColorID = colors.ColorID AND 
+					ItemTypeID = 'P' AND inventory.SetID = sets.SetID" . $where . " GROUP BY " . $group . " ORDER BY " . $order . " LIMIT " . $lowerLimit * $displaylimit . " ," . $displaylimit;			
 }
 else if($page == sets) {
-	
+	$searchQuery = "SELECT sets.SetID, Setname, MIN(Year), SUM(Quantity) FROM sets, inventory" . $table . " WHERE ItemTypeID = 'P' AND sets.SetID = inventory.SetID" . $where . 
+					" GROUP BY " . $group . " ORDER BY " . $order . " LIMIT " .  $lowerLimit * $displaylimit . ", " . $displaylimit;
 }
 
 
-if($searchQuery) {
 	// Testa om det går bra att koppla upp mot databasen
 	$connection = mysqli_connect("mysql.itn.liu.se","lego","","lego");
 		
@@ -122,14 +149,14 @@ if($searchQuery) {
 	$result	= mysqli_query($connection, "$searchQuery");
 
 	$row = mysqli_fetch_array($result);
-}
+
 
 
 // Ge felmeddelande om sökningen inte ger några resultat
 if(!$row && $where) {
 	print "Your search generated no results. Please search for something else!";
 }
-else if($row) {
+else if($row && $page == parts) {
 	print "	<tr>
 				<th>Image</th>
 				<th>ID</th>
@@ -139,47 +166,70 @@ else if($row) {
 				<th>Release year</th>
 			</tr>";
 }
-
-
+else if($row && $page == sets) {
+	print "	<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Release Year</th>
+				<th>Number of parts</th>
+			</tr>";
+}
+	
+	$result	= mysqli_query($connection, "$searchQuery");
+	
 while($row = mysqli_fetch_array($result)) {
-	// Lägg informationen som ska visas i separata variabler
-	$ID = $row["PartID"];
-	$Partname = $row["Partname"];
-	$Color = $row["Colorname"];
-	$numSets = $row["COUNT(DISTINCT inventory.SetID)"];
-	$Year = $row["MIN(Year)"];
 
-	// Fråga efter den information som är relevant för att få fram en bild
-	$info = mysqli_query($connection, "SELECT colors.ColorID, ItemTypeID, has_gif, has_jpg, has_largegif, has_largejpg FROM images, colors 
-	WHERE ItemID = '$ID' AND Colorname = '$Color' AND colors.ColorID = images.ColorID");
+	if($page == parts) {
+		// Lägg informationen som ska visas i separata variabler
+		$ID = $row["PartID"];
+		$Partname = $row["Partname"];
+		$Color = $row["Colorname"];
+		$numSets = $row["COUNT(DISTINCT inventory.SetID)"];
+		$Year = $row["MIN(Year)"];
 
-	$format = mysqli_fetch_array($info);
+		
+		// Fråga efter den information som är relevant för att få fram en bild
+		$info = mysqli_query($connection, "SELECT colors.ColorID, ItemTypeID, has_gif, has_jpg, has_largegif, has_largejpg FROM images, colors 
+		WHERE ItemID = '$ID' AND Colorname = '$Color' AND colors.ColorID = images.ColorID");
 
-	// Lägg den nödvändiga informationen för bildnamnet i variabler
-	$Itemtype = $format["ItemTypeID"];
-		$ColorID = $format["ColorID"];
+		$format = mysqli_fetch_array($info);
+
+		// Lägg den nödvändiga informationen för bildnamnet i variabler
+		$Itemtype = $format["ItemTypeID"];
+			$ColorID = $format["ColorID"];
+		
+									
+		// Bilda länken till den bild som ska visas
+		if($format["has_jpg"]) {
+			$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.jpg';
+			$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+		}
+		else if($format["has_gif"]) {
+			$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.gif';
+			$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+		}
+		else if($format["has_largejpg"]) {
+			$name = $Itemtype . 'L/' . $ID . '.jpg';
+			$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+		}
+		else if($format["has_largegif"]) {
+			$name = $Itemtype . 'L/' . $ID . '.gif';
+			$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+		}
+		
+		// Skriv ut detta i tabellen
+		print "<tr><td><img src=\"$link\" alt=\"$name\"></td><td>$ID</td><td>$Partname</td><td>$Color</td><td>$numSets</td><td>$Year</td></tr>";
+	}
+	else if($page == sets) {
+		$ID = $row["SetID"];
+		$Setname = $row["Setname"];
+		$Year = $row["MIN(Year)"];
+		$numParts = $row["SUM(Quantity)"];
 	
-								
-	// Bilda länken till den bild som ska visas
-	if($format["has_jpg"]) {
-		$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.jpg';
-		$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
-	}
-	else if($format["has_gif"]) {
-		$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.gif';
-		$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
-	}
-	else if($format["has_largejpg"]) {
-		$name = $Itemtype . 'L/' . $ID . '.jpg';
-		$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
-	}
-	else if($format["has_largegif"]) {
-		$name = $Itemtype . 'L/' . $ID . '.gif';
-		$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
-	}
 	
-	// Skriv ut detta i tabellen
-	print "<tr><td><img src=\"$link\" alt=\"$name\"></td><td>$ID</td><td>$Partname</td><td>$Color</td><td>$numSets</td><td>$Year</td></tr>";
+		// Skriv ut detta i tabellen
+		print "<tr><td>$ID</td><td>$Setname</td><td>$Year</td><td>$numParts</td></tr>";
+	}
 }
 
 if($searchQuery) {

@@ -1,13 +1,17 @@
 <!-- Knapparna med statistik om satser och bitar -->
 <div class="wrapper" id="amountsWrapper">
-   <a class="amountBox" href="?p=sets">
-      <p>Sets</p>
-      <p>2330</p>
+	<a class="amountBox" href="?p=sets">
+		<p>Sets</p>
+		<?php
+			include "numSets.php"
+		?>
    </a>
    
    <a class="amountBox" href="?p=parts">
-      <p>Parts</p>
-      <p>233034</p>
+		<p>Parts</p>
+		<?php
+			include "numParts.php"
+		?>
    </a>
 </div>
 <!-- Infotext -->
