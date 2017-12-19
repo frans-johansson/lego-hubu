@@ -16,7 +16,6 @@
 				<p class="tagOption" id="setTag">Set: <span class="searchContent"></span> </p>
 				<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
 				<p class="tagOption" id="yearTag">Year: <span class="searchContent"></span> </p>
-				<p class="tagOption" id="catTag">Category: <span class="searchContent"></span> </p>
 			</div>
 			
 			<!-- För att få med sidans GET-variabel i sökningen (annars blir det okul) -->
@@ -30,10 +29,20 @@
 			<input id="setTagList" type="hidden" name="set">
 			<input id="partTagList" type="hidden" name="par">
 			<input id="yearTagList" type="hidden" name="yea">
-			<input id="catTagList" type="hidden" name="cat">
 		</div>
 		
 		<div id="tagContainer"></div>
+		
+		<label>
+			Exact search
+		</label>
+		
+		<?php
+			if (isset($_GET['exact']))
+				echo "<input type=\"checkbox\" name=\"exact\" value=\"true\" checked=\"checked\">";
+			else
+				echo "<input type=\"checkbox\" name=\"exact\" value=\"true\">";
+		?>
 		
 		<label>
 			Show only my collection
