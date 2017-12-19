@@ -30,12 +30,17 @@ print '<input type="hidden" name="f" value="' . $f . '">';
 $page = $_GET["page"];
 
 
+// Se om previous-knappen ska visas eller ej
 if($page > 0){
 	$prev = $page-1;
 	print "<button id='prevPage' type='submit' name='page' value='" . $prev . "'>Previous</button>";
 }
 
-if($page < 10) {
+// Räkna ut om next-knappen ska visas eller ej
+$upperLimit = floor($rowcount / 20);
+
+
+if($upperLimit > 0)  {
 	$next = $page+1;
 	print '<button id="nextPage" type="submit" name="page" value="' . $next . '">Next</button>';	
 }
