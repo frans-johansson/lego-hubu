@@ -11,6 +11,8 @@
 
 <?php
 
+
+
 $col = $_GET["col"];
 print '<input type="hidden" name="col" value="' . $col . '">';
 $set = $_GET["set"];
@@ -26,10 +28,18 @@ print '<input type="hidden" name="p" value="' . $p . '">';
 $f = $_GET["f"];
 print '<input type="hidden" name="f" value="' . $f . '">';
 $page = $_GET["page"];
-$prev = $page-1;
-$next = $page+1;
-print "<button id='prevPage' type='submit' name='page' value='" . $prev . "'>Previous</button>";
-print '<button id="nextPage" type="submit" name="page" value="' . $next . '">Next</button>';
+
+
+if($page > 0){
+	$prev = $page-1;
+	print "<button id='prevPage' type='submit' name='page' value='" . $prev . "'>Previous</button>";
+}
+
+if($page < 10) {
+	$next = $page+1;
+	print '<button id="nextPage" type="submit" name="page" value="' . $next . '">Next</button>';	
+}
+
 
 
 ?>

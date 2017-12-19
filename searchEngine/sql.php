@@ -97,7 +97,7 @@ Antalet bitar i samling
 	
 	// Beräknar det sammanlagda antalet bitar som ingår i personens samling
 	$row = mysqli_query($connection, "SELECT SUM(inventory.Quantity*collection.Quantity) 
-				FROM inventory, collection WHERE inventory.SetID = collection.SetID ");
+				FROM inventory, collection WHERE inventory.SetID = collection.SetID");
 										
 	
 Totala Quantity för en bit

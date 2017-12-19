@@ -7,5 +7,6 @@
 	<!-- Inkludera tabellen med histogram-->
     <?php
         include "pages/sets/setsTable.html";
+		include "searchEngine/pageSelect.php";
     ?>
 </div>
