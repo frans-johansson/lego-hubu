@@ -91,11 +91,17 @@ if($filter == "ageAsc") {
 else if($filter == "ageDesc") {
 	$order = "MIN(Year) DESC";
 }
-else if($filter == "rarityAsc") {
+else if($filter == "rarityAsc" && $page == 'parts') {
 	$order = "COUNT(DISTINCT inventory.SetID) DESC";
 }
-else if($filter == "rarityDesc") {
+else if($filter == "rarityAsc" && $page == 'sets') {
+	$order = "SUM(Quantity) DESC";
+}
+else if($filter == "rarityDesc" && $page == 'parts' ) {
 	$order = "COUNT(DISTINCT inventory.SetID) ASC";
+}
+else if($filter == "rarityDesc" && $page == 'sets' ) {
+	$order = "SUM(Quantity) ASC";
 }
 else {
 	// Ett default till innan användaren valt sortering
@@ -186,6 +192,14 @@ while($row = mysqli_fetch_array($result)) {
 		$Color = $row["Colorname"];
 		$numSets = $row["COUNT(DISTINCT inventory.SetID)"];
 		$Year = $row["MIN(Year)"];
+		
+		if($_GET["set"]) {
+			$specialCase = mysqli_query($connection, "SELECT COUNT(DISTINCT inventory.SetID), MIN(Year) FROM inventory, parts, colors, sets WHERE ItemID = PartID 
+										AND PartID = '" . $ID . "' AND inventory.ColorID = colors.ColorID AND Colorname = '" . $Color . "' AND sets.SetID = inventory.SetID");
+			$hej = mysqli_fetch_array($specialCase);
+			$numSets = $hej["COUNT(DISTINCT inventory.SetID)"];
+			$Year = $hej["MIN(Year)"];
+		}
 
 		
 		// Fråga efter den information som är relevant för att få fram en bild
@@ -231,6 +245,9 @@ while($row = mysqli_fetch_array($result)) {
 		print "<tr><td>$ID</td><td>$Setname</td><td>$Year</td><td>$numParts</td></tr>";
 	}
 }
+
+$rowcount = mysqli_num_rows($result);
+
 
 if($searchQuery) {
 	mysqli_close($connection);
