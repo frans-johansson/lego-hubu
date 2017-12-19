@@ -207,6 +207,8 @@ h1 {
 	pointer-events: none;
 }
 
+Räknas dessvärre ej som CSS-standard och validerar ej
+
 */
 
 
@@ -272,8 +274,15 @@ label {
 }
 
 	/* Sets */
-
-
+.histogramCol {
+	width: 100px;
+	padding: 0;
+}
+	
+.histogram {
+	display: inline-block;
+	background: white;
+}
 
 	/* Pop-up */
 

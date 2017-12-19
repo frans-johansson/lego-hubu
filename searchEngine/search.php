@@ -130,6 +130,9 @@ else if($page == parts) {
 else if($page == sets) {
 	$searchQuery = "SELECT sets.SetID, Setname, MIN(Year), SUM(Quantity) FROM sets, inventory" . $table . " WHERE ItemTypeID = 'P' AND sets.SetID = inventory.SetID" . $where . 
 					" GROUP BY " . $group . " ORDER BY " . $order . " LIMIT " .  $lowerLimit * $displaylimit . ", " . $displaylimit;
+					
+	$maxPartsQuery = "SELECT SUM(Quantity) FROM sets, inventory" . $table . " WHERE ItemTypeID = 'P' AND sets.SetID = inventory.SetID" . $where . 
+					" GROUP BY " . $group . " ORDER BY SUM(Quantity) DESC LIMIT 1";
 }
 
 
@@ -150,6 +153,17 @@ else if($page == sets) {
 
 	$row = mysqli_fetch_array($result);
 
+// TEST FÖR ATT SKRIVA UT MAX-ANTAL //
+
+	$maxPartsResult = mysqli_query($connection, "$maxPartsQuery");
+	
+	$maxPartsArray = mysqli_fetch_array($maxPartsResult);
+	
+	$maxPartsAmount = $maxPartsArray[0];
+	
+	print ("<p>$maxPartsAmount</p>");
+	
+// SLUT PÅ TEST //
 
 
 // Ge felmeddelande om sökningen inte ger några resultat
@@ -172,6 +186,7 @@ else if($row && $page == sets) {
 				<th>Name</th>
 				<th>Release Year</th>
 				<th>Number of parts</th>
+				<th class=\"histogramCol\">Histogram</th>
 			</tr>";
 }
 	
@@ -225,10 +240,11 @@ while($row = mysqli_fetch_array($result)) {
 		$Setname = $row["Setname"];
 		$Year = $row["MIN(Year)"];
 		$numParts = $row["SUM(Quantity)"];
+		$percentage = 100 * $numParts / $maxPartsAmount;
 	
 	
 		// Skriv ut detta i tabellen
-		print "<tr><td>$ID</td><td>$Setname</td><td>$Year</td><td>$numParts</td></tr>";
+		print "<tr><td>$ID</td><td>$Setname</td><td>$Year</td><td>$numParts</td><td><div class=\"histogram\" style=\"width: $percentage%\">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div></td></tr>";
 	}
 }
 
