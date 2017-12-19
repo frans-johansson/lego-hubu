@@ -66,7 +66,6 @@ window.onload = function() {
 	var sets = DecodeURLParameter("set");
 	var parts = DecodeURLParameter("par");
 	var years = DecodeURLParameter("yea");
-	var categories = DecodeURLParameter("cat");
 	
 	/*lägg till taggar*/
 	if (colors)
@@ -80,9 +79,6 @@ window.onload = function() {
 	
 	if (years)
 		recreateTags(years, "yearTag");
-	
-	if (categories)
-		recreateTags(categories, "catTag");
 }
 
 function makeTag(tag) {

@@ -1,20 +1,9 @@
-<!doctype html>
+<!-- Inkluderar nav-fil -->
+<?php
+	include "res/header.html";
+?>
+<!-- Inkluderar sidinnehållet -->
+<?php
+	include "sets/setsPage.php";
+?>
 
-<html>
-   <head>
-		<!-- Inkluderar head-fil -->
-		<?php
-			include "res/head.html";
-		?>
-   </head>
-   <body>
-		<!-- Inkluderar nav-fil -->
-		<?php
-			include "res/header.html";
-		?>
-		<!-- Inkluderar sidinnehållet -->
-		<?php
-			include "sets/setsPage.php";
-		?>
-   </body>
-</html>

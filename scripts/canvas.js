@@ -1,4 +1,5 @@
 var c;
+var width, height;
 var data = new Array();
 var maxAmount;
 
@@ -10,35 +11,32 @@ function DataEntry (year, amount) {
 initCanvas = function() {
 	c = document.getElementById("canvas");
 	
-	
 	setArray();
 	getMax();
 	stageCanvas();
+	drawCanvas();
 }
 
 stageCanvas = function() {
 	var ratio = 16/9;
 	
-	var width = c.parentNode.clientWidth;
-	var height = width/ratio;
+	width = c.parentNode.clientWidth;
+	height = width/ratio;
 	
 	c.width = width;
 	c.height = height;
-	
-	drawCanvas();
 }
 
 drawCanvas = function() {
 	var ctx = c.getContext("2d");
 	
-	var unitY = c.height/maxAmount;
-	var unitX = c.width/data.length;
+	var unitY = height/maxAmount;
+	var unitX = width/data.length;
 	
 	ctx.fillStyle = "#fff";
 	
 	for (var i = 0; i < data.length; i++) {
-		ctx.fillRect(unitX + i * unitX, c.height, -unitX, -data[i].amount * unitY);
-		console.log(data[i].year);
+		ctx.fillRect(unitX + i * unitX, height, -unitX, -data[i].amount * unitY);
 	}
 }
 
@@ -73,11 +71,10 @@ getMax = function() {
 	for (var i = 0; i < data.length; i++) {
 		if (parseInt(data[i].amount) > maxAmount) {
 			maxAmount = data[i].amount;
-			console.log(maxAmount);
 		}
 	}
 }
 
-
 window.addEventListener("load", initCanvas);
 window.addEventListener("resize", stageCanvas);
+window.addEventListener("resize", drawCanvas);

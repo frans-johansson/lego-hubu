@@ -71,6 +71,7 @@ body {
    color: white;
    font-size: 25px;
    font-family: sans-serif;
+   overflow-x: hidden;
 }
 
 
@@ -141,8 +142,8 @@ h1 {
 }
 
 #diagrams {
-   width: 100%;
-   background: #9CC4EA;
+	width: 100%;
+	background: #9CC4EA;
 }
 
 
