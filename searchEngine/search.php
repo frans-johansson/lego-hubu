@@ -124,11 +124,38 @@ else if($page == sets) {
 }
 
 
+if($where) {
+	// Testa om det går bra att koppla upp mot databasen
+	$connection = mysqli_connect("mysql.itn.liu.se","lego","","lego");
+		
+		if (!$connection) {
+			echo "Error: Unable to connect to MySQL." . PHP_EOL;
+			echo "Debugging error: " . mysqli_connect_errno() . PHP_EOL;
+			echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+			exit;
+		}
+}
 
-if(!$where) {
+
+if(!$where) {  // Eventuellt ändra 
 	// Do nothing
 }
-else if($page == parts) {	
+else if($page == parts) {
+	/*if($_GET["set"]) {
+		print "$where";
+		$specialCase = mysqli_query($connection, "SELECT PartID FROM parts, sets, inventory WHERE PartID = ItemID AND sets.SetID = inventory.SetID $where");
+		$whereSet = mysqli_fetch_array($specialCase);
+		
+		while($whereSet) {
+			$hej = $whereSet["PartID"];
+			
+			
+			print "$hej";
+		}
+		
+
+		$where = " AND PartID = '" . $whereSet . "'";
+	} */
 	// Skapa sökfrågan
 	$searchQuery = "SELECT	PartID, Partname, Colorname, COUNT(DISTINCT inventory.SetID), MIN(Year) FROM parts, inventory, sets, colors " . $table . " WHERE PartID = ItemID AND inventory.ColorID = colors.ColorID AND 
 					ItemTypeID = 'P' AND inventory.SetID = sets.SetID" . $where . " GROUP BY " . $group . " ORDER BY " . $order . " LIMIT " . $lowerLimit * $displaylimit . " ," . $displaylimit;			
@@ -142,24 +169,8 @@ else if($page == sets) {
 }
 
 
-	// Testa om det går bra att koppla upp mot databasen
-	$connection = mysqli_connect("mysql.itn.liu.se","lego","","lego");
-		
-		if (!$connection) {
-			echo "Error: Unable to connect to MySQL." . PHP_EOL;
-			echo "Debugging error: " . mysqli_connect_errno() . PHP_EOL;
-			echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-			exit;
-		}
-	
-	print "$searchQuery";
-	
-//	Ställ	frågan																																																			
-	$result	= mysqli_query($connection, "$searchQuery");
-
-	$row = mysqli_fetch_array($result);
-
 // TEST FÖR ATT SKRIVA UT MAX-ANTAL //
+if($page == sets){
 
 	$maxPartsResult = mysqli_query($connection, "$maxPartsQuery");
 	
@@ -169,8 +180,135 @@ else if($page == sets) {
 	
 	print ("<p>$maxPartsAmount</p>");
 	
+}
+	
 // SLUT PÅ TEST //
 
+
+//	Ställ	frågan
+
+	print "$searchQuery";
+																																																	
+	$result	= mysqli_query($connection, "$searchQuery");
+
+	$row = mysqli_fetch_array($result);
+	
+	/*if($_GET["set"] && $page == parts) {
+		
+		print "$row[0]['PartID']";
+		
+		while($row) {
+			$ID = $row["PartID"];
+			$Partname = $row["Partname"];
+			$Color = $row["Colorname"];
+			$numSets = $row["COUNT(DISTINCT inventory.SetID)"];
+			$Year = $row["MIN(Year)"];
+			
+			if($_GET["set"]) {
+				$specialCase = mysqli_query($connection, "SELECT COUNT(DISTINCT inventory.SetID), MIN(Year) FROM inventory, parts, colors, sets WHERE ItemID = PartID 
+											AND PartID = '" . $ID . "' AND inventory.ColorID = colors.ColorID AND Colorname = '" . $Color . "' AND sets.SetID = inventory.SetID");
+				$hej = mysqli_fetch_array($specialCase);
+				$row["COUNT(DISTINCT inventory.SetID)"] = $hej["COUNT(DISTINCT inventory.SetID)"];
+				$row["MIN(Year)"] = $hej["MIN(Year)"];
+			}
+		}
+		
+		$array_length = sizeof($row);
+		
+		if($filter == "ageAsc") {
+			for($i = 1; $i < $array_length; $i++) {
+				for ($k = 0; k < $array_length-1; $k++) {
+					if ($row[k]["MIN(Year)"] > $row[k + 1]["MIN(Year)"]) {
+							$temp = $row[k]["MIN(Year)"];
+							$row[k]["MIN(Year)"] = $row[k+1]["MIN(Year)"];
+							$row[k+1]["MIN(Year)"] = $temp;
+					}
+				}
+			}
+		}
+		else if($filter == "ageDesc") {
+			for($i = 1; $i < $array_length; $i++) {
+				for ($k = 0; k < array_length-1; $k++) {
+					if ($row[k]["MIN(Year)"] < $row[k + 1]["MIN(Year)"]) {
+							$temp = $row[k]["MIN(Year)"];
+							$row[k]["MIN(Year)"] = $row[k+1]["MIN(Year)"];
+							$row[k+1]["MIN(Year)"] = $temp;
+					}
+				}
+			}
+		}
+		else if($filter == "rarityAsc") {
+			for($i = 1; $i < $array_length; $i++) {
+				for ($k = 0; k < array_length-1; $k++) {
+					if ($row[k]["COUNT(DISTINCT inventory.SetID)"] < $row[k + 1]["COUNT(DISTINCT inventory.SetID)"]) {
+							$temp = $row[k]["COUNT(DISTINCT inventory.SetID)"];
+							$row[k]["COUNT(DISTINCT inventory.SetID)"] = $row[k+1]["COUNT(DISTINCT inventory.SetID)"];
+							$row[k+1]["COUNT(DISTINCT inventory.SetID)"] = $temp;
+					}
+				}
+			}
+		}
+		else if($filter == "rarityDesc") {
+			for($i = 1; $i < $array_length; $i++) {
+				for ($k = 0; k > array_length-1; $k++) {
+					if ($row[k]["COUNT(DISTINCT inventory.SetID)"] < $row[k + 1]["COUNT(DISTINCT inventory.SetID)"]) {
+							$temp = $row[k]["COUNT(DISTINCT inventory.SetID)"];
+							$row[k]["COUNT(DISTINCT inventory.SetID)"] = $row[k+1]["COUNT(DISTINCT inventory.SetID)"];
+							$row[k+1]["COUNT(DISTINCT inventory.SetID)"] = $temp;
+					}
+				}
+			}
+		}
+		
+		print "	<tr>
+					<th>Image</th>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Color</th>
+					<th>Included in sets</th>
+					<th>Release year</th>
+				</tr>";
+		
+		for($i = 0; $i < $array_length; $i++) {
+			$ID = $row[$i]["PartID"];
+			$Partname = $row[$i]["Partname"];
+			$Color = $row[$i]["Colorname"];
+			$numSets = $row[$i]["COUNT(DISTINCT inventory.SetID)"];
+			$Year = $row[$i]["MIN(Year)"];
+			
+			// Fråga efter den information som är relevant för att få fram en bild
+			$info = mysqli_query($connection, "SELECT colors.ColorID, ItemTypeID, has_gif, has_jpg, has_largegif, has_largejpg FROM images, colors 
+			WHERE ItemID = '$ID' AND Colorname = '$Color' AND colors.ColorID = images.ColorID");
+
+			$format = mysqli_fetch_array($info);
+
+			// Lägg den nödvändiga informationen för bildnamnet i variabler
+			$Itemtype = $format["ItemTypeID"];
+			$ColorID = $format["ColorID"];
+			
+										
+			// Bilda länken till den bild som ska visas
+			if($format["has_jpg"]) {
+				$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.jpg';
+				$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+			}
+			else if($format["has_gif"]) {
+				$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.gif';
+				$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+			}
+			else if($format["has_largejpg"]) {
+				$name = $Itemtype . 'L/' . $ID . '.jpg';
+				$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+			}
+			else if($format["has_largegif"]) {
+				$name = $Itemtype . 'L/' . $ID . '.gif';
+				$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+			}
+				print "hej";
+				// Skriv ut detta i tabellen
+				print "<tr><td><img src=\"$link\" alt=\"$name\"></td><td>$ID</td><td>$Partname</td><td>$Color</td><td>$numSets</td><td>$Year</td></tr>";
+			}
+	} */
 
 // Ge felmeddelande om sökningen inte ger några resultat
 if(!$row && $where) {
@@ -196,71 +334,74 @@ else if($row && $page == sets) {
 			</tr>";
 }
 	
-	$result	= mysqli_query($connection, "$searchQuery");
 	
-while($row = mysqli_fetch_array($result)) {
+$result	= mysqli_query($connection, "$searchQuery");
 
-	if($page == parts) {
-		// Lägg informationen som ska visas i separata variabler
-		$ID = $row["PartID"];
-		$Partname = $row["Partname"];
-		$Color = $row["Colorname"];
-		$numSets = $row["COUNT(DISTINCT inventory.SetID)"];
-		$Year = $row["MIN(Year)"];
-		
-		if($_GET["set"]) {
-			$specialCase = mysqli_query($connection, "SELECT COUNT(DISTINCT inventory.SetID), MIN(Year) FROM inventory, parts, colors, sets WHERE ItemID = PartID 
-										AND PartID = '" . $ID . "' AND inventory.ColorID = colors.ColorID AND Colorname = '" . $Color . "' AND sets.SetID = inventory.SetID");
-			$hej = mysqli_fetch_array($specialCase);
-			$numSets = $hej["COUNT(DISTINCT inventory.SetID)"];
-			$Year = $hej["MIN(Year)"];
-		}
 
-		
-		// Fråga efter den information som är relevant för att få fram en bild
-		$info = mysqli_query($connection, "SELECT colors.ColorID, ItemTypeID, has_gif, has_jpg, has_largegif, has_largejpg FROM images, colors 
-		WHERE ItemID = '$ID' AND Colorname = '$Color' AND colors.ColorID = images.ColorID");
+//if(!$_GET["set"]) {
+	while($row = mysqli_fetch_array($result)) {
 
-		$format = mysqli_fetch_array($info);
+		if($page == parts) {
+			// Lägg informationen som ska visas i separata variabler
+			$ID = $row["PartID"];
+			$Partname = $row["Partname"];
+			$Color = $row["Colorname"];
+			$numSets = $row["COUNT(DISTINCT inventory.SetID)"];
+			$Year = $row["MIN(Year)"];
 
-		// Lägg den nödvändiga informationen för bildnamnet i variabler
-		$Itemtype = $format["ItemTypeID"];
+			if($_GET["set"]) {
+				$specialCase = mysqli_query($connection, "SELECT COUNT(DISTINCT inventory.SetID), MIN(Year) FROM inventory, parts, colors, sets WHERE ItemID = PartID 
+											AND PartID = '" . $ID . "' AND inventory.ColorID = colors.ColorID AND Colorname = '" . $Color . "' AND sets.SetID = inventory.SetID");
+				$hej = mysqli_fetch_array($specialCase);
+				$numSets = $hej["COUNT(DISTINCT inventory.SetID)"];
+				$Year = $hej["MIN(Year)"];
+			}
+			
+			// Fråga efter den information som är relevant för att få fram en bild
+			$info = mysqli_query($connection, "SELECT colors.ColorID, ItemTypeID, has_gif, has_jpg, has_largegif, has_largejpg FROM images, colors 
+			WHERE ItemID = '$ID' AND Colorname = '$Color' AND colors.ColorID = images.ColorID");
+
+			$format = mysqli_fetch_array($info);
+
+			// Lägg den nödvändiga informationen för bildnamnet i variabler
+			$Itemtype = $format["ItemTypeID"];
 			$ColorID = $format["ColorID"];
+			
+										
+			// Bilda länken till den bild som ska visas
+			if($format["has_jpg"]) {
+				$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.jpg';
+				$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+			}
+			else if($format["has_gif"]) {
+				$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.gif';
+				$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+			}
+			else if($format["has_largejpg"]) {
+				$name = $Itemtype . 'L/' . $ID . '.jpg';
+				$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+			}
+			else if($format["has_largegif"]) {
+				$name = $Itemtype . 'L/' . $ID . '.gif';
+				$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+			}
+			
+			// Skriv ut detta i tabellen
+			print "<tr><td><img src=\"$link\" alt=\"$name\"></td><td>$ID</td><td>$Partname</td><td>$Color</td><td>$numSets</td><td>$Year</td></tr>";
+		}
+		else if($page == sets) {
+			$ID = $row["SetID"];
+			$Setname = $row["Setname"];
+			$Year = $row["MIN(Year)"];
+			$numParts = $row["SUM(Quantity)"];
+			$percentage = 100 * $numParts / $maxPartsAmount;
 		
-									
-		// Bilda länken till den bild som ska visas
-		if($format["has_jpg"]) {
-			$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.jpg';
-			$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
-		}
-		else if($format["has_gif"]) {
-			$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.gif';
-			$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
-		}
-		else if($format["has_largejpg"]) {
-			$name = $Itemtype . 'L/' . $ID . '.jpg';
-			$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
-		}
-		else if($format["has_largegif"]) {
-			$name = $Itemtype . 'L/' . $ID . '.gif';
-			$link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
-		}
 		
-		// Skriv ut detta i tabellen
-		print "<tr><td><img src=\"$link\" alt=\"$name\"></td><td>$ID</td><td>$Partname</td><td>$Color</td><td>$numSets</td><td>$Year</td></tr>";
+			// Skriv ut detta i tabellen
+			print "<tr><td>$ID</td><td>$Setname</td><td>$Year</td><td>$numParts</td><td><div class=\"histogram\" style=\"width: $percentage%\">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div></td></tr>";
+		}
 	}
-	else if($page == sets) {
-		$ID = $row["SetID"];
-		$Setname = $row["Setname"];
-		$Year = $row["MIN(Year)"];
-		$numParts = $row["SUM(Quantity)"];
-		$percentage = 100 * $numParts / $maxPartsAmount;
-	
-	
-		// Skriv ut detta i tabellen
-		print "<tr><td>$ID</td><td>$Setname</td><td>$Year</td><td>$numParts</td><td><div class=\"histogram\" style=\"width: $percentage%\">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div></td></tr>";
-	}
-}
+//}
 
 $rowcount = mysqli_num_rows($result);
 
