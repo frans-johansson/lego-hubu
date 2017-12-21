@@ -253,12 +253,24 @@ label {
 }
 
 	/* Användarens pop-up */
+#pageBackground {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.55);
+	
+	/* När den är aktiv och har display: flex*/
+	align-items: center;
+	justify-content: center;
+}
 
 #profilePopup{
 	position: absolute;
 	display: none;
-	float: right;
-	width: 300px;
+	width: 60%;
 	height: 160px;
 	background: #F0C247;
 	text-align: center;
