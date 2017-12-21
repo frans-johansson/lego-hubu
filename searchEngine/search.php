@@ -191,8 +191,7 @@ else if($row && $page == sets) {
 				<th>ID</th>
 				<th>Name</th>
 				<th>Release Year</th>
-				<th>Number of parts</th>
-				<th class=\"histogramCol\">Histogram</th>
+				<th colspan=\"2\">Number of parts</th>
 			</tr>";
 }
 	
@@ -254,11 +253,11 @@ while($row = mysqli_fetch_array($result)) {
 		$Setname = $row["Setname"];
 		$Year = $row["MIN(Year)"];
 		$numParts = $row["SUM(Quantity)"];
-		$percentage = 100 * $numParts / $maxPartsAmount;
+		$percentage = 100 * $numParts / $maxPartsAmount; // Beräkna den relativa bredden av varje histogrampelare
 	
 	
 		// Skriv ut detta i tabellen
-		print "<tr><td>$ID</td><td>$Setname</td><td>$Year</td><td>$numParts</td><td><div class=\"histogram\" style=\"width: $percentage%\">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div></td></tr>";
+		print "<tr><td>$ID</td><td>$Setname</td><td>$Year</td><td>$numParts </td><td><div class=\"histogram\" style=\"width: $percentage%\"></div></td></tr>";
 	}
 }
 
