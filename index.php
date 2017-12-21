@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<?php
-			include "pages/res/head.html";
+			include "pages/res/head.php";
 		?>
 	</head>
 	<body>

@@ -77,9 +77,17 @@ body {
 
 /* Eventuellt flytta till home om ej används någon annanstans */
 h1 {
-   font-size: 30px;
-   text-align: center;
-   margin: 0;
+	width: 100%;
+	font-size: 30px;
+	text-align: center;
+	margin: 0;
+}
+
+.pageHeader {
+	color: white;
+	background: #3872A9;
+	padding-top: 5px;
+	padding-bottom: 10px;
 }
 
 
@@ -146,9 +154,7 @@ h1 {
 	background: #9CC4EA;
 }
 
-
 #diagrams h1 {
-   margin: 0;
    color: white;
    background: #3872A9;
 }
@@ -247,12 +253,24 @@ label {
 }
 
 	/* Användarens pop-up */
+#pageBackground {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.55);
+	
+	/* När den är aktiv och har display: flex*/
+	align-items: center;
+	justify-content: center;
+}
 
 #profilePopup{
 	position: absolute;
 	display: none;
-	float: right;
-	width: 300px;
+	width: 60%;
 	height: 160px;
 	background: #F0C247;
 	text-align: center;
@@ -280,7 +298,8 @@ label {
 }
 	
 .histogram {
-	display: inline-block;
+	height: 20px;
+	display: block;
 	background: white;
 }
 
