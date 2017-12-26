@@ -36,13 +36,14 @@ if($page > 0){
 	print "<button id='prevPage' type='submit' name='page' value='" . $prev . "'>Previous</button>";
 }
 
+// Ta bort dessa rader när vi testat att if-satsen nedan fungerar som den ska
 // Räkna ut om next-knappen ska visas eller ej
-$upperLimit = floor($rowcount / 20);
+//$upperLimit = floor($rowcount / 20);
 
 
-if($upperLimit > 0)  {
+if($rowcount == $displaylimit) {
 	$next = $page+1;
-	print '<button id="nextPage" type="submit" name="page" value="' . $next . '">Next</button>';	
+	print '<button id="nextPage" type="submit" name="page" value="' . $next . '">Next</button>';
 }
 
 
