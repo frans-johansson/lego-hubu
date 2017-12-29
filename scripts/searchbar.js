@@ -1,20 +1,50 @@
-var searchText;
+var searchText; // Global variabel för söktexten i sökfältet
+var dropDownFields = document.getElementsByClassName("tagOption");
+var currentSelected = 0;
 
 updateTagList = function() {
 	searchText = document.getElementById("searchText").value;
-	
+
+	// Gör drop-down-menyn synlig om användaren skriver i sökfältet
 	if (searchText)
-		document.getElementById("tagList").style.display = "inline-block";
-	else 
-		document.getElementById("tagList").style.display = "none";
-	
-	var listthing = document.getElementsByClassName("searchContent");
-	
-	for (var i=0; i < listthing.length; i++) 
-		listthing[i].innerHTML = searchText;
+		document.getElementById("tagList").style.display = "inline-block"; // Gör den synlig
+	else
+		document.getElementById("tagList").style.display = "none"; // Gör den osynlig om sökfältet är tomt
+
+	var tagSearchContent = document.getElementsByClassName("searchContent"); // Hämtar delen av tag-fälten som ska innehålla söktexten
+
+	for (var i=0; i < tagSearchContent.length; i++)
+		tagSearchContent[i].innerHTML = searchText; // Lägger in söktexten i varje tag-fält
+
+
+	/* WIP: navigerbara taggar */
+	var dropDownFields = document.getElementsByClassName("tagOption");
+
+	// Makes the first tag in the list selected by default
+	dropDownFields[0].classList.add("selectedTag");
 }
 
-/* Lägger till ny klass för taggar */
+/* Mer WIP för navigerbara taggar. OBS, pseudokod */
+
+/*
+navigateTagList = function(key) {
+	if (key is down and is not end) {
+		dropDownFields[currentSelected] = not selected;
+		dropDownFields[++currentSelected] = selected;
+	}
+	else if (key is up and is not beginning) {
+		dropDownFields[currentSelected] = not selected;
+		dropDownFields[--currentSelected] = selected;
+	}
+}
+*/
+
+/*
+	För addTag lägg till funktion för när enterknappen trycks ner
+	och leta efter elementet med selectedTag
+*/
+
+/* Lägger till ny "klass" för taggar */
 
 function Tag(type, content, ID) {
 	this.type = type;
@@ -22,12 +52,14 @@ function Tag(type, content, ID) {
 	this.ID = ID;
 }
 
-window.onclick = function(click) {
+/* Funktion som tar emot ett click-event, lägger till motsvarande tag som användaren klickar på
+   Gömmer drop-downen om användaren klickar utanför */
+activateTag = function(click) {
 	if (click.target.className == "tagOption") {
 		var inputID = click.target.id + "List";
-		
+
 		tag = new Tag(click.target.id, searchText, inputID);
-	
+
 		makeTag(tag);
 	}
 	else if (!(click.target.className == "tagList" || click.target.id == "searchText")) {
@@ -35,7 +67,8 @@ window.onclick = function(click) {
 	}
 }
 
-function DecodeURLParameter(Parameter)
+/* Ser till att alla taggar är kvar även efter sökningen är gjord */
+DecodeURLParameter = function(Parameter)
 {
 	var FullURL = window.location.search.substring(1);
 	var ParametersArray = FullURL.split('&');
@@ -52,58 +85,60 @@ function DecodeURLParameter(Parameter)
 	}
 }
 
-function recreateTags(tagArray, type) {
+recreateTags = function(tagArray, type) {
 	for(var i = 0; i < tagArray.length; i++) {
 		var ID = type + "List";
 		tag = new Tag(type, tagArray[i], ID);
-		
+
 		makeTag(tag);
 	}
 }
 
-window.onload = function() {
+restoreTags = function() {
 	var colors = DecodeURLParameter("col");
 	var sets = DecodeURLParameter("set");
 	var parts = DecodeURLParameter("par");
 	var years = DecodeURLParameter("yea");
-	
+
 	/*lägg till taggar*/
 	if (colors)
 		recreateTags(colors, "colorTag");
-	
+
 	if (sets)
 		recreateTags(sets, "setTag");
-	
+
 	if (parts)
 		recreateTags(parts, "partTag");
-	
+
 	if (years)
 		recreateTags(years, "yearTag");
 }
 
 function makeTag(tag) {
 	/* Skapar ny tag (div) och lägger till den i dokumentet*/
-	
+
 	var newTag = document.createElement("div");
 	newTag.className = tag.type;
-	
+
 	var tagContent = document.createTextNode(tag.content);
 	newTag.appendChild(tagContent);
-	
+
 	var removeButton = document.createElement("div");
 	removeButton.className = "removeButton";
 	removeButton.onclick = function() { newTag.parentNode.removeChild(newTag); };
 	newTag.appendChild(removeButton);
-	
+
 	document.getElementById("tagContainer").appendChild(newTag);
 }
 
+/* Placerar all information från taggarna i korrekt hidden-input-element i formuläret för att sökningen ska funka
+   aktiveras on-submit */
 function setParams() {
 	var tagContainer = document.getElementById("tagContainer");
 	var tags = tagContainer.childNodes;
-	
+
 	for (var i = 0; i < tags.length; i++) {
-		
+
 		if(document.getElementById(tags[i].className + "List").value == "") {
 			document.getElementById(tags[i].className + "List").value = tags[i].textContent;
 		}
@@ -113,9 +148,5 @@ function setParams() {
 	}
 }
 
-
-
-
-
-
-
+window.addEventListener("click", activateTag);
+window.addEventListener("load", restoreTags);
