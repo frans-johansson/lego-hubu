@@ -1,6 +1,6 @@
 var searchText; // Global variabel för söktexten i sökfältet
-var dropDownFields = document.getElementsByClassName("tagOption");
-var currentSelected = 0;
+var dropDownFields;
+var currentSelected;
 
 updateTagList = function() {
 	searchText = document.getElementById("searchText").value;
@@ -16,33 +16,64 @@ updateTagList = function() {
 	for (var i=0; i < tagSearchContent.length; i++)
 		tagSearchContent[i].innerHTML = searchText; // Lägger in söktexten i varje tag-fält
 
+	dropDownFields = document.getElementsByClassName("tagOption");
 
-	/* WIP: navigerbara taggar */
-	var dropDownFields = document.getElementsByClassName("tagOption");
-
-	// Makes the first tag in the list selected by default
-	dropDownFields[0].classList.add("selectedTag");
-}
-
-/* Mer WIP för navigerbara taggar. OBS, pseudokod */
-
-/*
-navigateTagList = function(key) {
-	if (key is down and is not end) {
-		dropDownFields[currentSelected] = not selected;
-		dropDownFields[++currentSelected] = selected;
-	}
-	else if (key is up and is not beginning) {
-		dropDownFields[currentSelected] = not selected;
-		dropDownFields[--currentSelected] = selected;
+	// Gör så att första taggen markeras automatiskt när användaren börjar skriva för första gången
+	if (typeof(currentSelected) == "undefined") {
+		currentSelected = 0;
+		dropDownFields[currentSelected].classList.toggle("selectedTag");
 	}
 }
-*/
+
+// Keycodes
+// 40 = pil ner
+// 38 = pil upp
+// 13 = enterknappen
+
+navigateTagList = function(pressed) {
+	var key = pressed.keyCode || pressed.which; // För att också fungera på webbläsare som inte stödjer keycode
+
+	if (key == 40 && currentSelected < 0) {
+		currentSelected = 0;
+		dropDownFields[currentSelected].classList.toggle("selectedTag");
+	}
+	else if (key == 40 && currentSelected < dropDownFields.length - 1) {
+		document.getElementById("searchText").blur(); // Avmarkera sökfältet
+		dropDownFields[currentSelected].classList.toggle("selectedTag");
+		dropDownFields[++currentSelected].classList.toggle("selectedTag");
+	}
+	else if (key == 38 && currentSelected > 0) {
+		dropDownFields[currentSelected].classList.toggle("selectedTag");
+		dropDownFields[--currentSelected].classList.toggle("selectedTag");
+	}
+	else if (key == 38 && currentSelected == 0) {
+		document.getElementById("searchText").focus(); // Markera sökfältet igen
+		dropDownFields[currentSelected--].classList.toggle("selectedTag");
+	}
+}
 
 /*
 	För addTag lägg till funktion för när enterknappen trycks ner
-	och leta efter elementet med selectedTag
+	och leta efter elementet med selectedTag. Gör även så att man kan söka genom att trycka enter igen.
 */
+activateTagOnPress = function(pressed) {
+	var key = pressed.keyCode || pressed.which; // För att också fungera på webbläsare som inte stödjer keycode
+
+	// Avgör om en tag är markerad och om enterknappen har tryckts
+	if (key == 13 && currentSelected >= 0) {
+
+		// Sök efter den markerade taggen (dvs. den som har klasssen selectedTag) och skapa en ny tag
+		for (var i = 0; i < dropDownFields.length; i++) {
+			if (dropDownFields[i].classList.contains("selectedTag")) {
+				var inputID = dropDownFields[i].id + "List";
+
+				tag = new Tag(dropDownFields[i].id, searchText, inputID);
+
+				makeTag(tag);
+			}
+		}
+	}
+}
 
 /* Lägger till ny "klass" för taggar */
 
@@ -54,7 +85,7 @@ function Tag(type, content, ID) {
 
 /* Funktion som tar emot ett click-event, lägger till motsvarande tag som användaren klickar på
    Gömmer drop-downen om användaren klickar utanför */
-activateTag = function(click) {
+activateTagOnClick = function(click) {
 	if (click.target.className == "tagOption") {
 		var inputID = click.target.id + "List";
 
@@ -148,5 +179,8 @@ function setParams() {
 	}
 }
 
-window.addEventListener("click", activateTag);
+/* Kopplar funktioner till respektive event */
+window.addEventListener("click", activateTagOnClick);
+window.addEventListener("keydown", activateTagOnPress);
 window.addEventListener("load", restoreTags);
+window.addEventListener("keydown", navigateTagList);
