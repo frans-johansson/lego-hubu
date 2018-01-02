@@ -53,8 +53,7 @@ navigateTagList = function(pressed) {
 }
 
 /*
-	För addTag lägg till funktion för när enterknappen trycks ner
-	och leta efter elementet med selectedTag. Gör även så att man kan söka genom att trycka enter igen.
+	Lägger till den markerade taggen i sökfältet till sökningen vid nertryckning av enterknappen
 */
 activateTagOnPress = function(pressed) {
 	var key = pressed.keyCode || pressed.which; // För att också fungera på webbläsare som inte stödjer keycode
