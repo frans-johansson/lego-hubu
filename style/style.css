@@ -216,7 +216,11 @@ h1 {
 Räknas dessvärre ej som CSS-standard och validerar ej
 */
 
-.selectedTag {
+.tagOption {
+    /* Lägg till CSS för taggarna i dropdown-menyn */
+}
+
+.selectedTag, .hashover:hover {
     background: blue;
 }
 

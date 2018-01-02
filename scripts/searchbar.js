@@ -34,6 +34,10 @@ navigateTagList = function(pressed) {
 	var key = pressed.keyCode || pressed.which; // För att också fungera på webbläsare som inte stödjer keycode
 
 	if (key == 40 && currentSelected < 0) {
+		for (var i = 0; i < dropDownFields.length; i++) {
+			dropDownFields[i].classList.remove("hashover"); // tar bort koppling till pseudoklassen hover i CSS:en från alla taggar
+		}
+
 		currentSelected = 0;
 		dropDownFields[currentSelected].classList.toggle("selectedTag");
 	}
@@ -74,6 +78,17 @@ activateTagOnPress = function(pressed) {
 	}
 }
 
+clearSelected = function() {
+	if (currentSelected >= 0) { // kolla först om det finns en vald tag genom tangentbordsnavigation
+		currentSelected = -1; // ingen tag är nu vald genom tangentbordet
+
+		for (var i = 0; i < dropDownFields.length; i++) {
+			dropDownFields[i].classList.remove("selectedTag"); // tar bort selectedTag från alla taggar
+			dropDownFields[i].classList.add("hashover"); // ger alla taggarna koppling till pseudoklassen hover i CSS:en
+		}
+	}
+}
+
 /* Lägger till ny "klass" för taggar */
 
 function Tag(type, content, ID) {
@@ -85,7 +100,7 @@ function Tag(type, content, ID) {
 /* Funktion som tar emot ett click-event, lägger till motsvarande tag som användaren klickar på
    Gömmer drop-downen om användaren klickar utanför */
 activateTagOnClick = function(click) {
-	if (click.target.className == "tagOption") {
+	if (click.target.classList.contains("tagOption")) {
 		var inputID = click.target.id + "List";
 
 		tag = new Tag(click.target.id, searchText, inputID);
