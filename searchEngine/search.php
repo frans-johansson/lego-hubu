@@ -3,7 +3,7 @@
 //Hämta vilken sida vi är på, exemepelvis sida 0, sida 1, sida 2 osv.
 $lowerLimit = $_GET["page"];
 
-// Inkludera sökmotorn
+// Inkludera funktionen som separerar det som står i get-parametrarna
 include "searchEngine/separate.php";
 
 //Nollställ sida om ingen finns eller är mindre än noll
