@@ -148,7 +148,7 @@ DecodeURLParameter = function(parameter)
 		var currentParameter = parametersArray[i].split('='); // Tar fram de själva enskilda parametrarna
 		if(currentParameter[0] == parameter && currentParameter[1] != "") // Kollar om parametertypen är den som söks efter, samt om den är tom
 		{
-			var fullGet = CurrentParameter[1]; // Hämtar listan med alla parametrarna på URL-form (ex. röd, grön, blå)
+			var fullGet = currentParameter[1]; // Hämtar listan med alla parametrarna på URL-form (ex. röd, grön, blå)
 			fullGet = decodeURIComponent(fullGet); // Avkodar URL-form till vanliga karaktärer
 			var getArray = fullGet.split('&'); // Delar upp i individuella parametrar vilka sedan returneras
 			return getArray;
