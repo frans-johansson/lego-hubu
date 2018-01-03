@@ -1,5 +1,8 @@
-var hidden = true;
+var hidden = true; // Global variabel för att avgöra om profil-popupen ska vara dold eller inte
 
+/* 	Funktion för att byta mellan att visa och dölja popup-fönstret.
+	Ändrar endast display-typ för de relevanta HTML-elementen.
+*/
 togglePopup = function(){
 	if(hidden) {
 		document.getElementById("profile").style.display = "none";
