@@ -2,6 +2,16 @@
 var searchText; // Texten användaren skrivit in i sökfältet
 var dropDownFields; // Array med alla alternativen i dropdown-menyn
 var currentSelected; // Det markerade elementet i dropdown-menyn. Sätts till -1 om inget element är markerat.
+var shouldSubmit;
+
+/* 	Lägger till ny "klass" för taggarna som läggs till bredvid sökfältet.
+	Används främst för att organisera koden.
+*/
+function Tag(type, content, ID) {
+	this.type = type;
+	this.content = content;
+	this.ID = ID;
+}
 
 /*  Funktion för att dels initiera dropdown-menyn, samt uppdatera denna när användaren skriver i sökfältet
  	Kallas onkeyup i sökfältet
@@ -43,7 +53,7 @@ updateTagList = function() {
 navigateTagList = function(pressed) {
 	var key = pressed.keyCode || pressed.which; // För att också fungera på webbläsare som inte stödjer keycode
 
-	if (key == 40 && currentSelected < 0) {
+	if (key == 40 && currentSelected < 0) { // Pil ner när inget alternativ är valt
 		for (var i = 0; i < dropDownFields.length; i++) {
 			dropDownFields[i].classList.remove("hashover"); // tar bort koppling till pseudoklassen hover i CSS:en från alla taggar
 		}
@@ -51,16 +61,16 @@ navigateTagList = function(pressed) {
 		currentSelected = 0;
 		dropDownFields[currentSelected].classList.toggle("selectedTag");
 	}
-	else if (key == 40 && currentSelected < dropDownFields.length - 1) {
+	else if (key == 40 && currentSelected < dropDownFields.length - 1) { // Pil ner när ett alternativ är valt
 		document.getElementById("searchText").blur(); // Avmarkera sökfältet
 		dropDownFields[currentSelected].classList.toggle("selectedTag");
 		dropDownFields[++currentSelected].classList.toggle("selectedTag");
 	}
-	else if (key == 38 && currentSelected > 0) {
+	else if (key == 38 && currentSelected > 0) { // Pil upp, ej första alternativet
 		dropDownFields[currentSelected].classList.toggle("selectedTag");
 		dropDownFields[--currentSelected].classList.toggle("selectedTag");
 	}
-	else if (key == 38 && currentSelected == 0) {
+	else if (key == 38 && currentSelected == 0) { // Pil upp med första alternativet
 		document.getElementById("searchText").focus(); // Markera sökfältet igen
 		dropDownFields[currentSelected--].classList.toggle("selectedTag");
 	}
@@ -73,6 +83,8 @@ navigateTagList = function(pressed) {
 activateTagOnPress = function(pressed) {
 	var key = pressed.keyCode || pressed.which; // För att också fungera på webbläsare som inte stödjer keycode
 
+	//alert("currentSelected: " + currentSelected);
+
 	// Avgör om ett tagalternativ är markerat (currentSelected är ej negativ) och om enterknappen har tryckts
 	if (key == 13 && currentSelected >= 0) {
 
@@ -80,13 +92,40 @@ activateTagOnPress = function(pressed) {
 		for (var i = 0; i < dropDownFields.length; i++) {
 			if (dropDownFields[i].classList.contains("selectedTag")) {
 				var inputID = dropDownFields[i].id + "List";
-
 				tag = new Tag(dropDownFields[i].id, searchText, inputID);
-
 				makeTag(tag);
+
+				break;
 			}
 		}
+
+		resetSearchField();
 	}
+}
+
+/* 	Funktion som tar emot ett click-event, lägger till motsvarande tag som användaren klickar på.
+   	Gömmer drop-downen om användaren klickar utanför listan.
+*/
+activateTagOnClick = function(click) {
+	if (click.target.classList.contains("tagOption")) {
+		var inputID = click.target.id + "List";
+		tag = new Tag(click.target.id, searchText, inputID);
+		makeTag(tag);
+
+		resetSearchField();
+	}
+	else if (!(click.target.className == "tagList" || click.target.id == "searchText")) {
+		document.getElementById("tagList").style.display = "none";
+	}
+}
+
+/*	Avmarkera drop-down-menyn, ta bort texten i Sökfältet och fokusera på sökfältet igen
+*/
+resetSearchField = function() {
+	document.getElementById("tagList").style.display = "none";
+	currentSelected = -1;
+	document.getElementById("searchText").value = "";
+	setTimeout(function(){document.getElementById("searchText").focus();}, 50); // För att undvika konflikt med submit för formuläret
 }
 
 /*	För att relativt smidigt byta till att navigera dropdownen med musen.
@@ -101,31 +140,6 @@ clearSelected = function() {
 			dropDownFields[i].classList.remove("selectedTag"); 	// tar bort selectedTag från alla alternativ
 			dropDownFields[i].classList.add("hashover"); 		// ger alla elementen i listan koppling till pseudoklassen med hover i CSS:en
 		}
-	}
-}
-
-/* 	Lägger till ny "klass" för taggarna som läggs till bredvid sökfältet.
-	Används främst för att organisera koden.
-*/
-function Tag(type, content, ID) {
-	this.type = type;
-	this.content = content;
-	this.ID = ID;
-}
-
-/* 	Funktion som tar emot ett click-event, lägger till motsvarande tag som användaren klickar på.
-   	Gömmer drop-downen om användaren klickar utanför listan.
-*/
-activateTagOnClick = function(click) {
-	if (click.target.classList.contains("tagOption")) {
-		var inputID = click.target.id + "List";
-
-		tag = new Tag(click.target.id, searchText, inputID);
-
-		makeTag(tag);
-	}
-	else if (!(click.target.className == "tagList" || click.target.id == "searchText")) {
-		document.getElementById("tagList").style.display = "none";
 	}
 }
 
@@ -208,6 +222,7 @@ function makeTag(tag) {
    	Bunden till onsubmit för sökformuläret.
 */
 function setParams() {
+	alert("submit");
 	var tagContainer = document.getElementById("tagContainer");
 	var tags = tagContainer.childNodes;
 
