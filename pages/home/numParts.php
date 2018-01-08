@@ -11,7 +11,7 @@
         while($row = mysqli_fetch_array($result)) {
 
             // Spara antalet bitar i en variabel
-            $Parts = $row["COUNT(DISTINCT PartID)"];
+            $Parts = $row["COUNT(PartID)"];
 
             // Skriv ut antalet bitar
             print "<p>$Parts</p>";
