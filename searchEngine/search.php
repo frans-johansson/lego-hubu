@@ -161,7 +161,8 @@
 
 
 // Om en fråga ställdes så ska nu kopplingen till databasen stängas stängas
-    if($searchQuery) {
+    if($where) {
+		print "hej";
         mysqli_close($connection);
     }
 
