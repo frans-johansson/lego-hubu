@@ -11,23 +11,54 @@
 
 <?php
 
-// Lägg till kommentarer för detta den som vet vad detta gör
+// Läser in sökningens alla getparametrar och skapar hidden input av dem så sökningsparametrarna är med vid sidbyte
+//Allt är inom if-satser så att html:en validerar
 
-$col = $_GET["col"];
-print '<input type="hidden" name="col" value="$col">';
-$set = $_GET["set"];
-print '<input type="hidden" name="set" value="$set">';
-$par = $_GET["par"];
+if($_GET["col"])
+{
+	$col = $_GET["col"];
+	print '<input type="hidden" name="col" value="$col">';
+}
+if($_GET["set"])
+{
+	$set = $_GET["set"];
+	print '<input type="hidden" name="set" value="$set">';
+}
+if($_GET["par"])
+{
+	$par = $_GET["par"];
 print '<input type="hidden" name="par" value="$par">';
-$yea = $_GET["yea"];
+}
+if($_GET["yea"])
+{
+	$yea = $_GET["yea"];
 print '<input type="hidden" name="yea" value="$yea">';
-$cat = $_GET["cat"];
+}
+if($_GET["cat"])
+{
+	$cat = $_GET["cat"];
 print '<input type="hidden" name="cat" value="$cat">';
-$p = $_GET["p"];
+}
+if($_GET["p"])
+{
+	$p = $_GET["p"];
 print '<input type="hidden" name="p" value="$p">';
-$f = $_GET["f"];
+}
+if($_GET["f"])
+{
+	$f = $_GET["f"];
 print '<input type="hidden" name="f" value="$f">';
-
+}
+if($_GET["exact"])
+{
+	$exact = $_GET["exact"];
+	print '<input type="hidden" name="exact" value="$exact">';
+}
+if($_GET["c"])
+{
+	$c = $_GET["c"];
+	print '<input type="hidden" name="c" value="$c">';
+}
 
 // Läs in vilken sida som användaren inne på, exemepel sida 1, sida 2 osv
 $page = $_GET["page"];
