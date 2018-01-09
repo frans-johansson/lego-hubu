@@ -3,13 +3,13 @@
 		<h1>Your collection</h1>
 		<div id="profileWrapper">
 			<div id="profileSets">
-				<p>Sets</p>
+				<p class="profileinfo" >Sets</p>
 				<?php
 					include "profile/setsCollect.php";
 				?>
 			</div>
 			<div id="profileParts">
-				<p>Parts</p>
+				<p class="profileinfo" >Parts</p>
 				<?php
 					include "profile/partsCollect.php";
 				?>
