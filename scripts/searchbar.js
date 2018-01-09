@@ -203,7 +203,7 @@ restoreTags = function() {
 
 /*	Skapar ny tag (div) utifrån en given Tag (definierad "klass") och lägger till den i dokumentet bredvid sökfältet
 */
-function makeTag(tag) {
+makeTag = function(tag) {
 	// Gör inga tomma taggar
 	if (tag.content != "" || typeof(tag.content) == "undefined") {
 		var newTag = document.createElement("div"); // Skapar själva div:en för taggen och ger den rätt klass (beroende på typ)
@@ -221,10 +221,17 @@ function makeTag(tag) {
 	}
 }
 
+/*	Hanterar alla funktioner som aktiveras onsubmit för formuläret
+*/
+doSubmit = function() {
+	setParams();
+	showLoadBar();
+}
+
 /* 	Placerar all information från taggarna i korrekt hidden-input-element i formuläret för att sökningen ska funka.
    	Bunden till onsubmit för sökformuläret.
 */
-function setParams() {
+setParams = function() {
 	var tagContainer = document.getElementById("tagContainer");
 	var tags = tagContainer.childNodes;
 
@@ -239,8 +246,85 @@ function setParams() {
 	}
 }
 
+/*	Funktioner för att visa, animera och dölja laddningsmeddelandet när sidan laddar ett sökresultat.
+	showLoadBar bunden till onsubmit.
+	hideLoadBar bunden till onload.
+*/
+var dotAmount;
+var startTime;
+
+showLoadBar = function() {
+	loadBar = document.getElementById("loadBar");
+	
+	loadBar.style.display = "block";
+	
+	dotAmount = 0;
+	startTime = new Date();
+	
+	animateLoadBar();
+}
+
+animateLoadBar =  function() {
+	var dots = document.getElementById("loadingDots");
+	var message = document.getElementById("message");
+	
+	var currentTime = new Date();
+	var elapsedTime = (currentTime - startTime) / 1000; // Hämtar passerad tid i sekunder
+	
+	// Ändra meddelandet i rutan enligt vissa tidsintervall
+	if (elapsedTime > 3600) {
+		message.innerHTML = "We here at Legu Hubu really admire your patience";
+	}
+	else if (elapsedTime > 1800) {
+		message.innerHTML = "I'm not suggesting you just give up at this point but";
+	}
+	else if (elapsedTime > 600) {
+		message.innerHTML = "Who knew this could take more than 10 minutes";
+	}
+	else if (elapsedTime > 140) {
+		message.innerHTML = "Still looking"
+	}
+	else if (elapsedTime > 120) {
+		message.innerHTML = "Feel free to go and get a hot beverage of your choice";
+	}
+	else if (elapsedTime > 65) {
+		message.innerHTML = "Our top agents are still looking for your Lego";
+	}
+	else if (elapsedTime > 60) {
+		message.innerHTML = "In case you were wondering, you have now waited for more than a minute";
+	}
+	else if (elapsedTime > 30) {
+		message.innerHTML = "Man, there's a lot of Lego to look through";
+	}
+	else if (elapsedTime > 15) {
+		message.innerHTML = "We are working as fast as we can";
+	}
+	else if (elapsedTime > 5) {
+		message.innerHTML = "Please be patient";
+	}
+	
+	
+	if (dotAmount < 3) {
+		dots.innerHTML += ". ";
+		dotAmount++;
+	}
+	else {
+		dots.innerHTML = "";
+		dotAmount = 0;
+	}
+	
+	setTimeout(animateLoadBar, 500);
+}
+
+hideLoadBar = function() {
+	loadBar = document.getElementById("loadBar");
+	
+	loadBar.style.display = "none";
+}
+
 /* Kopplar funktioner till respektive event */
 window.addEventListener("click", activateTagOnClick);
 window.addEventListener("keydown", activateTagOnPress);
 window.addEventListener("load", restoreTags);
+window.addEventListener("load", hideLoadBar)
 window.addEventListener("keydown", navigateTagList);

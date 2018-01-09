@@ -317,6 +317,17 @@ label {
 	margin: 0 10px;
 }
 
+/* Visas endast när sidan laddas efter sökning */
+#loadBar {
+	display: none;
+	background: #E43E3E;
+	color: white;
+	width: 100%;
+	height: 30px;
+	padding: 2px;
+	text-align: center;
+}
+
 /* Oklart..?
 .navFilter {
 	background: gold;
@@ -383,12 +394,13 @@ Slut på oklart */
 
 	/* Sets */
 .histogramCol {
-	width: 100px;
-	padding: 0;
+	
 }
 
 .histogram {
 	height: 20px;
 	display: block;
 	background: white;
+	width: 100px;
+	padding: 0;
 }

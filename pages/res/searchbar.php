@@ -5,22 +5,35 @@
 		VÄNLIGEN AKTIVERA JAVASCRIPT, TACK!
 	</noscript>
 
-	<form method="get" onsubmit="setParams()">
+	<form method="get" onsubmit="doSubmit()">
 		<div id="searchField">
 			<!-- Skriv in sökord -->
 			<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()">
+
              <input type="submit" id="searchButton" value="Search">
-			<!-- Lista med val av taggar -->
-			<div id="tagList" onmousemove="clearSelected()">
-				<p class="tagOption" id="colorTag">Color: <span class="searchContent"></span> </p>
-				<p class="tagOption" id="setTag">Set: <span class="searchContent"></span> </p>
-				<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
-				<p class="tagOption" id="yearTag">Year: <span class="searchContent"></span> </p>
-			</div>
-			
-			<!-- För att få med sidans GET-variabel i sökningen (annars blir det okul) -->
+
 			<?php
-				$page = $_GET['p'];
+			
+			$page = $_GET["p"];
+			
+			if($page == parts) {
+				// Lista med val av taggar
+				print '<div id="tagList" onmousemove="clearSelected()">
+							<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
+							<p class="tagOption" id="colorTag">Color: <span class="searchContent"></span> </p>
+							<p class="tagOption" id="setTag">Set: <span class="searchContent"></span> </p>
+							<p class="tagOption" id="yearTag">Year: <span class="searchContent"></span> </p>
+						</div>';
+			} else if($page == sets) {
+				print '<div id="tagList" onmousemove="clearSelected()">
+							<p class="tagOption" id="setTag">Set: <span class="searchContent"></span> </p>
+							<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
+							<p class="tagOption" id="colorTag">Color: <span class="searchContent"></span> </p>
+							<p class="tagOption" id="yearTag">Year: <span class="searchContent"></span> </p>
+						</div>';
+			}
+			
+			// För att få med sidans GET-variabel i sökningen
 				echo "<input type=\"hidden\" name=\"p\" value=\"$page\">";
 			?>
 			
@@ -67,4 +80,8 @@
 			<option value="rarityDesc">Rare - Common</option>
 		</select>
 	</form>
+</div>
+
+<div id="loadBar">
+	<span id="message">Loading</span> <span id="loadingDots"></span>
 </div>

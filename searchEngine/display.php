@@ -60,11 +60,11 @@
                     $link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
                 }
                 else if($format["has_largejpg"]) {
-                    $name = "$ItemtypeL/$ID.jpg";
+                    $name = $Itemtype . "L/$ID.jpg";
                     $link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
                 }
                 else if($format["has_largegif"]) {
-                    $name = "$ItemtypeL/$ID.gif";
+                    $name = $Itemtype . "L/$ID.gif";
                     $link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
                 }
 
@@ -77,14 +77,14 @@
                 $ID = $row["SetID"];
                 $Setname = $row["Setname"];
                 $Year = $row["MIN(Year)"];
-                $numParts = $row["SUM(Quantity)"];
+                $numParts = $row["SUM(inventory.Quantity)"];
 
             // Beräkna den relativa bredden av varje histogrampelare
                 $percentage = 100 * $numParts / $maxPartsAmount;
 
 
             // Skriv ut detta i tabellen
-                print "<tr><td>$ID</td><td>$Setname</td><td>$Year</td><td>$numParts </td><td>
+                print "<tr><td>$ID</td><td>$Setname</td><td>$Year</td><td>$numParts</td><td>
                       <div class=\"histogram\" style=\"width: $percentage%\"></div></td></tr>";
         }
     }
