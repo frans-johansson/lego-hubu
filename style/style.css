@@ -28,6 +28,7 @@
 #nav {
     display: flex;
     width: 100vw;
+	height: 100%;
     justify-content: flex-start;
     align-items: center;
 }
@@ -105,18 +106,42 @@ h1 {
 
 /* Generell wrapper-div */
 .wrapper {
-    width: 450px;
+    width: 100%;
+}
+
+#textBox {
+	display: flex;
+	height: 100%;
+}
+
+#textBox h1 {
+	display: block;
+}
+
+.textColumn {
+	flex-shrink: 1;
+	width: 100%;
+	margin: 5px 10px; 
+}
+
+.outerWrapper {
+	display: flex;
+	width: 100%;
+	justify-content: center;
 }
 
 /* Antal bitar/satser */
 #amountsWrapper {
     display: flex;
     flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .amountBox {
     color: black;
     background: #F0C247;
+	width: 70%;
     margin-bottom: 25px;
     text-decoration: none;
 }
