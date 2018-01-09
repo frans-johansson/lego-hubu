@@ -110,7 +110,11 @@ h1 {
    background: gold;
    margin-bottom: 25px;
    text-decoration: none;
+<<<<<<< HEAD
    color: Black;
+=======
+   color: black;
+>>>>>>> 63c357bf56f7be33a2e24a43a35ff82ebb995912
 }
 
 
@@ -188,6 +192,8 @@ h1 {
 	overflow: hidden;
 }
 
+/* Gör så att söktexten i tag-drop-downen inte går att klicka på*/
+
 .searchContent {
 	pointer-events: none;
 }
@@ -195,6 +201,13 @@ h1 {
 
 #tagContainer {
 	width: 100%;
+}
+
+.removeButton {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background: red;
 }
 
 label {

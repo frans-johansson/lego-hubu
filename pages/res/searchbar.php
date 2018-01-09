@@ -1,12 +1,15 @@
 <div id="searchBar">
-	<form action="" method="get">
+	<noscript>
+		VÄNLIGEN AKTIVERA JAVASCRIPT TACK!
+	</noscript>
+
+	<form action="" method="get" onsubmit="setParams()">
 		<div id="searchField">
 			<!-- Skriv in sökord -->
 			<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()">
 
-
 			<!-- Lista med val av taggar -->
-			<div id="tagList" tabindex="0">
+			<div id="tagList">
 				<p class="tagOption" id="colorTag">Color: <span class="searchContent"></span> </p>
 				<p class="tagOption" id="setTag">Set: <span class="searchContent"></span> </p>
 				<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
@@ -20,7 +23,7 @@
 				echo "<input type=\"hidden\" name=\"p\" value=\"$page\">";
 			?>
 			
-			<!-- Samla taggar -->
+			<!-- Samla taggar i dessa med JS -->
 			<input id="colorTagList" type="hidden" name="col">
 			<input id="setTagList" type="hidden" name="set">
 			<input id="partTagList" type="hidden" name="par">
