@@ -222,7 +222,6 @@ function makeTag(tag) {
    	Bunden till onsubmit för sökformuläret.
 */
 function setParams() {
-	alert("submit");
 	var tagContainer = document.getElementById("tagContainer");
 	var tags = tagContainer.childNodes;
 
