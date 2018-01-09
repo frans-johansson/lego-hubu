@@ -151,11 +151,13 @@
 		$checkResult = false;
 	}
 
-// Ge felmeddelande om sökningen inte ger några resultat
-    if(!$checkResult && $where) {
-        print "Your search generated no results. Please search for something else!";
+// Om sökningen inte ger något resultat så visa ett felmeddelande
+// Annars om en sökning gjorts och det finns ett resultat så inkludera filen som visar detta
+	if(!$checkResult && $where) {
+        print '<div id="searchError">Your search generated no results. Please search for something else!</div>';
     }
     else if($checkResult && $where) {
+		// Inkludera filen som 
         include "searchEngine/display.php";
     }
 
