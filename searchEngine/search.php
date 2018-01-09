@@ -148,16 +148,15 @@
 	$rowCountResult = mysqli_query($connection, "SELECT FOUND_ROWS()");
 	
 	$rowCount = mysqli_fetch_row($rowCountResult);
-
 	
 // Se om det gjorts en sökning genom att se om det definierats ett $where
-// Se om sökningen gett ett resultat genom att se om $rowCount har definierats
+// Se om sökningen gett ett resultat genom att se om $rowCountär noll eller om det har ett värde
 // Om sökningen inte ger något resultat så visa ett felmeddelande
 // Annars om en sökning gjorts och det finns ett resultat så inkludera filen som visar detta
-	if(!$rowCount && $where) {
+	if($rowCount[0] == 0 && $where) {
         print '<div id="searchError">Your search generated no results. Please search for something else!</div>';
     }
-    else if($rowCount && $where) {
+    else if($rowCount[0] != 0 && $where) {
 		// Inkludera filen som skriver ut resultatet av sökningen
         include "searchEngine/display.php";
     }
