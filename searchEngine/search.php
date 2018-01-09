@@ -27,7 +27,6 @@
 // Inkludera funktionen getToSQL som anropas nedan
     include "searchEngine/condition.php";
 
-
 // Läs in ifall användaren har sökt på en sats
     if($_GET["set"])
         $where .= getToSQL("set", "inventory.SetID", "Setname", "");
@@ -115,7 +114,7 @@
             include "searchEngine/connect.php";
 
         // Skapa frågan $searchQuery som sedan ställs till databasen
-            include "searchEngine/query.php"
+            include "searchEngine/query.php";
     }
 
 
@@ -136,33 +135,34 @@
 
 // Ställ frågan
 //TA BORT DETTA SEN NÄR ALLT ÄR KONTROLLERAT ATT DET FUNGERAR
-    print "$searchQuery";
+   // print "$searchQuery";
 
 
 // Ställ frågan till databasen, $searchQuery skapades i en inkluderad fil ovan
     $result	= mysqli_query($connection, "$searchQuery");
+	
+	if($result) {
+		$checkResult = true;
+	} else {
+		$checkResult = false;
+	}
 
 
 // Beräkna antalet rader i resultatet för att få fram om next-knappen ska visas eller ej, detta görs i en annan fil
     $rowcount = mysqli_num_rows($result);
 
 
-// Hämta arrayen med resultatet
-    $row = mysqli_fetch_array($result);
-
-
 // Ge felmeddelande om sökningen inte ger några resultat
-    if(!$row && $where) {
+    if(!$checkResult && $where) {
         print "Your search generated no results. Please search for something else!";
     }
-    else if($row && $where) {
+    else if($checkResult && $where) {
         include "searchEngine/display.php";
     }
 
 
 // Om en fråga ställdes så ska nu kopplingen till databasen stängas stängas
     if($where) {
-		print "hej";
         mysqli_close($connection);
     }
 

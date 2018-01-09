@@ -17,47 +17,47 @@
 if($_GET["col"])
 {
 	$col = $_GET["col"];
-	print '<input type="hidden" name="col" value="$col">';
+	print "<input type='hidden' name='col' value='$col'>";
 }
 if($_GET["set"])
 {
 	$set = $_GET["set"];
-	print '<input type="hidden" name="set" value="$set">';
+	print "<input type='hidden' name='set' value='$set'>";
 }
 if($_GET["par"])
 {
 	$par = $_GET["par"];
-print '<input type="hidden" name="par" value="$par">';
+print "<input type='hidden' name='par' value='$par'>";
 }
 if($_GET["yea"])
 {
 	$yea = $_GET["yea"];
-print '<input type="hidden" name="yea" value="$yea">';
+print "<input type='hidden' name='yea' value='$yea'>";
 }
 if($_GET["cat"])
 {
 	$cat = $_GET["cat"];
-print '<input type="hidden" name="cat" value="$cat">';
+print "<input type='hidden' name='cat' value='$cat'>";
 }
 if($_GET["p"])
 {
 	$p = $_GET["p"];
-print '<input type="hidden" name="p" value="$p">';
+print "<input type='hidden' name='p' value='$p'>";
 }
 if($_GET["f"])
 {
 	$f = $_GET["f"];
-print '<input type="hidden" name="f" value="$f">';
+print "<input type='hidden' name='f' value='$f'>";
 }
 if($_GET["exact"])
 {
 	$exact = $_GET["exact"];
-	print '<input type="hidden" name="exact" value="$exact">';
+	print "<input type='hidden' name='exact' value='$exact'>";
 }
 if($_GET["c"])
 {
 	$c = $_GET["c"];
-	print '<input type="hidden" name="c" value="$c">';
+	print "<input type='hidden' name='c' value='$c'>";
 }
 
 // Läs in vilken sida som användaren inne på, exemepel sida 1, sida 2 osv
