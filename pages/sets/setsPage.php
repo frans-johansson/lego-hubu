@@ -8,7 +8,10 @@
 
 	<!-- Inkludera tabellen med histogram-->
     <?php
-        include "pages/sets/setsTable.html";
-		include "searchEngine/pageSelect.php";
+        include "pages/sets/setsTable.php";
+		
+		if($where) {
+			include "searchEngine/pageSelect.php";
+		}
     ?>
 </div>
