@@ -215,6 +215,8 @@ makeTag = function(tag) {
 
 		var removeButton = document.createElement("div"); // Lägger till knapp för att ta bort taggen (notera dock att hela diven går att klicka på)
 		removeButton.className = "removeButton";
+		var cross = document.createTextNode("x");
+		removeButton.appendChild(cross);
 		newTag.appendChild(removeButton);
 
 		document.getElementById("tagContainer").appendChild(newTag); // Lägger in hela taggen i dokumentet på rätt plats

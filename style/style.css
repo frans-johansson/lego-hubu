@@ -2,6 +2,7 @@
 p {
     font-family: "Ubuntu";
 	font-size: 21px;
+
 }
 
 p.num{
@@ -281,7 +282,7 @@ Räknas dessvärre ej som CSS-standard och validerar ej
 
 /* Markerat tag-alternativ antingen med tangentbord eller mus (onhover) */
 .selectedTag, .hashover:hover {
-    background: blue;
+    background:#5b82d7;
 }
 
 #tagContainer {
@@ -294,42 +295,46 @@ Räknas dessvärre ej som CSS-standard och validerar ej
 /* Själva taggarna (men inte div:ar i taggarna) */
 #tagContainer > div {
     color: white;
-    padding: 1px 3px;
-    margin: 1px;
+    margin: 5px;
     font-size: 17px;
     border-radius: 4px;
+	padding-left:10px;
 }
 
 .yearTag {
-    background: blue;
+    background: #709d62;
     border: 2px solid;
-    border-color: darkBlue;
+  
 }
 
 .partTag {
-    background: green;
+    background: #9b6cc6;
     border: 2px solid;
-    border-color: darkGreen;
+ 
 }
 
 .setTag {
-    background: red;
+    background: #5b82d7;
     border: 2px solid;
-    border-color: darkRed;
+ 
 }
 
 .colorTag {
-    background: purple;
+    background:#edc02c;
     border: 2px solid;
-    border-color: indigo;
+   
 }
 
 .removeButton {
 	display: inline-block;
-    background: red;
-	width: 10px;
-	height: 10px;
-    margin: 0px 1px 0px 2px;
+    color: white;
+	width: 11px;
+    height: 21px;
+    margin: -9px 6px 10px 20px;
+	margin-left: 10px;
+	font-weight: bold;
+    font-size: 29px;
+	float: right;
 }
 
 label {
@@ -428,7 +433,18 @@ Slut på oklart */
 	border: 5px solid #3872A9;
 }
 
+p.numprofile{
+	font-size: 60px;
+	margin: 0px;
+}
+p.profileinfo{
+	font-size: 42px;
+	margin: 0px;
+}
+
+
 	/* Sets */
+
 table {
 	border-spacing: 0;
 }
@@ -441,6 +457,7 @@ th, td {
 	background: darkBlue;
 	color: white;
 	font-size: 18px;
+
 }
 
 #idColumn {
@@ -455,9 +472,11 @@ th, td {
 .histogram {
 	height: 20px;
 	display: block;
+
 	background: darkBlue;
 	width: 100px;
 	padding: 0;
+
 }
 
 #histogramColumn {
