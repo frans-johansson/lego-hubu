@@ -5,7 +5,7 @@
 		VÄNLIGEN AKTIVERA JAVASCRIPT, TACK!
 	</noscript>
 
-	<form method="get" onsubmit="setParams()">
+	<form method="get" onsubmit="doSubmit()">
 		<div id="searchField">
 			<!-- Skriv in sökord -->
 			<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()">
@@ -67,4 +67,8 @@
 			<option value="rarityDesc">Rare - Common</option>
 		</select>
 	</form>
+</div>
+
+<div id="loadBar">
+	<span id="message">Loading</span> <span id="loadingDots"></span>
 </div>
