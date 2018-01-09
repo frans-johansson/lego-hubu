@@ -16,10 +16,10 @@
         // Skriv ut tabellhuvudena
         print '<div id="searchSuccess">Thank you for your patience. Here are the results!</div>
 				<tr>
-                    <th class="dataColumn">ID</th>
+                    <th id="idColumn" class="dataColumn">ID</th>
                     <th class="dataColumn">Name</th>
                     <th class="dataColumn">Release Year</th>
-                    <th colspan="2">Number of parts</th>
+                    <th id="histogramColumn" colspan="2">Number of parts</th>
                 </tr>';
     }
 

@@ -348,6 +348,22 @@ label {
 	text-align: center;
 }
 
+#searchSuccess {
+	color: white;
+    background: #53a553;
+	height: 30px;
+	padding: 2px;
+    text-align: center;
+}
+
+#searchError {
+	color: white;
+    background: #eaa21a;
+    height: 30px;
+    padding: 2px;
+    text-align: center;
+}
+
 /* Oklart..?
 .navFilter {
 	background: gold;
@@ -427,6 +443,10 @@ th, td {
 	font-size: 18px;
 }
 
+#idColumn {
+	width: 75px;
+}
+
 .partsAmount {
 	color: darkBlue;
 	text-align: center;
@@ -438,6 +458,10 @@ th, td {
 	background: darkBlue;
 	width: 100px;
 	padding: 0;
+}
+
+#histogramColumn {
+	color: darkBlue;
 }
 
 .histogramCell {

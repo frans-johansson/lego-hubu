@@ -254,8 +254,18 @@ var dotAmount;
 var startTime;
 
 showLoadBar = function() {
-	loadBar = document.getElementById("loadBar");
+	var success = document.getElementById("searchSuccess");
+	var error = document.getElementById("searchError");
 	
+	// Döljer meddelanden gällande tidigare sökningar om dessa finns i dokumentet
+	if (success) {
+		success.style.display = "none";
+	}
+	if (error) {
+		error.style.display = "none";
+	}
+	
+	loadBar = document.getElementById("loadBar");
 	loadBar.style.display = "block";
 	
 	dotAmount = 0;
