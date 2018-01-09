@@ -1,10 +1,14 @@
 <div id="page">
-	<!-- Inkludera sökfält-->
+	<h1 class="pageHeader">PARTS</h1>
+	
+	<!-- Inkludera sökfält -->
 	<?php
 		include "pages/res/searchbar.php";
 	?>
+	
 	<!-- Inkludera tabell med sökresultat-->
 	<?php
-	 	include "pages/parts/partsTable.html";
+	 	include "pages/parts/partsTable.php";
+		include "searchEngine/pageSelect.php";
 	?>
 </div>

@@ -1,20 +1,36 @@
 <!-- Knapparna med statistik om satser och bitar -->
-<div class="wrapper" id="amountsWrapper">
-   <a class="amountBox" href="?p=sets">
-      <p>Sets</p>
-      <p>2330</p>
-   </a>
-   
-   <a class="amountBox" href="?p=parts">
-      <p>Parts</p>
-      <p>233034</p>
-   </a>
-</div>
-<!-- Infotext -->
-<div class="wrapper" id="textBox">
-	<h1> Fin rubrik </h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Vestibulum porttitor risus nec convallis faucibus.
-      Nunc suscipit interdum mi non auctor. Sed blandit libero justo, id mollis justo eleifend eget.
-      Duis imperdiet, nulla ut gravida dictum, tortor ex pretium nisi, non laoreet dui ligula volutpat mauris.</p>
+<div class="outerWrapper">
+	<div class="wrapper" id="amountsWrapper">
+		<a class="amountBox" href="?p=sets">
+			<!-- Hur många Sets som finns, och en länk till sidan för Sets-->
+			<p>Sets</p>
+			<?php
+				include "numSets.php"
+			?>
+	   </a>
+	   
+	   <a class="amountBox" href="?p=parts">
+		   <!-- Hur många Parts som finns, och en länk till sidan för Parts-->
+			<p>Parts</p>
+			<?php
+				include "numParts.php"
+			?>
+	   </a>
+	</div>
+	<!-- Infotext -->
+	<div class="wrapper">
+		<h1> LEGO </h1>
+		<div id="textBox">
+			<div class="textColumn">
+				<p> Lego is a line of plastic construction toys that consists of interlocking bits, gears, minifigures and various other parts. Lego can be assembled in many different ways and then disassembled and be used again. It is made by the lego group, a family owned company based in denmark, billund founded by Ole Kirk Christiansen. Lego begun manufacturing in 1949 . Since then lego has become something more than just plastic bits that you can build new creations with. Under the brand there have been several legoland amusement parks, movies, games, competitions.
+				</p>
+			</div>
+			<div class="textColumn">
+				<p>The name lego was made by its founder Ole Kirk Christiansen. It comes from the danish word leg godt meaning “play well”.
+				</p>
+				<p>Legoland is a chain of family theme parks, that is not fully owned by the lego group . The first legoland opened in 1968 in billund denmark. Now you can find legolands in malaysia, japan, usa, United Arab Emirates, germany and england. One of the big attractions in legoland are models of landmarks and scenes from around the world, made from millions of genuine Lego bricks. 
+				</p>
+			</div>
+		</div>
+	</div>
 </div>

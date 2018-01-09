@@ -1,89 +1,100 @@
 ﻿	/* Fonts etc */
 
 
+
 	/* Nav */
 
 #header {
-   background: darkBlue;
-   height: 70px;
-   margin: 0;
-   display: flex;
+    display: flex;
+    background: #3872A9;
+    height: 70px;
+    margin: 0;
+    align-items: center;
 }
-
 
 #logo {
-   width: 200px;
-   margin-right: 20px;
-   margin-left: 10px;
-   align-self: center;
+    background: #458BCF;
+    color: #F0C247;
+    width: 200px;
+    height: 100%;
+    margin-right: 20px;
+    padding-left: 10px;
+    font-size: 30px;
 
-   color: gold;
-   font-size: 30px;
-   flex-shrink: 0;
+    /* För att inte mosas med flex*/
+    flex-shrink: 0;
 }
-
 
 #nav {
-   width: 100vw;
-   display: flex;
-   justify-content: flex-start;
-   align-items: center;
+    display: flex;
+    width: 100vw;
+	height: 100%;
+    justify-content: flex-start;
+    align-items: center;
 }
 
+/* Länkarna i navigationsmenyn */
 .navOption {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-decoration: none;
-	color: white;
+    color: white;
 	height: 100%;
 	width: 150px;
+    text-decoration: none;
+    align-items: center;
+	justify-content: center;
 }
 
 .navOption:hover {
-	background: gold;
-	color: darkBlue;
+    background: #F0C247;
+    color: #3872A9;
 }
 
 .navOption p {
-   margin: 0;
+    margin: 0;
 }
 
-
+/* Profilrutan med finfin bild */
 #profile {
-   height: 70px;
-   width: 70px;
-   background: gold;
+    background: #F0C247;
+    height: 70px;
+    width: 70px;
 
-   /* För att inte mosa användarrutan med flex*/
-   flex-shrink: 0;
+    /* För att inte mosas med flex*/
+    flex-shrink: 0;
 }
 
 
 	/* Page */
 
-	
 body {
-   margin: 0;
-   background: lightGray;
-   color: white;
-   font-size: 25px;
-   font-family: sans-serif;
+    background: #EEE;
+    color: white;
+    margin: 0;
+    font-size: 25px;
+    font-family: sans-serif;
+    overflow-x: hidden;
 }
 
-
-/* Eventuellt flytta till home om ej används någon annanstans */
 h1 {
-   font-size: 30px;
-   text-align: center;
-   margin: 0;
+	width: 100%;
+    margin: 0;
+	font-size: 30px;
+	text-align: center;
 }
 
+/* Rubrik för bitar eller satser */
+.pageHeader {
+	color: white;
+	background: #3872A9;
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
 
 /* Inledande innehåll: Antal bitar, satser och lite text */
 #page {
    color: black;
    width: 70%;
+   height: 100%;
    margin: 50px auto 0 auto;
    display: flex;
    flex-wrap: wrap;
@@ -93,88 +104,108 @@ h1 {
 
 	/* Home */
 
-	
 /* Generell wrapper-div */
 .wrapper {
-   width: 450px;
+    width: 100%;
 }
 
+#textBox {
+	display: flex;
+	height: 100%;
+}
+
+#textBox h1 {
+	display: block;
+}
+
+.textColumn {
+	flex-shrink: 1;
+	width: 100%;
+	margin: 5px 10px; 
+}
+
+.outerWrapper {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+}
 
 /* Antal bitar/satser */
 #amountsWrapper {
-   display: flex;
-   flex-direction: column;
+    display: flex;
+    flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .amountBox {
-   background: gold;
-   margin-bottom: 25px;
-   text-decoration: none;
-<<<<<<< HEAD
-   color: Black;
-=======
-   color: black;
->>>>>>> 63c357bf56f7be33a2e24a43a35ff82ebb995912
+    color: black;
+    background: #F0C247;
+	width: 70%;
+    margin-bottom: 25px;
+    text-decoration: none;
 }
-
 
 /* Intressant och lärorik textruta */
 #homeTextBox {
-   margin-bottom: 25px;
-   background: white;
-   width: 600px;
+    background: white;
+    width: 600px;
+    margin-bottom: 25px;
 }
-
 
 #homeTextBox h1 {
-   margin-top: 0;
+    margin-top: 0;
 }
-
 
 #homeTextBox p {
-   margin: 0 5px;
+    margin: 0 5px;
 }
-
 
 /* Diagram-sektion */
-#diagrams {
-   width: 100%;
-   background: lightBlue;
+#diagramData {
+    display: none;
 }
 
+#diagrams {
+    background: #9CC4EA;
+	width: 100%;
+}
 
 #diagrams h1 {
-   margin: 0;
-   color: white;
-   background: darkBlue;
+    background: #3872A9;
+    color: white;
 }
 
 
-.diagram {
-	
+#canvas {
+    /* Sätter bredd till 100% här för att tvinga korrekt storlek, skalningen sköts i JS */
+    width: 100%;
+    border: none;
 
 }
 
 
 	/* Sökfält för parts och sets	*/
 
-	
+/* Agerar som flex container för formuläret */
 #searchBar {
-	background: darkBlue;
+    display: flex;
+	background: #3872A9;
+    width: 100%;
+	height: 100%;
 	padding: 0 10px;
-	display: flex;
 	align-items: center;
-	width: 100%;
-	height: 50px;
 }
 
 #searchBar form {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	height: 30px;	
+	height: 100%;
+	margin: 0 0 3px 0;
 }
 
+/* Sökfältet */
 #searchText {
 	margin: 0 20px 0 0;
 	background: white;
@@ -182,50 +213,103 @@ h1 {
 	width: 300px;
 }
 
+#searchFilter {
+    height: 50px;
+}
+
 #tagList {
-	background: white;
+    display: none; /* Blir synlig med JS */
+    background: white;
 	width: 300px;
 	float: left;
-	display: none;
 	position: absolute;
-	z-index: 1;
 	overflow: hidden;
 }
 
-/* Gör så att söktexten i tag-drop-downen inte går att klicka på*/
+/* Gör så att söktexten i tag-drop-downen inte går att klicka på
 
 .searchContent {
 	pointer-events: none;
 }
 
+Räknas dessvärre ej som CSS-standard och validerar ej
+*/
+
+.tagOption {
+    /* Lägg till CSS för taggarna i dropdown-menyn */
+}
+
+/* Markerat tag-alternativ antingen med tangentbord eller mus (onhover) */
+.selectedTag, .hashover:hover {
+    background: blue;
+}
 
 #tagContainer {
+    display: flex;
 	width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+/* Själva taggarna (men inte div:ar i taggarna) */
+#tagContainer > div {
+    color: white;
+    padding: 1px 3px;
+    margin: 1px;
+    font-size: 17px;
+    border-radius: 4px;
+}
+
+.yearTag {
+    background: blue;
+    border: 2px solid;
+    border-color: darkBlue;
+}
+
+.partTag {
+    background: green;
+    border: 2px solid;
+    border-color: darkGreen;
+}
+
+.setTag {
+    background: red;
+    border: 2px solid;
+    border-color: darkRed;
+}
+
+.colorTag {
+    background: purple;
+    border: 2px solid;
+    border-color: indigo;
 }
 
 .removeButton {
 	display: inline-block;
+    background: red;
 	width: 10px;
 	height: 10px;
-	background: red;
+    margin: 0px 1px 0px 2px;
 }
 
 label {
+    color: white;
 	margin: 0 10px;
-	color: white;
 }
 
+/* Oklart..?
 .navFilter {
 	background: gold;
 	width: 100px;
-	text-align: center;
 	margin: 0 20px;
+    text-align: center;
 }
 
 .navFilter p {
 	margin: 0;
 	color: darkBlue;
 }
+Slut på oklart */
 
 .table {
 	background: lightBlue;
@@ -233,9 +317,56 @@ label {
 	height: 100%;
 }
 
+
+	/* Användarens pop-up */
+
+#pageBackground {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.55);
+
+	/* När den är aktiv och har display: flex*/
+	align-items: center;
+	justify-content: center;
+}
+
+#profilePopup{
+	position: absolute;
+	display: none;
+	width: 60%;
+	height: 160px;
+	background: #F0C247;
+	text-align: center;
+}
+
+#profileWrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+#profileParts{
+	width: 100%;
+	border: 5px solid #3872A9;
+}
+
+#profileSets {
+    width: 100%;
+	border: 5px solid #3872A9;
+}
+
 	/* Sets */
+.histogramCol {
+	width: 100px;
+	padding: 0;
+}
 
-
-
-	/* Pop-up */
-
+.histogram {
+	height: 20px;
+	display: block;
+	background: white;
+}

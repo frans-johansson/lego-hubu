@@ -1,8 +1,92 @@
 <?php
-//	Skriv ut alla poster i svaret																																		
-while ($row = mysqli_fetch_array($result)) {																						
-	$heading = $row['SetID'];																															
-	print("<h2>$heading</h2>\n");																																																
-}	//	end	while	
+
+    if($page == parts) {
+        // Skriv ut tabellhuvudena
+        print "<tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Included in sets</th>
+                    <th>Release year</th>
+                </tr>";
+    }
+    else if($page == sets) {
+        // Skriv ut tabellhuvudena
+        print "<tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Release Year</th>
+                    <th colspan=\"2\">Number of parts</th>
+                </tr>";
+    }
+
+
+// Hämta resultatet igen, nödvändigt eftersom SQL är konstigt och arrayen har blivit tom vid det här laget?
+    $result	= mysqli_query($connection, "$searchQuery");
+
+
+// Hämta arrayen med resultatet igen, annars kör den inte igenom arrayen utan visar bara resultatet för samma bit om och om igen i alla evighet
+    while($row = mysqli_fetch_array($result)) {
+
+        // Gå igenom och ändra i detta nu när bättre lösning funnen
+        if($page == parts) {
+            // Lägg informationen som ska visas i separata variabler
+                $ID = $row["PartID"];
+                $Partname = $row["Partname"];
+                $Color = $row["Colorname"];
+                $numSets = $row["COUNT(DISTINCT inventory.SetID)"];
+                $Year = $row["MIN(Year)"];
+
+            // Fråga efter den information som är relevant för att få fram en bild
+                $info = mysqli_query($connection, "SELECT colors.ColorID, ItemTypeID, has_gif, has_jpg, has_largegif, has_largejpg
+                                FROM images, colors WHERE ItemID = '$ID' AND Colorname = '$Color' AND colors.ColorID = images.ColorID");
+
+            // Hämta arrayen med denna information
+                $format = mysqli_fetch_array($info);
+
+            // Lägg den nödvändiga informationen för bildnamnet i variabler
+                $Itemtype = $format["ItemTypeID"];
+                $ColorID = $format["ColorID"];
+
+
+            // Bilda länken till den bild som ska visas
+                if($format["has_jpg"]) {
+                    $name = "$Itemtype/$ColorID/$ID.jpg";
+                    $link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+                }
+                else if($format["has_gif"]) {
+                    $name = "$Itemtype/$ColorID/$ID.gif";
+                    $link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+                }
+                else if($format["has_largejpg"]) {
+                    $name = "$ItemtypeL/$ID.jpg";
+                    $link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+                }
+                else if($format["has_largegif"]) {
+                    $name = "$ItemtypeL/$ID.gif";
+                    $link = "http://www.itn.liu.se/~stegu76/img.bricklink.com/$name";
+                }
+
+            // Skriv ut detta i tabellen
+                print "<tr><td><img src=\"$link\" alt=\"$name\"></td><td>$ID</td><td>$Partname</td>
+                        <td>$Color</td><td>$numSets</td><td>$Year</td></tr>";
+        }
+        else if($page == sets) {
+            // Lägg informationen som ska visas i separata variabler
+                $ID = $row["SetID"];
+                $Setname = $row["Setname"];
+                $Year = $row["MIN(Year)"];
+                $numParts = $row["SUM(Quantity)"];
+
+            // Beräkna den relativa bredden av varje histogrampelare
+                $percentage = 100 * $numParts / $maxPartsAmount;
+
+
+            // Skriv ut detta i tabellen
+                print "<tr><td>$ID</td><td>$Setname</td><td>$Year</td><td>$numParts </td><td>
+                      <div class=\"histogram\" style=\"width: $percentage%\"></div></td></tr>";
+        }
+    }
 
 ?>

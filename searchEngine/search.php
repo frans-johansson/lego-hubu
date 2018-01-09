@@ -1,204 +1,169 @@
 <?php
-//Hämta sida
-$lowerLimit = $_GET["page"];
 
+//Hämta vilken sida vi är på, exemepelvis sida 0, sida 1, sida 2 osv.
+    $lowerLimit = $_GET["page"];
+
+
+// Inkludera funktionen som separerar det som står i get-parametrarna
+// ANVÄNDS DENNA ENBART I getToSQL-funktionen? KAN DEN I SÅ FALL INLKUDERAS DÄR ISTÄLLET
+    include "searchEngine/separate.php";
 
 //Nollställ sida om ingen finns eller är mindre än noll
-if(!$lowerLimit || $lowerLimit < 0) {
-	$lowerLimit = 0;
-}
+    if(!$lowerLimit || $lowerLimit < 0) {
+        $lowerLimit = 0;
+    }
 
-$displaylimit = 20;
 
-// Frågan som ska fyllas på beroende på sökningen
-$where = "";
+// Den gräns vi valt för hur många sökresultat som visas i taget
+    $displaylimit = 20;
 
-// Få fram vilka frågor som ska ställas
-if($_GET["set"] != ""){
-	$set = "set";
-	$setGetArray = splitGet($set);
-	$length = count($setGetArray);
+
+// Läs in om vi är inne på sidan parts eller sets
+    $page = $_GET["p"];
+
+
+/* Läs in vad som sökts på och anropa funktionen för att formulera SQL-frågan */
+
+// Inkludera funktionen getToSQL som anropas nedan
+    include "searchEngine/condition.php";
+
+// Läs in ifall användaren har sökt på en sats
+    if($_GET["set"])
+        $where .= getToSQL("set", "inventory.SetID", "Setname", "");
+
+// Läs in ifall användaren har sökt på en bit
+    if($_GET["par"]) {
+        // Kolla vilken sida användaren är inne och söker på och formulera frågan olika utefter det
+            if($page == parts) {
+                $where .= getToSQL("par", "PartID", "Partname", "");
+            }
+            else if($page == sets) {
+                $where .= getToSQL("par", "PartID", "Partname", " AND PartID = ItemID");
+                $table .= ", parts";
+            }
+    }
+
+// Läs in ifall användaren har sökt på en färg
+    if($_GET["col"]) {
+        // Kolla vilken sida användaren är inne och söker på och formulera frågan olika utefter det
+            if($page == parts) {
+                $where .= getToSQL("col", "Colorname", "", "");
+            }
+            else if($page == sets) {
+                $where .= getToSQL("col", "Colorname", "", " AND inventory.ColorID = colors.ColorID");
+                $table .= ", colors";
+            }
+    }
+
+// Läs in ifall användaren har sökt på ett år
+    if($_GET["yea"])
+        $where .= getToSQL("yea", "Year", "", "");
+
+
+// Läs in vilket filtreringsalternativ anvöndaren valt
+    $filter = $_GET["f"];
+
+
+// Få fram i vilken ordning obejekten ska visas utefter den valda sorteringen
+// Behöver det läggas till kommentarer här eller är det tillräckligt tydligt?
+
+    if($filter == "ageAsc") {
+        $order = "MIN(Year) ASC";
+    }
+    else if($filter == "ageDesc") {
+        $order = "MIN(Year) DESC";
+    }
+    else if($filter == "rarityAsc" && $page == 'parts') {
+        $order = "COUNT(DISTINCT inventory.SetID) DESC";
+    }
+    else if($filter == "rarityAsc" && $page == 'sets') {
+        $order = "SUM(Quantity) DESC";
+    }
+    else if($filter == "rarityDesc" && $page == 'parts' ) {
+        $order = "COUNT(DISTINCT inventory.SetID) ASC";
+    }
+    else if($filter == "rarityDesc" && $page == 'sets' ) {
+        $order = "SUM(Quantity) ASC";
+    }
+    else {
+        // Om användaren inte valt filter så blir detta det förvalda alternativet
+        $order = "COUNT(DISTINCT inventory.SetID) DESC";
+    }
+
+
+// Kolla om sökningen ska vara inom den egna samlingen
+// Om get-parametern är satt så har användaren valt att visa enbart den egna samlingen
+    if($_GET["c"]) {
+        $where .= " AND collection.SetID = inventory.SetID";
+        $table .= ", collection";
+    }
+
+
+// Välj hur resultatet ska grupperas beroende på vilket sida man är inne och söker på
+    if($page == parts) {
+        $group = "Colorname, PartID";
+    }
+    else if($page == sets) {
+        $group = "sets.SetID";
+    }
+
+
+// Om en fråga har ställts så koppla upp mot databasen och skapa frågan
+    if($where) {
+        // Koppla upp mot databasen
+            include "searchEngine/connect.php";
+
+        // Skapa frågan $searchQuery som sedan ställs till databasen
+            include "searchEngine/query.php";
+    }
+
+
+// Om användaren är inne på sets, ta fram antalet bitar hos det set som innehåller flest bitar av de set som matchar sökningen
+// Detta är nödvändig information för histgramet och används när resultatet skrivs ut
+    if($page == sets){
+
+        // Ställ frågan och läs in resultatet
+        $maxPartsResult = mysqli_query($connection, "$maxPartsQuery");
+
+        // Hämta arrayen med resultatet
+        $maxPartsArray = mysqli_fetch_array($maxPartsResult);
+
+        // Hämta det första värdet i arrayen då det frågan är ställd så att detta är det största värdet
+        $maxPartsAmount = $maxPartsArray[0];
+    }
+
+
+// Ställ frågan
+//TA BORT DETTA SEN NÄR ALLT ÄR KONTROLLERAT ATT DET FUNGERAR
+   // print "$searchQuery";
+
+
+// Ställ frågan till databasen, $searchQuery skapades i en inkluderad fil ovan
+    $result	= mysqli_query($connection, "$searchQuery");
 	
-	for($i = 0; $i < $length; $i++) {
-		$whereSetsString += "inventory.SetID LIKE '%" . $setGetArray[$i] . "%' OR Setname LIKE '%" . $setGetArray[$i] . "%'";
-		if($i != $length-1) {
-			$whereSetsString += " OR ";
-		}
+	if($result) {
+		$checkResult = true;
+	} else {
+		$checkResult = false;
 	}
-	
-	$table = "";
-	$whereSets = "(" . $whereSetsString . ")";				// Kom på bättre variabelnamn!
-	// Lägg ihop till en fråga
-	$where += " AND" . $whereSets;
-}
 
 
-if($_GET["par"] != ""){
-	$par = "par";
-	$parGetArray = splitGet($par);
-	$length = count($parGetArray);
-	
-	for($i = 0; $i < $length; $i++) {
-		$wherePartsString += "PartID LIKE '%" . $parGetArray[$i] . "%' OR Partname LIKE '%" . $parGetArray[$i] . "%'";
-		if($i != $length-1) {
-			$wherePartsString += " OR ";
-		}
-	}
-	
-	$table = "";
-	$wherePart = "(" . $wherePartsString . ")";
-	// Lägg ihop till en fråga
-	$where += " AND" . $wherePart;
-}
+// Beräkna antalet rader i resultatet för att få fram om next-knappen ska visas eller ej, detta görs i en annan fil
+    $rowcount = mysqli_num_rows($result);
 
 
-if($_GET["col"] != ""){
-	$col = "col";
-	$colGetArray = splitGet($col);
-	$length = count($colGetArray);
-	
-	for($i = 0; $i < $length; $i++) {
-		$whereColString += "Colorname LIKE '%" . $colGetArray[$i] . "%'";
-		if($i != $length-1) {
-			$whereColString += " OR ";
-		}
-	}
-	
-	$table = "";
-	$whereColor = "(" . $whereColString . ")";
-	// Lägg ihop till en fråga
-	$where += " AND" . $whereColor;
-}
-
-if($_GET["yea"] != ""){
-	$yea = "yea";
-	$yeaGetArray = splitGet($yea);
-	$length = count($yeaGetArray);
-	
-	for($i = 0; $i < $length; $i++) {
-		$whereYearString += "MIN(Year) LIKE '%" . $yeaGetArray[$i] . "%'";
-		if($i != $length-1) {
-			$whereYearString += " OR ";
-		}
-	}
-	
-	$table = "";
-	$whereYear = "(" . $whereYearString . ")";
-	// Lägg ihop till en fråga
-	$where += " AND" . $whereYear;
-}
+// Ge felmeddelande om sökningen inte ger några resultat
+    if(!$checkResult && $where) {
+        print "Your search generated no results. Please search for something else!";
+    }
+    else if($checkResult && $where) {
+        include "searchEngine/display.php";
+    }
 
 
-if($_GET["cat"] != ""){
-	$cat = "cat";
-	$catGetArray = splitGet($cat);
-	$length = count($catGetArray);
-	
-	for($i = 0; $i < $length; $i++) {
-		$whereCatString += "Categoryname LIKE '%" . $catGetArray[$i] . "%'";
-		if($i != $length-1) {
-			$whereCatString += " OR ";
-		}
-	}
-	
-	$table = ", categories";
-	$whereCat = "(" . $whereCatString . ") AND parts.CatID = categories.CatID AND categories.CatID = sets.SetID";
-	// Lägg ihop till en fråga
-	$where += " AND" . $whereCat;
-}
+// Om en fråga ställdes så ska nu kopplingen till databasen stängas stängas
+    if($where) {
+        mysqli_close($connection);
+    }
 
-
-// Kolla om något sökts på
-
-
-// Få fram i vilken ordning obejekten ska visas
-if($_GET["f"] == "ageAsc") {
-	$order = "MIN(Year) ASC";
-}
-else if($_GET["f"] == "ageDesc") {
-	$order = "MIN(Year) DESC";
-}
-else if($_GET["f"] == "rarityAsc") {
-	$order = "COUNT(DISTINCT inventory.SetID) ASC";
-}
-else if($_GET["f"] == "rarityDesc") {
-	$order = "COUNT(DISTINCT inventory.SetID) DESC";
-}
-else {
-	// Ett default till innan användaren valt sortering
-	$order = "COUNT(DISTINCT inventory.SetID) DESC";
-}
-
-$group = "Colorname, PartID";
-// Eller $group = vad? Eventuellt group by Colorname and group by PartID
-
-
-	
-// Skapa sökfrågan
-$searchQuery = "SELECT	PartID, Partname, Colorname, COUNT(DISTINCT inventory.SetID), MIN(Year) FROM parts, inventory, sets, colors" . $table . " WHERE PartID = ItemID AND inventory.ColorID = colors.ColorID AND 
-				ItemTypeID = 'P' AND inventory.SetID = sets.SetID" . $where . " GROUP BY " . $group . " ORDER BY " . $order . " LIMIT " . $lowerLimit * $displaylimit . " ," . $displaylimit;
-
-	
-// Testa om det går bra att koppla upp mot databasen
-$connection = mysqli_connect("mysql.itn.liu.se","lego","","lego");
-	
-	if (!$link) {
-		echo "Error: Unable to connect to MySQL." . PHP_EOL;
-		echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-		echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-		exit;
-	}
-	
-//	Ställ	frågan																																																			
-	$result	= mysqli_query($connection, "$searchQuery");
-	
-while($row = mysqli_fetch_array($result)) {
-	// Lägg informationen som ska visas i separata variabler
-	$ID = $row["PartID"];
-	$Partname = $row["Partname"];
-	$Color = $row["Colorname"];
-	$numSets = $row["COUNT(DISTINCT inventory.SetID)"];
-	$Year = $row["MIN(Year)"];
-
-		
-	// Fråga efter den information som är relevant för att få fram en bild
-	$format = mysqli_query($connection, "SELECT colors.ColorID, ItemTypeID, has_gif, has_jpg, has_largegif, has_largejpg FROM images, colors 
-		WHERE ItemID = '$ID' AND Colorname = '$Color' AND colors.ColorID = images.ColorID");
-	
-	
-	// Lägg den nödvändiga informationen för bildnamnet i variabler
-	$Itemtype = $format["ItemTypeID"];
-	$ColorID = $format["ColorID"];
-	
-								
-	// Bilda länken till den bild som ska visas
-	if($format["has_jpg"]) {
-		$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.jpg';
-		$link = 'http://www.itn.liu.se/~stegu76/img.bricklink.com/$name';
-	}
-	else if($format["has_gif"]) {
-		$name = $Itemtype . '/' . $ColorID . '/' . $ID . '.gif';
-		$link = 'http://www.itn.liu.se/~stegu76/img.bricklink.com/$name';
-	}
-	else if($format["has_largejpg"]) {
-		$name = $Itemtype . 'L/' . $ID . '.jpg';
-		$link = 'http://www.itn.liu.se/~stegu76/img.bricklink.com/$name';
-	}
-	else if($format["has_largegif"]) {
-		$name = $Itemtype . 'L/' . $ID . '.gif';
-		$link = 'http://www.itn.liu.se/~stegu76/img.bricklink.com/$name';
-	}
-	
-	// Skriv ut detta i tabellen
-	print "<tr><td>" . $link . "</td><td>" . $ID . "</td><td>" . $Partname . "</td><td>" . $Color . "</td><td>" . $numSets . "</td><td>" . $Year . "</td></tr>";
-}
-
-/*
-	$searchQuery = "SELECT	PartID, Partname, Colorname, COUNT(DISTINCT SetID) FROM parts, inventory, sets" . $table . " WHERE ItemTypeID = 'P' AND " . $where1 . " LIKE '%" . $search . "%' 
-	" . $or . " GROUP BY ItemID ORDER BY COUNT(DISTINCT SetID) LIMIT " . $lowerLimit * $displaylimit . " ," . $displaylimit;
-
-	
-	SELECT PartID, Partname, Colorname, COUNT(DISTINCT inventory.SetID), MIN(Year) FROM parts, inventory, colors, sets WHERE PartID = '3003' AND PartID = ItemID 
-	AND inventory.ColorID = colors.ColorID AND ItemTypeID = 'P' AND inventory.SetID = sets.SetID GROUP BY Colorname ORDER BY MIN(Year) ASC LIMIT 20
-*/
 ?>

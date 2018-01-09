@@ -1,20 +1,8 @@
-<!doctype html>
-
-<html>
-   <head>
-		<!-- Inkluderar head-fil -->
-		<?php
-			include "res/head.html";
-		?>
-   </head>
-   <body>
-		<!-- Inkluderar nav-fil -->
-		<?php
-			include "res/header.html";
-		?>
-		<!-- Inkluderar sidinnehållet -->
-		<?php
-			include "parts/partsPage.php";
-		?>
-   </body>
-</html>
+<!-- Inkluderar nav-fil -->
+<?php
+	include "pages/res/header.html";
+?>
+<!-- Inkluderar sidinnehållet -->
+<?php
+	include "pages/parts/partsPage.php";
+?>
