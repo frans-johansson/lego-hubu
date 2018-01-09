@@ -226,6 +226,10 @@ h1 {
 	overflow: hidden;
 }
 
+#searchButton{ /* Sök knappen */
+	
+}
+
 /* Gör så att söktexten i tag-drop-downen inte går att klicka på
 
 .searchContent {

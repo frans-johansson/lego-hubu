@@ -9,7 +9,7 @@
 		<div id="searchField">
 			<!-- Skriv in sökord -->
 			<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()">
-
+             <input type="submit" id="searchButton" value="Search">
 			<!-- Lista med val av taggar -->
 			<div id="tagList" onmousemove="clearSelected()">
 				<p class="tagOption" id="colorTag">Color: <span class="searchContent"></span> </p>
