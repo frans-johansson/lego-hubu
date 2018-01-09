@@ -1,11 +1,5 @@
 <!-- Knappar för att välja sida -->
 
-
-
-
-<!-- Anslut till javascript, som manipulerar länkarnas/knapparnas href -->
-<!-- <script src="searchFormManipulate.js"></script> -->
-
 <form method="get">
 
 
@@ -71,28 +65,26 @@ if($page > 0){
 	print "<button id='prevPage' type='submit' name='page' value='$prev'>Previous</button>";
 }
 
-// Ta bort dessa rader när vi testat att if-satsen nedan fungerar som den ska
-// Räkna ut om next-knappen ska visas eller ej
-//$upperLimit = floor($rowcount / 20);
 
+	// Koppla upp mot databasen
+		include "searchEngine/connect.php";
+		
+	$countResultQuery = "SELECT COUNT(DISTINCT sets.SetID) FROM inventory, sets $table WHERE sets.SetID = inventory.SetID AND ItemTypeID = 'P' $where";
+	
+	$countResult = mysqli_query($connection, "$countResultQuery");
+
+	$rowCount = mysqli_fetch_array($countResult);
 
 // Om antalet rader i resultatet är samma som antalet som ska visas så ska det finnas en next-knapp för att se resten
-if($rowcount == $displaylimit) {
+if($rowCount > $displaylimit + $displayFrom) {
+	print "$rowCount";
+	print " $displaylimit * $displayFrom";
+	
 	$next = $page+1;
-	print '<button id="nextPage" type="submit" name="page" value="' . $next . '">Next</button>';
+	print "<button id='nextPage' type='submit' name='page' value='$next'>Next</button>";
 } // TEST 3514-1
-
-// Om en sökning ger exakt 20 svar så kommer next-knappen att visas ändå
-// Eventuell lösning, separat SQL-fråga som enbart räknar antalet resultat med en COUNT-funktion, eller lägg in detta i frågan?
 
 ?>
 
 
 </form>
-
-
-<!-- Knapparna -->
-<!--
-<a id="prevlink" href="">Förra</a>
-<a id="nextlink" href="">Nästa</a>
--->

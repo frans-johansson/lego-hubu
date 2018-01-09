@@ -9,6 +9,9 @@
 	<!-- Inkludera tabell med sökresultat-->
 	<?php
 	 	include "pages/parts/partsTable.php";
-		include "searchEngine/pageSelect.php";
+		
+		if($where) {
+			include "searchEngine/pageSelect.php";
+		}
 	?>
 </div>
