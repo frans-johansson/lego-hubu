@@ -15,7 +15,7 @@
             $Sets = $row["COUNT(SetID)"];
 
             // Skriv ut antalet satser
-            print "<p>$Sets</p>";
+            print "<p class='num'>$Sets</p>";
         }
 
 	// Stäng kopplingen

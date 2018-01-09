@@ -14,7 +14,7 @@
             $Parts = $row["COUNT(PartID)"];
 
             // Skriv ut antalet bitar
-            print "<p>$Parts</p>";
+            print "<p class='num' >$Parts</p>";
         }
 
     // Stäng kopplingen

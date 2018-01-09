@@ -2,23 +2,25 @@
 
     if($page == parts) {
         // Skriv ut tabellhuvudena
-        print "<tr>
+        print '<div id="searchSuccess">Thank you for your patience. Here are the results!</div>
+				<tr>
                     <th>Image</th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Color</th>
                     <th>Included in sets</th>
                     <th>Release year</th>
-                </tr>";
+                </tr>';
     }
     else if($page == sets) {
         // Skriv ut tabellhuvudena
-        print "<tr>
-                    <th class=\"dataColumn\">ID</th>
-                    <th class=\"dataColumn\">Name</th>
-                    <th class=\"dataColumn\">Release Year</th>
-                    <th colspan=\"2\">Number of parts</th>
-                </tr>";
+        print '<div id="searchSuccess">Thank you for your patience. Here are the results!</div>
+				<tr>
+                    <th class="dataColumn">ID</th>
+                    <th class="dataColumn">Name</th>
+                    <th class="dataColumn">Release Year</th>
+                    <th colspan="2">Number of parts</th>
+                </tr>';
     }
 
 
