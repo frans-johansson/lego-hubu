@@ -204,18 +204,21 @@ restoreTags = function() {
 /*	Skapar ny tag (div) utifrån en given Tag (definierad "klass") och lägger till den i dokumentet bredvid sökfältet
 */
 function makeTag(tag) {
-	var newTag = document.createElement("div"); // Skapar själva div:en för taggen och ger den rätt klass (beroende på typ)
-	newTag.className = tag.type;
-	newTag.onclick = function() { newTag.parentNode.removeChild(newTag); }; // För att ta bort taggen
+	// Gör inga tomma taggar
+	if (tag.content != "" || typeof(tag.content) == "undefined") {
+		var newTag = document.createElement("div"); // Skapar själva div:en för taggen och ger den rätt klass (beroende på typ)
+		newTag.className = tag.type;
+		newTag.onclick = function() { newTag.parentNode.removeChild(newTag); }; // För att ta bort taggen
 
-	var tagContent = document.createTextNode(tag.content); // Lägger till textinnehåll
-	newTag.appendChild(tagContent);
+		var tagContent = document.createTextNode(tag.content); // Lägger till textinnehåll
+		newTag.appendChild(tagContent);
 
-	var removeButton = document.createElement("div"); // Lägger till knapp för att ta bort taggen (notera dock att hela diven går att klicka på)
-	removeButton.className = "removeButton";
-	newTag.appendChild(removeButton);
+		var removeButton = document.createElement("div"); // Lägger till knapp för att ta bort taggen (notera dock att hela diven går att klicka på)
+		removeButton.className = "removeButton";
+		newTag.appendChild(removeButton);
 
-	document.getElementById("tagContainer").appendChild(newTag); // Lägger in hela taggen i dokumentet på rätt plats
+		document.getElementById("tagContainer").appendChild(newTag); // Lägger in hela taggen i dokumentet på rätt plats
+	}
 }
 
 /* 	Placerar all information från taggarna i korrekt hidden-input-element i formuläret för att sökningen ska funka.

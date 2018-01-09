@@ -10,6 +10,8 @@
 			<!-- Skriv in sökord -->
 			<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()">
 
+             <input type="submit" id="searchButton" value="Search">
+
 			<?php
 			
 			$page = $_GET["p"];
