@@ -24,9 +24,9 @@
     }
 
 
-// Hämta resultatet igen, nödvändigt eftersom SQL är konstigt och arrayen har blivit tom vid det här laget?
+// Hämta resultatet igen, nödvändigt eftersom SQL är konstigt och arrayen har blivit tom vid det här laget? HJGDJGDJGD
     $result	= mysqli_query($connection, "$searchQuery");
-
+	
 
 // Hämta arrayen med resultatet igen, annars kör den inte igenom arrayen utan visar bara resultatet för samma bit om och om igen i alla evighet
     while($row = mysqli_fetch_array($result)) {

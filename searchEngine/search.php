@@ -142,22 +142,23 @@
     $result	= mysqli_query($connection, "$searchQuery");
 
 
-// Beräkna antalet rader i resultatet för att få fram om next-knappen ska visas eller ej, detta görs i en annan fil
-    $rowcount = mysqli_num_rows($result);
+// Hämta hur många rader som funnits i resultatet om det inte funnits någon LIMIT
+// Måste göras direkt efter att frågan ställts eftersom det inte sparas annars
+// Detta behövs för att få fram om next-knappen ska visas eller ej, detta görs i en annan fil
+	$rowCountResult = mysqli_query($connection, "SELECT FOUND_ROWS()");
+	
+	$rowCount = mysqli_fetch_row($rowCountResult);
 
-	if($rowcount) {
-		$checkResult = true;
-	} else {
-		$checkResult = false;
-	}
-
+	
+// Se om det gjorts en sökning genom att se om det definierats ett $where
+// Se om sökningen gett ett resultat genom att se om $rowCount har definierats
 // Om sökningen inte ger något resultat så visa ett felmeddelande
 // Annars om en sökning gjorts och det finns ett resultat så inkludera filen som visar detta
-	if(!$checkResult && $where) {
+	if(!$rowCount && $where) {
         print '<div id="searchError">Your search generated no results. Please search for something else!</div>';
     }
-    else if($checkResult && $where) {
-		// Inkludera filen som 
+    else if($rowCount && $where) {
+		// Inkludera filen som skriver ut resultatet av sökningen
         include "searchEngine/display.php";
     }
 
