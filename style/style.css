@@ -15,6 +15,7 @@ p {
     height: 70px;
     margin: 0;
     align-items: center;
+	box-shadow: 0px 3px 7px black;
 }
 
 #logo {
@@ -62,7 +63,7 @@ p {
 #profile {
     background: #F0C247;
     height: 60px;
-    width: 87px;
+    width: 60px;
     border: 5px solid white;
     /* För att inte mosas med flex*/
     flex-shrink: 0;
@@ -119,11 +120,17 @@ h1 {
 
 #textBox {
 	display: flex;
+	color: #1c4b79;
+	background: #deefff;
 	height: 100%;
+	box-shadow: 0px 3px 7px black;
 }
 
-#textBox h1 {
+#textHeader {
 	display: block;
+    background: #3871a9;
+    color: white;
+	box-shadow: 0px 3px 7px black;
 }
 
 .textColumn {
@@ -135,6 +142,7 @@ h1 {
 .outerWrapper {
 	display: flex;
 	width: 100%;
+	margin-bottom: 70px;
 	justify-content: center;
 }
 
@@ -147,14 +155,26 @@ h1 {
 }
 
 .amountBox {
-    color: black;
-    background: #F0C247;
-	width: 70%;
-    margin-bottom: 25px;
+    color: #5f4400;
+    background: #f1c247;
+    width: 70%;
+    margin-bottom: 50px;
     text-decoration: none;
-	text-align: center;
-	height: 20%; 
-	border: 5px solid #3872A9;
+    text-align: center;
+    height: 40%;
+    box-shadow: 0px 3px 7px black;
+}
+
+.amountBox h1 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #ca9a1f;
+    color: white;
+}
+
+.amountBox p {
+	font-size: 100px;
+    margin-top: 40px;
 }
 
 /* Intressant och lärorik textruta */
@@ -388,14 +408,33 @@ Slut på oklart */
 }
 
 	/* Sets */
-.histogramCol {
-	
+table {
+	border-spacing: 0;
 }
 
+th, td {
+	padding: 15px;
+}
+	
+.dataColumn {
+	background: darkBlue;
+	color: white;
+	font-size: 18px;
+}
+
+.partsAmount {
+	color: darkBlue;
+	text-align: center;
+}
+	
 .histogram {
 	height: 20px;
 	display: block;
-	background: white;
+	background: darkBlue;
 	width: 100px;
 	padding: 0;
+}
+
+.histogramCell {
+	width: 50%;
 }
