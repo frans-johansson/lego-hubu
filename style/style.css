@@ -294,7 +294,7 @@ Räknas dessvärre ej som CSS-standard och validerar ej
 
 /* Själva taggarna (men inte div:ar i taggarna) */
 #tagContainer > div {
-    color: white;
+    color: black;
     margin: 5px;
     font-size: 17px;
     border-radius: 4px;
@@ -302,39 +302,27 @@ Räknas dessvärre ej som CSS-standard och validerar ej
 }
 
 .yearTag {
-    background: #709d62;
-    border: 2px solid;
-  
+    background: #92c383;
 }
 
 .partTag {
-    background: #9b6cc6;
-    border: 2px solid;
- 
+    background: #ba87e8;
 }
 
 .setTag {
-    background: #5b82d7;
-    border: 2px solid;
- 
+    background: #8EADF1;
 }
 
 .colorTag {
-    background:#edc02c;
-    border: 2px solid;
-   
+    background: #ffe079;
 }
 
 .removeButton {
 	display: inline-block;
-    color: white;
-	width: 11px;
-    height: 21px;
-    margin: -9px 6px 10px 20px;
-	margin-left: 10px;
-	font-weight: bold;
-    font-size: 29px;
-	float: right;
+	width: 10px;
+    height: 10px;
+	margin: 1px 5px;
+	opacity: 0.6;
 }
 
 label {

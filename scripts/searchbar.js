@@ -213,10 +213,9 @@ makeTag = function(tag) {
 		var tagContent = document.createTextNode(tag.content); // Lägger till textinnehåll
 		newTag.appendChild(tagContent);
 
-		var removeButton = document.createElement("div"); // Lägger till knapp för att ta bort taggen (notera dock att hela diven går att klicka på)
+		var removeButton = document.createElement("img"); // Lägger till knapp för att ta bort taggen (notera dock att hela diven går att klicka på)
 		removeButton.className = "removeButton";
-		var cross = document.createTextNode("x");
-		removeButton.appendChild(cross);
+		removeButton.src = "style/X.png";
 		newTag.appendChild(removeButton);
 
 		document.getElementById("tagContainer").appendChild(newTag); // Lägger in hela taggen i dokumentet på rätt plats
