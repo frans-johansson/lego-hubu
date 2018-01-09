@@ -11,7 +11,7 @@
 			<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()">
 
 			<!-- Lista med val av taggar -->
-			<div id="tagList">
+			<div id="tagList" onmousemove="clearSelected()">
 				<p class="tagOption" id="colorTag">Color: <span class="searchContent"></span> </p>
 				<p class="tagOption" id="setTag">Set: <span class="searchContent"></span> </p>
 				<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
