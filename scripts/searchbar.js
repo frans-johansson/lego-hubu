@@ -206,13 +206,13 @@ restoreTags = function() {
 function makeTag(tag) {
 	var newTag = document.createElement("div"); // Skapar själva div:en för taggen och ger den rätt klass (beroende på typ)
 	newTag.className = tag.type;
+	newTag.onclick = function() { newTag.parentNode.removeChild(newTag); }; // För att ta bort taggen
 
 	var tagContent = document.createTextNode(tag.content); // Lägger till textinnehåll
 	newTag.appendChild(tagContent);
 
-	var removeButton = document.createElement("div"); // Lägger till knapp för att ta bort taggen
+	var removeButton = document.createElement("div"); // Lägger till knapp för att ta bort taggen (notera dock att hela diven går att klicka på)
 	removeButton.className = "removeButton";
-	removeButton.onclick = function() { newTag.parentNode.removeChild(newTag); };
 	newTag.appendChild(removeButton);
 
 	document.getElementById("tagContainer").appendChild(newTag); // Lägger in hela taggen i dokumentet på rätt plats
@@ -222,7 +222,6 @@ function makeTag(tag) {
    	Bunden till onsubmit för sökformuläret.
 */
 function setParams() {
-	alert("submit");
 	var tagContainer = document.getElementById("tagContainer");
 	var tags = tagContainer.childNodes;
 
