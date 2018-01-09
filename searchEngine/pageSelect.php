@@ -72,34 +72,9 @@
 // Koppla upp mot databasen
 	include "searchEngine/connect.php";
 	
-// Se vilken sida användaren befinner sig på och bestäm frågan utefter det
-	if($page == sets) {
-		$countResultQuery = "SELECT COUNT(DISTINCT sets.SetID) FROM inventory, sets, colors WHERE sets.SetID = inventory.SetID AND ItemTypeID = 'P' AND inventory.ColorID = colors.ColorID $where";
-	}
-	else if($page == parts) {
-		$countResultQuery = "SELECT COUNT(PartID) FROM inventory, parts, sets, colors WHERE sets.SetID = inventory.SetID AND ItemTypeID = 'P' AND inventory.ColorID = colors.ColorID AND ItemID = PartID $where GROUP BY PartID, Colorname";
-	}
-	
-// Ställ frågan till databasen
-	$countResult = mysqli_query($connection, "$countResultQuery");
-
-// Hämta arrayen med resultatet
-	$rowCountArray = mysqli_fetch_array($countResult);
-	
-// Hämta resultatet från arrayen
-	if($page == sets) {
-		$rowCount = $rowCountArray["COUNT(DISTINCT sets.SetID)"];
-	}
-	else if($page == parts) {
-		$rowCount = $rowCountArray["COUNT(PartID)"];
-	}
-	
-	
-	print "$rowCount";
-	
 
 // Om antalet rader i resultatet är samma som antalet som ska visas så ska det finnas en next-knapp för att se resten
-	if($rowCount && $rowCount > $displaylimit + $displayFrom) {
+	if($rowCount[0] > $displaylimit + $displayFrom) {
 		// Next-knappen skrivs ut och leder till sidan som kommer eefter den närvarande
 		$next = $pageNumber+1;
 		print "<button id='nextPage' type='submit' name='page' value='$next'>Next</button>";
