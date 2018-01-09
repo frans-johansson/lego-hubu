@@ -15,7 +15,7 @@
             $Sets = $row["SUM(Quantity)"];
 
             // Skriv ut antalet satser
-            print "<p>$Sets</p>";
+            print "<p class='numprofile'>$Sets</p>";
         }
 
 

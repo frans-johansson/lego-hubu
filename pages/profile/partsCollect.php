@@ -15,7 +15,7 @@
             $Parts = $row["SUM(inventory.Quantity*collection.Quantity)"];
 
             // Skriv ut antalet bitar
-            print "<p>$Parts</p>";
+            print "<p class='numprofile' >$Parts</p>";
         }
 
 	// Stäng kopplingen
