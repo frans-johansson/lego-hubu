@@ -74,6 +74,8 @@ navigateTagList = function(pressed) {
 		document.getElementById("searchText").focus(); // Markera sökfältet igen
 		dropDownFields[currentSelected--].classList.toggle("selectedTag");
 	}
+	
+	console.log("currentSelected: " + currentSelected);
 }
 
 /*	Lägger till den markerade taggen i sökfältet till sökningen vid nertryckning av enterknappen.
@@ -91,6 +93,8 @@ activateTagOnPress = function(pressed) {
 		// Sök efter det markerade alternativet (dvs. den som har klasssen selectedTag) och skapa en ny tag
 		for (var i = 0; i < dropDownFields.length; i++) {
 			if (dropDownFields[i].classList.contains("selectedTag")) {
+				dropDownFields[i].classList.toggle("selectedTag");
+				
 				var inputID = dropDownFields[i].id + "List";
 				tag = new Tag(dropDownFields[i].id, searchText, inputID);
 				makeTag(tag);

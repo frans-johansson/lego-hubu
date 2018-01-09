@@ -10,8 +10,6 @@
 			<!-- Skriv in sökord -->
 			<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()">
 
-             <input type="submit" id="searchButton" value="Search">
-
 			<?php
 			
 			$page = $_GET["p"];
@@ -43,6 +41,8 @@
 			<input id="partTagList" type="hidden" name="par">
 			<input id="yearTagList" type="hidden" name="yea">
 		</div>
+		
+		<input type="submit" id="searchButton" value="Search">
 		
 		<div id="tagContainer"></div>
 		
