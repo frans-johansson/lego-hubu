@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <title>Legu Hubu</title>
 <link type="text/css" rel="stylesheet" href="style/style.css">
-
+<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
 <?php
 	$page = $_GET['p'];
 

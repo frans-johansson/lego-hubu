@@ -1,9 +1,14 @@
-	/* Fonts etc */
+﻿	/* Fonts etc */
+p {
+    font-family: "Ubuntu";
+	font-size: 21px;
+}
 
 
 
 	/* Nav */
-
+	
+	
 #header {
     display: flex;
     background: #3872A9;
@@ -56,11 +61,13 @@
 /* Profilrutan med finfin bild */
 #profile {
     background: #F0C247;
-    height: 70px;
-    width: 70px;
-
+    height: 60px;
+    width: 87px;
+    border: 5px solid white;
     /* För att inte mosas med flex*/
     flex-shrink: 0;
+	text-align: center;
+	
 }
 
 
@@ -71,7 +78,7 @@ body {
     color: white;
     margin: 0;
     font-size: 25px;
-    font-family: sans-serif;
+    font-family: "Ubuntu";
     overflow-x: hidden;
 }
 
@@ -80,6 +87,7 @@ h1 {
     margin: 0;
 	font-size: 30px;
 	text-align: center;
+	 font-family: "Ubuntu";
 }
 
 /* Rubrik för bitar eller satser */
@@ -144,6 +152,9 @@ h1 {
 	width: 70%;
     margin-bottom: 25px;
     text-decoration: none;
+	text-align: center;
+	height: 20%; 
+	border: 5px solid #3872A9;
 }
 
 /* Intressant och lärorik textruta */
@@ -176,10 +187,12 @@ h1 {
     color: white;
 }
 
+
 #canvas {
     /* Sätter bredd till 100% här för att tvinga korrekt storlek, skalningen sköts i JS */
     width: 100%;
     border: none;
+
 }
 
 
@@ -222,6 +235,10 @@ h1 {
 	float: left;
 	position: absolute;
 	overflow: hidden;
+}
+
+#searchButton{ /* Sök knappen */
+	
 }
 
 /* Gör så att söktexten i tag-drop-downen inte går att klicka på
@@ -360,22 +377,25 @@ Slut på oklart */
 
 #profileParts{
 	width: 100%;
+	height: 120px;
 	border: 5px solid #3872A9;
 }
 
 #profileSets {
     width: 100%;
+	height: 120px;
 	border: 5px solid #3872A9;
 }
 
 	/* Sets */
 .histogramCol {
-	width: 100px;
-	padding: 0;
+	
 }
 
 .histogram {
 	height: 20px;
 	display: block;
 	background: white;
+	width: 100px;
+	padding: 0;
 }

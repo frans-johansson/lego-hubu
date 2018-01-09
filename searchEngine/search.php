@@ -77,13 +77,13 @@
         $order = "COUNT(DISTINCT inventory.SetID) DESC";
     }
     else if($filter == "rarityAsc" && $page == 'sets') {
-        $order = "SUM(Quantity) DESC";
+        $order = "SUM(inventory.Quantity) DESC";
     }
     else if($filter == "rarityDesc" && $page == 'parts' ) {
         $order = "COUNT(DISTINCT inventory.SetID) ASC";
     }
     else if($filter == "rarityDesc" && $page == 'sets' ) {
-        $order = "SUM(Quantity) ASC";
+        $order = "SUM(inventory.Quantity) ASC";
     }
     else {
         // Om användaren inte valt filter så blir detta det förvalda alternativet
@@ -140,17 +140,16 @@
 
 // Ställ frågan till databasen, $searchQuery skapades i en inkluderad fil ovan
     $result	= mysqli_query($connection, "$searchQuery");
-	
-	if($result) {
-		$checkResult = true;
-	} else {
-		$checkResult = false;
-	}
 
 
 // Beräkna antalet rader i resultatet för att få fram om next-knappen ska visas eller ej, detta görs i en annan fil
     $rowcount = mysqli_num_rows($result);
 
+	if($rowcount) {
+		$checkResult = true;
+	} else {
+		$checkResult = false;
+	}
 
 // Ge felmeddelande om sökningen inte ger några resultat
     if(!$checkResult && $where) {

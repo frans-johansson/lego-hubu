@@ -2,6 +2,7 @@
         <!--Inkludera fil med övre sidinnehållet-->
         <?php
             include "upperHome.html"
+			
         ?>
 		<!--Inkludera informationen om satser per år-->
 		<table id="diagramData">

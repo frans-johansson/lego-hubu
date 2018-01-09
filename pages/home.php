@@ -6,4 +6,3 @@
 <?php
 	include "pages/home/homePage.php";
 ?>
-
