@@ -359,12 +359,13 @@ Slut på oklart */
 
 	/* Sets */
 .histogramCol {
-	width: 100px;
-	padding: 0;
+	
 }
 
 .histogram {
 	height: 20px;
 	display: block;
 	background: white;
+	width: 100px;
+	padding: 0;
 }
