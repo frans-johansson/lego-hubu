@@ -13,6 +13,40 @@ function Tag(type, content, ID) {
 	this.ID = ID;
 }
 
+/*	Lägger till hidden-input-element som bara ska finnas för söknigen med javascript aktiverat
+	Bunden till onload för window.
+*/
+addHiddenInputs = function() {	
+	var container = document.getElementById("searchField");
+	
+	var colorList = document.createElement("input");
+	colorList.id = "colorTagList";
+	colorList.type = "hidden";
+	colorList.name = "col";
+	container.appendChild(colorList);
+	
+	var partList = document.createElement("input");
+	partList.id = "partTagList";
+	partList.type = "hidden";
+	partList.name = "par";
+	container.appendChild(partList);
+	
+	var setList = document.createElement("input");
+	setList.id = "setTagList";
+	setList.type = "hidden";
+	setList.name = "set";
+	container.appendChild(setList);
+	
+	var yearList = document.createElement("input");
+	yearList.id = "yearTagList";
+	yearList.type = "hidden";
+	yearList.name = "yea";
+	container.appendChild(yearList);
+	
+	// Tar bort GET-parameter från input-elementet för söktext då denna endast behövs om JS är inaktiverat
+	document.getElementById("searchText").name = "";
+}
+
 /*  Funktion för att dels initiera dropdown-menyn, samt uppdatera denna när användaren skriver i sökfältet
  	Kallas onkeyup i sökfältet
 */
@@ -21,7 +55,7 @@ updateTagList = function() {
 
 	// Gör drop-down-menyn synlig om användaren skriver i sökfältet
 	if (searchText)
-		document.getElementById("tagList").style.display = "inline-block";
+		document.getElementById("tagList").style.display = "block";
 	else
 		document.getElementById("tagList").style.display = "none"; // Gör den osynlig om sökfältet är tomt
 
@@ -341,5 +375,6 @@ hideLoadBar = function() {
 window.addEventListener("click", activateTagOnClick);
 window.addEventListener("keydown", activateTagOnPress);
 window.addEventListener("load", restoreTags);
-window.addEventListener("load", hideLoadBar)
+window.addEventListener("load", hideLoadBar);
+window.addEventListener("load", addHiddenInputs);
 window.addEventListener("keydown", navigateTagList);

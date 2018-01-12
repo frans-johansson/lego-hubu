@@ -1,5 +1,8 @@
 <?php
 
+// Inkludera funktionen som separerar det som står i get-parametrarna
+    include "searchEngine/separate.php";
+
 // Funktion för att formulera sökvillkoret för SQL-frågan
 
 function getToSQL($getpara, $condition1, $condition2, $whereAdd){

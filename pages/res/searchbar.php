@@ -1,28 +1,28 @@
 <div id="searchBar">
 
-	<!-- Vänliga hjälpmeddelanden -->
-	<noscript>
-		VÄNLIGEN AKTIVERA JAVASCRIPT, TACK!
-	</noscript>
-
 	<form method="get" onsubmit="doSubmit()">
 		<div id="searchField">
-			<!-- Skriv in sökord -->
-			<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()">
 
 			<?php
 			
 			$page = $_GET["p"];
 			
+			// Lägg in dropdown i rätt ordning samt sökfältet med rätt fallback beroende på sidan
 			if($page == parts) {
+				// Sökfält
+				print '<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()" name="par">';
+				
 				// Lista med val av taggar
 				print '<div id="tagList" onmousemove="clearSelected()">
 							<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
 							<p class="tagOption" id="colorTag">Color: <span class="searchContent"></span> </p>
-							<p class="tagOption" id="setTag">Set: <span class="searchContent"></span> </p>
 							<p class="tagOption" id="yearTag">Year: <span class="searchContent"></span> </p>
 						</div>';
 			} else if($page == sets) {
+				// Sökfält
+				print '<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()" name="set">';
+				
+				// Lista med val av taggar
 				print '<div id="tagList" onmousemove="clearSelected()">
 							<p class="tagOption" id="setTag">Set: <span class="searchContent"></span> </p>
 							<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
@@ -36,10 +36,6 @@
 			?>
 			
 			<!-- Samla taggar i dessa med JS -->
-			<input id="colorTagList" type="hidden" name="col">
-			<input id="setTagList" type="hidden" name="set">
-			<input id="partTagList" type="hidden" name="par">
-			<input id="yearTagList" type="hidden" name="yea">
 		</div>
 		
 		<input type="submit" id="searchButton" value="Search">
@@ -83,25 +79,26 @@
 			$filter = $_GET["f"];
 			
 			// Avgör vilket filter som ska synligt i menyn så att det valda filtret hänger med vid sökning och sidbyte
-			if($filter == ageAsc || !$filter) {
-				$oldNew = "selected";
-			}
-			else if($filter == ageDesc) {
-				$newOld = "selected";
-			}
-			else if($filter == rarityAsc) {
+			if($filter == rarityAsc || !$filter) {
 				$commonRare = "selected";
 			}
 			else if($filter == rarityDesc) {
 				$rareCommon = "selected";
 			}
+			else if($filter == ageAsc) {
+				$oldNew = "selected";
+			}
+			else if($filter == ageDesc) {
+				$newOld = "selected";
+			}
+			
 				
 			// Skriv ut menyn för val av filter med rätt filter som förhandsvisas
 			print 	"<select id='searchFilter' name='f'>
-						<option value='ageAsc' $oldNew>Oldest - Newest</option>
-						<option value='ageDesc' $newOld>Newest - Oldest</option>
 						<option value='rarityAsc' $commonRare>Common - Rare</option>
 						<option value='rarityDesc' $rareCommon>Rare - Common</option>
+						<option value='ageAsc' $oldNew>Oldest - Newest</option>
+						<option value='ageDesc' $newOld>Newest - Oldest</option>
 					</select>";
 		
 		?>
