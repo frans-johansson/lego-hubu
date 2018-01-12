@@ -42,6 +42,9 @@ addHiddenInputs = function() {
 	yearList.type = "hidden";
 	yearList.name = "yea";
 	container.appendChild(yearList);
+	
+	// Tar bort GET-parameter från input-elementet för söktext då denna endast behövs om JS är inaktiverat
+	document.getElementById("searchText").name = "";
 }
 
 /*  Funktion för att dels initiera dropdown-menyn, samt uppdatera denna när användaren skriver i sökfältet

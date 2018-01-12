@@ -1,10 +1,5 @@
 <div id="searchBar">
 
-	<!-- Vänliga hjälpmeddelanden -->
-	<noscript>
-		VÄNLIGEN AKTIVERA JAVASCRIPT, TACK!
-	</noscript>
-
 	<form method="get" onsubmit="doSubmit()">
 		<div id="searchField">
 
