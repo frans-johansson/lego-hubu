@@ -371,6 +371,14 @@ hideLoadBar = function() {
 	loadBar.style.display = "none";
 }
 
+clearSearchTags = function() {
+	var tags = document.getElementById("tagContainer").children;
+	
+	for (var i = tags.length - 1; i >= 0; i--) {
+		tags[i].parentNode.removeChild(tags[i]);
+	}
+}
+
 /* Kopplar funktioner till respektive event */
 window.addEventListener("click", activateTagOnClick);
 window.addEventListener("keydown", activateTagOnPress);

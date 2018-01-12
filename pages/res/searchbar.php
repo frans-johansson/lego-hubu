@@ -35,39 +35,44 @@
 				echo "<input type=\"hidden\" name=\"p\" value=\"$page\">";
 			?>
 			
+			<div class="button" id="clearSearch" onclick="clearSearchTags()">Clear</div>
 		</div>
 		
-		<input type="submit" id="searchButton" value="Search">
+		<input type="submit" class="button" id="searchButton" value="Search">
 		
+		<!-- Samla taggar här med JS -->
 		<div id="tagContainer"></div>
-		<div class= "labelcontainer">
-		<label>
-			Exact search
-		</label>
 		
-		<?php
-			if (isset($_GET['exact']))
-				echo "<input type=\"checkbox\" name=\"exact\" value=\"true\" checked=\"checked\">";
-			else
-				echo "<input type=\"checkbox\" name=\"exact\" value=\"true\">";
-		?>
+		<div id="labelContainer">
+			<div class="optionLabel">
+				<?php
+					if (isset($_GET['exact']))
+						echo "<input type=\"checkbox\" name=\"exact\" value=\"true\" checked=\"checked\">";
+					else
+						echo "<input type=\"checkbox\" name=\"exact\" value=\"true\">";
+				?>
+				
+				<label>
+					Exact search
+				</label>
+			</div>
+			
+			<div class="optionLabel">
+				<!-- Lägg till checkbox och se till att den är markerad även efter sökning -->
+				<?php
+					if (isset($_GET['c']))
+						echo "<input type=\"checkbox\" name=\"c\" value=\"true\" checked=\"checked\">";
+					else
+						echo "<input type=\"checkbox\" name=\"c\" value=\"true\">";
+				?>
+				
+				<label>
+					Show only my collection
+				</label>
+			</div>
 		</div>
-		
-		<div class= "labelcontainer">
-		<label>
-			Show only my collection
-		</label>
-		
-		<!-- Lägg till checkbox och se till att den är markerad även efter sökning -->
-		<?php
-			if (isset($_GET['c']))
-				echo "<input type=\"checkbox\" name=\"c\" value=\"true\" checked=\"checked\">";
-			else
-				echo "<input type=\"checkbox\" name=\"c\" value=\"true\">";
-		?>
 		
 		<!-- Drop-down-lista för sorteringsalternativ -->
-		</div>
 		<label>
 			Filter
 		</label>

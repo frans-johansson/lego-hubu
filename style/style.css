@@ -21,7 +21,7 @@ p.num{
     height: 70px;
     margin: 0;
     align-items: center;
-	box-shadow: 0px 3px 7px black;
+	box-shadow: 0px 1px 3px #00000087;
 }
 
 #logo {
@@ -126,15 +126,6 @@ h1 {
 	border-bottom: 2px solid #0000001c;
 }
 
-.labelcontainer{
-	display: flex;
-	height: 70px;
-    width: 120px;
-    background-color: #4478a9;
-    margin: 8px;
-	box-shadow: 0px 0px 57px #1b1b1b26;
-}
-
 /* Inledande innehåll: Antal bitar, satser och lite text */
 #page {
    color: black;
@@ -159,14 +150,14 @@ h1 {
 	color: #1c4b79;
 	background: #deefff;
 	height: 100%;
-	box-shadow: 0px 3px 7px black;
+	box-shadow: 0px 1px 3px #00000087;
 }
 
 #textHeader {
 	display: block;
     background: #3871a9;
     color: white;
-	box-shadow: 0px 3px 7px black;
+	box-shadow: 0px 1px 3px #00000087;
 }
 
 .textColumn {
@@ -198,7 +189,7 @@ h1 {
     text-decoration: none;
     text-align: center;
     height: 40%;
-    box-shadow: 0px 3px 7px black;
+    box-shadow: 0px 1px 3px #00000087;
 }
 
 .amountBox h1 {
@@ -274,10 +265,26 @@ h1 {
 
 /* Sökfältet */
 #searchText {
-	margin: 1px 20px 0 1px;
+	margin: 1px auto;
+	border: none;
 	background: white;
 	flex-shrink: 0;
 	width: 300px;
+}
+
+#labelContainer {
+	display: flex;
+	background-color: #4478a9;
+	flex-direction: column;
+	flex-wrap: wrap;
+	width: 50%;
+}
+
+.optionLabel {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	width: 100%;
 }
 
 #searchFilter {
@@ -292,10 +299,6 @@ h1 {
 	position: absolute;
 	overflow: hidden;
 	align-self: initial;
-}
-
-#searchButton {
-	
 }
 
 /* Gör så att söktexten i tag-drop-downen inte går att klicka på
@@ -330,7 +333,7 @@ Räknas dessvärre ej som CSS-standard och validerar ej
     font-size: 17px;
     border-radius: 4px;
 	padding-left:10px;
-	box-shadow: 0px 1px 6px #2d2d2d;
+	box-shadow: 0px 1px 5px #2d2d2dde;
 }
 
 .yearTag {
@@ -349,6 +352,37 @@ Räknas dessvärre ej som CSS-standard och validerar ej
     background: #ffe079
 }
 
+/* Sökknapparna */
+.button {
+	border: none;
+	font-size: 17px;
+	flex-shrink: 0;
+	background: #275582;
+	color: white;
+	font-family: inherit;
+	padding: 1px 6px;
+	border-radius: 2px;
+	text-align: center;
+}
+
+#clearSearch {
+	margin: 5px 0;
+	background: #cc3939;
+}
+
+#clearSearch:hover {
+	background: #8c2121;
+}
+
+#searchButton {
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+#searchButton:hover {
+	background: #093a5d;
+}
+
 .removeButton {
 	display: inline-block;
 	width: 10px;
@@ -359,8 +393,8 @@ Räknas dessvärre ej som CSS-standard och validerar ej
 
 label {
     color: white;
-	margin: 0 10px;
-	font-size: 19px;
+	margin: 5px;
+	font-size: 15px;
 }
 
 /* Visas endast när sidan laddas efter sökning */
