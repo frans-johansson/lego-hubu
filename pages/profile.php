@@ -1,6 +1,6 @@
 <div id="pageBackground">
 	<div id="profilePopup" onclick="togglePopup()">
-		<h1>Your collection</h1>
+		<h1 id="profileheader">Your collection</h1>
 		<div id="profileWrapper">
 			<div id="profileSets">
 				<p class="profileinfo" >Sets</p>
