@@ -93,8 +93,8 @@ h1 {
 	width: 100%;
     margin: 0px;
 	font-size: 30px;
-	text-align: center;
-	 font-family: "Ubuntu";
+	text-align: center; 
+	font-family: "Ubuntu";
 }
 
 /* Rubrik för bitar eller satser */
@@ -395,8 +395,7 @@ Slut på oklart */
 	justify-content: center;
 }
 
-#profilePopup{
-	position: absolute;
+#profilePopup {
 	display: none;
 	width: 60%;
 	height: 160px;
