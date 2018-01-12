@@ -45,6 +45,26 @@ p.num{
     align-items: center;
 }
 
+/* För användare som ej har JS aktiverat */
+#noscriptBanner {
+	display: block;
+	background: #E43E3E;
+	color: white;
+	width: 100vw;
+	padding: 8px 0;
+	font-size: 30px;
+	text-align: center;
+}
+
+#noCanvas {
+	display: block;
+	padding: 0 5px;
+}
+
+#noCanvas h2 {
+	text-align: center;
+}
+
 /* Länkarna i navigationsmenyn */
 .navOption {
 	display: flex;
