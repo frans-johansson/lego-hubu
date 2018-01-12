@@ -123,6 +123,16 @@ h1 {
 	background: #3872A9;
 	padding-top: 5px;
 	padding-bottom: 10px;
+	border-bottom: 2px solid #0000001c;
+}
+
+.labelcontainer{
+	display: flex;
+	height: 70px;
+    width: 120px;
+    background-color: #4478a9;
+    margin: 8px;
+	box-shadow: 0px 0px 57px #1b1b1b26;
 }
 
 /* Inledande innehåll: Antal bitar, satser och lite text */
@@ -247,7 +257,7 @@ h1 {
 /* Agerar som flex container för formuläret */
 #searchBar {
     display: flex;
-	background: #3872A9;
+	background: #4479ab;
     width: 100%;
 	height: 100%;
 	padding: 0 10px;
@@ -320,6 +330,7 @@ Räknas dessvärre ej som CSS-standard och validerar ej
     font-size: 17px;
     border-radius: 4px;
 	padding-left:10px;
+	box-shadow: 0px 1px 6px #2d2d2d;
 }
 
 .yearTag {
@@ -349,6 +360,7 @@ Räknas dessvärre ej som CSS-standard och validerar ej
 label {
     color: white;
 	margin: 0 10px;
+	font-size: 19px;
 }
 
 /* Visas endast när sidan laddas efter sökning */
@@ -368,6 +380,7 @@ label {
 	height: 30px;
 	padding: 2px;
     text-align: center;
+	box-shadow: 0px 0px 4px #191919;
 }
 
 #searchError {
@@ -417,28 +430,36 @@ Slut på oklart */
 
 #profilePopup {
 	display: none;
-	width: 60%;
-	height: 160px;
-	background: #F0C247;
+	width: 49%;
+	height: 280px;
+	background: #3872A9;
 	text-align: center;
+	border-bottom: 29px solid #416342;
+	box-shadow: 0px 3px 7px #191919;
+}
+
+#profileheader{
+	background-color:#476d48;
+	box-shadow: 0px 3px 7px #3e3e3e;
 }
 
 #profileWrapper {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	margin: 54px 18px;
 }
 
 #profileParts{
 	width: 100%;
 	height: 120px;
-	border: 5px solid #3872A9;
+
 }
 
 #profileSets {
     width: 100%;
 	height: 120px;
-	border: 5px solid #3872A9;
+	
 }
 
 p.numprofile{
@@ -462,7 +483,7 @@ th, td {
 }
 	
 .dataColumn {
-	background: darkBlue;
+	background: #1c4b79;
 	color: white;
 	font-size: 18px;
 
@@ -473,22 +494,22 @@ th, td {
 }
 
 .partsAmount {
-	color: darkBlue;
+	color: #1c4b79;
 	text-align: center;
 }
 	
 .histogram {
 	height: 20px;
 	display: block;
-
-	background: darkBlue;
+	background: #1c4b79;
 	width: 100px;
 	padding: 0;
+	
 
 }
 
 #histogramColumn {
-	color: darkBlue;
+	color: #1c4b79;
 }
 
 .histogramCell {

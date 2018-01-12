@@ -41,7 +41,7 @@
 		<input type="submit" id="searchButton" value="Search">
 		
 		<div id="tagContainer"></div>
-		
+		<div class= "labelcontainer">
 		<label>
 			Exact search
 		</label>
@@ -52,7 +52,9 @@
 			else
 				echo "<input type=\"checkbox\" name=\"exact\" value=\"true\">";
 		?>
+		</div>
 		
+		<div class= "labelcontainer">
 		<label>
 			Show only my collection
 		</label>
@@ -66,6 +68,7 @@
 		?>
 		
 		<!-- Drop-down-lista för sorteringsalternativ -->
+		</div>
 		<label>
 			Filter
 		</label>
