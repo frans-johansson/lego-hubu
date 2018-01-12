@@ -35,11 +35,7 @@
 				echo "<input type=\"hidden\" name=\"p\" value=\"$page\">";
 			?>
 			
-			<!-- Samla taggar i dessa med JS 
-			<input id="colorTagList" type="hidden" name="col">
-			<input id="setTagList" type="hidden" name="set">
-			<input id="partTagList" type="hidden" name="par">
-			<input id="yearTagList" type="hidden" name="yea"> -->
+			<!-- Samla taggar i dessa med JS -->
 		</div>
 		
 		<input type="submit" id="searchButton" value="Search">
