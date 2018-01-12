@@ -19,7 +19,6 @@
 
 	
 	
-	
 	/* Formulera SQL-frågan */
 	
 
@@ -62,6 +61,9 @@
 // Läs in vilket filtreringsalternativ användaren valt
 // Det finns ett default satt för om användaren inte aktivt valt någonting
     $filter = $_GET["f"];
+	
+// Skydd mot SQL injections
+	$filter = mysqli_real_escape_string($connection, "$filter");
 
 
 // Få fram i vilken ordning obejekten ska visas utefter den valda sorteringen´
@@ -103,11 +105,8 @@
 
 	
 	
-// Om en fråga har ställts så koppla upp mot databasen och skapa frågan
+// Om en sökning har gjorts så skapa frågan till databasen
     if($where) {
-        // Koppla upp mot databasen
-            include "searchEngine/connect.php";
-
         // Skapa frågan $searchQuery som sedan ställs till databasen
             include "searchEngine/query.php";
     }
@@ -138,6 +137,7 @@
 	$rowCountResult = mysqli_query($connection, "SELECT FOUND_ROWS()");
 	
 	$rowCount = mysqli_fetch_row($rowCountResult);
+	
 	
 // Se om det gjorts en sökning genom att se om det definierats ett $where
 // Se om sökningen gett ett resultat genom att se om $rowCount är noll eller om det har ett värde

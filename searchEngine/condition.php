@@ -1,5 +1,8 @@
 <?php
 
+// Koppla upp mot databasen
+    include "searchEngine/connect.php";
+
 // Inkludera funktionen som separerar det som står i get-parametrarna
     include "searchEngine/separate.php";
 
@@ -19,10 +22,20 @@ function getToSQL($getpara, $condition1, $condition2, $whereAdd){
 
     // Formulera villkoren för själva frågan
         for($i = 0; $i < $length; $i++) {
-
+			
+			// Koppla upp mot databasen
+				include "searchEngine/connect.php";
+			
+			// Skydd mot SQL injections
+				$getArray[$i] = mysqli_real_escape_string($connection, "$getArray[$i]");
+			
+			// Trimma så att eventuella mellanslag eller liknande som förekommer innnan eller efter själv sökordet försvinner
+				$getArray[$i] = trim($getArray[$i]);
+			
+		
             // Om sökningen inte är exakt så formulera frågan på detta sätt
             if(!$precision) {
-
+			
                 $whereString .= "$condition1 LIKE '%$getArray[$i]%'";
 
                 // Om det är två villkor som ska uppfyllas, lägg till det andra
