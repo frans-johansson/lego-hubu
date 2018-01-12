@@ -294,6 +294,7 @@ h1 {
 
 #searchFilter {
     height: 50px;
+	flex-shrink: 0;
 }
 
 #tagList {
@@ -419,7 +420,6 @@ label {
 	height: 30px;
 	padding: 2px;
     text-align: center;
-	box-shadow: 0px 0px 4px #191919;
 }
 
 #searchError {
@@ -429,20 +429,6 @@ label {
     padding: 2px;
     text-align: center;
 }
-
-/* Oklart..?
-.navFilter {
-	background: gold;
-	width: 100px;
-	margin: 0 20px;
-    text-align: center;
-}
-
-.navFilter p {
-	margin: 0;
-	color: darkBlue;
-}
-Slut på oklart */
 
 .table {
 	background: lightBlue;
