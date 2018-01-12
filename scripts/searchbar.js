@@ -51,7 +51,7 @@ addHiddenInputs = function() {
  	Kallas onkeyup i sökfältet
 */
 updateTagList = function() {
-	searchText = document.getElementById("searchText").value;
+	searchText = document.getElementById("searchText").value.trim(); // hämtar texten från sökfältet och trimmar whitespaces
 
 	// Gör drop-down-menyn synlig om användaren skriver i sökfältet
 	if (searchText)
