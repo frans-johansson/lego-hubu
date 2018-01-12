@@ -35,7 +35,6 @@
 				echo "<input type=\"hidden\" name=\"p\" value=\"$page\">";
 			?>
 			
-			<!-- Samla taggar i dessa med JS -->
 		</div>
 		
 		<input type="submit" id="searchButton" value="Search">
