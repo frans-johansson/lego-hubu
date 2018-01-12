@@ -10,7 +10,10 @@ p.num{
 	margin: 14px;
 }
 
-
+em {
+	font-style: inherit;
+	color: #EEE;;
+}
 
 	/* Nav */
 	
@@ -148,7 +151,7 @@ h1 {
 #textBox {
 	display: flex;
 	color: #1c4b79;
-	background: #deefff;
+	background: #9cc4eb;
 	height: 100%;
 	box-shadow: 0px 1px 3px #00000087;
 }
@@ -195,13 +198,15 @@ h1 {
 .amountBox h1 {
     padding-top: 10px;
     padding-bottom: 10px;
-    background: #ca9a1f;
+    box-shadow: 0 1px 3px #00000087;
     color: white;
+	background: #ffca43;
 }
 
 .amountBox p {
 	font-size: 100px;
     margin-top: 40px;
+	margin-bottom: 50px;
 }
 
 /* Intressant och lärorik textruta */
@@ -289,6 +294,7 @@ h1 {
 
 #searchFilter {
     height: 50px;
+	flex-shrink: 0;
 }
 
 #tagList {
@@ -414,7 +420,6 @@ label {
 	height: 30px;
 	padding: 2px;
     text-align: center;
-	box-shadow: 0px 0px 4px #191919;
 }
 
 #searchError {
@@ -424,20 +429,6 @@ label {
     padding: 2px;
     text-align: center;
 }
-
-/* Oklart..?
-.navFilter {
-	background: gold;
-	width: 100px;
-	margin: 0 20px;
-    text-align: center;
-}
-
-.navFilter p {
-	margin: 0;
-	color: darkBlue;
-}
-Slut på oklart */
 
 .table {
 	background: lightBlue;
@@ -468,12 +459,12 @@ Slut på oklart */
 	height: 280px;
 	background: #3872A9;
 	text-align: center;
-	border-bottom: 29px solid #92c383;
+	border-bottom: 29px solid #d6b14d;
 	box-shadow: 0px 3px 7px #191919;
 }
 
 #profileheader{
-	background-color:#92c383;
+	background-color: #d6b14d;
 	box-shadow: 0px 3px 7px #3e3e3e;
 }
 

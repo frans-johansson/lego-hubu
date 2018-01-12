@@ -107,8 +107,6 @@ drawCanvas = function() {
 
 		ctx.rect(rects[i].x, rects[i].y, rects[i].w, rects[i].h);
 		ctx.fill();
-
-		ctx.fillText(rectInfo, 10, 30);
 	}
 }
 
