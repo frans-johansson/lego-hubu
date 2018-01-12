@@ -10,7 +10,10 @@ p.num{
 	margin: 14px;
 }
 
-
+em {
+	font-style: inherit;
+	color: #EEE;;
+}
 
 	/* Nav */
 	
@@ -148,7 +151,7 @@ h1 {
 #textBox {
 	display: flex;
 	color: #1c4b79;
-	background: #deefff;
+	background: #9cc4eb;
 	height: 100%;
 	box-shadow: 0px 1px 3px #00000087;
 }
