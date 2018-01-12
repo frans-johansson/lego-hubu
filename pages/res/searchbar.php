@@ -7,14 +7,16 @@
 
 	<form method="get" onsubmit="doSubmit()">
 		<div id="searchField">
-			<!-- Skriv in sökord -->
-			<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()">
 
 			<?php
 			
 			$page = $_GET["p"];
 			
+			// Lägg in dropdown i rätt ordning samt sökfältet med rätt fallback beroende på sidan
 			if($page == parts) {
+				// Sökfält
+				print '<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()" name="par">';
+				
 				// Lista med val av taggar
 				print '<div id="tagList" onmousemove="clearSelected()">
 							<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
@@ -22,6 +24,10 @@
 							<p class="tagOption" id="yearTag">Year: <span class="searchContent"></span> </p>
 						</div>';
 			} else if($page == sets) {
+				// Sökfält
+				print '<input type="text" id="searchText" autocomplete="off" onkeyup="updateTagList()" onclick="updateTagList()" name="set">';
+				
+				// Lista med val av taggar
 				print '<div id="tagList" onmousemove="clearSelected()">
 							<p class="tagOption" id="setTag">Set: <span class="searchContent"></span> </p>
 							<p class="tagOption" id="partTag">Part: <span class="searchContent"></span> </p>
@@ -34,11 +40,11 @@
 				echo "<input type=\"hidden\" name=\"p\" value=\"$page\">";
 			?>
 			
-			<!-- Samla taggar i dessa med JS -->
+			<!-- Samla taggar i dessa med JS 
 			<input id="colorTagList" type="hidden" name="col">
 			<input id="setTagList" type="hidden" name="set">
 			<input id="partTagList" type="hidden" name="par">
-			<input id="yearTagList" type="hidden" name="yea">
+			<input id="yearTagList" type="hidden" name="yea"> -->
 		</div>
 		
 		<input type="submit" id="searchButton" value="Search">
