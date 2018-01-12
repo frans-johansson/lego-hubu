@@ -55,7 +55,7 @@ updateTagList = function() {
 
 	// Gör drop-down-menyn synlig om användaren skriver i sökfältet
 	if (searchText)
-		document.getElementById("tagList").style.display = "inline-block";
+		document.getElementById("tagList").style.display = "block";
 	else
 		document.getElementById("tagList").style.display = "none"; // Gör den osynlig om sökfältet är tomt
 
