@@ -2,13 +2,9 @@
 
 //Hämta vilken sida vi är på, exemepelvis sida 0, sida 1, sida 2 osv.
     $lowerLimit = $_GET["page"];
+	
 
-
-// Inkludera funktionen som separerar det som står i get-parametrarna
-// ANVÄNDS DENNA ENBART I getToSQL-funktionen? KAN DEN I SÅ FALL INLKUDERAS DÄR ISTÄLLET
-    include "searchEngine/separate.php";
-
-//Nollställ sida om ingen finns eller är mindre än noll
+//Nollställ sida om ingen finns eller är mindre än noll, vilket inte ska vara möjligt
     if(!$lowerLimit || $lowerLimit < 0) {
         $lowerLimit = 0;
     }
@@ -21,17 +17,20 @@
 // Läs in om vi är inne på sidan parts eller sets
     $page = $_GET["p"];
 
+	
+	
+	
+	/* Formulera SQL-frågan */
+	
 
-/* Läs in vad som sökts på och anropa funktionen för att formulera SQL-frågan */
-
-// Inkludera funktionen getToSQL som anropas nedan
+// Inkludera funktionen getToSQL som anropas nedan och används för att formulera SQL-frågan
     include "searchEngine/condition.php";
 
-// Läs in ifall användaren har sökt på en sats
+// Läs in ifall användaren har sökt på en sats och formulera sökvillkoret beroende av detta
     if($_GET["set"])
         $where .= getToSQL("set", "inventory.SetID", "Setname", "");
 
-// Läs in ifall användaren har sökt på en bit
+// Läs in ifall användaren har sökt på en bit och formulera sökvillkoret beroende av detta
     if($_GET["par"]) {
         // Kolla vilken sida användaren är inne och söker på och formulera frågan olika utefter det
             if($page == parts) {
@@ -43,7 +42,7 @@
             }
     }
 
-// Läs in ifall användaren har sökt på en färg
+// Läs in ifall användaren har sökt på en färg och formulera sökvillkoret beroende av detta
     if($_GET["col"]) {
         // Kolla vilken sida användaren är inne och söker på och formulera frågan olika utefter det
             if($page == parts) {
@@ -55,18 +54,17 @@
             }
     }
 
-// Läs in ifall användaren har sökt på ett år
+// Läs in ifall användaren har sökt på ett år och formulera sökvillkoret beroende av detta
     if($_GET["yea"])
         $where .= getToSQL("yea", "Year", "", "");
 
 
-// Läs in vilket filtreringsalternativ anvöndaren valt
+// Läs in vilket filtreringsalternativ användaren valt
+// Det finns ett default satt för om användaren inte aktivt valt någonting
     $filter = $_GET["f"];
 
 
-// Få fram i vilken ordning obejekten ska visas utefter den valda sorteringen
-// Behöver det läggas till kommentarer här eller är det tillräckligt tydligt?
-
+// Få fram i vilken ordning obejekten ska visas utefter den valda sorteringen´
     if($filter == "ageAsc") {
         $order = "MIN(Year) ASC";
     }
@@ -84,10 +82,6 @@
     }
     else if($filter == "rarityDesc" && $page == 'sets' ) {
         $order = "SUM(inventory.Quantity) ASC";
-    }
-    else {
-        // Om användaren inte valt filter så blir detta det förvalda alternativet
-        $order = "COUNT(DISTINCT inventory.SetID) DESC";
     }
 
 
@@ -107,7 +101,8 @@
         $group = "sets.SetID";
     }
 
-
+	
+	
 // Om en fråga har ställts så koppla upp mot databasen och skapa frågan
     if($where) {
         // Koppla upp mot databasen
@@ -118,9 +113,9 @@
     }
 
 
-// Om användaren är inne på sets, ta fram antalet bitar hos det set som innehåller flest bitar av de set som matchar sökningen
-// Detta är nödvändig information för histgramet och används när resultatet skrivs ut
-    if($page == sets){
+// Om användaren är inne på sets och en sökning gjorts, ta fram antalet bitar hos det set som innehåller flest bitar av de set som matchar sökningen
+// Detta är nödvändig information för histogrammet och används när resultatet skrivs ut
+    if($where && $page == sets){
 
         // Ställ frågan och läs in resultatet
         $maxPartsResult = mysqli_query($connection, "$maxPartsQuery");
@@ -133,24 +128,19 @@
     }
 
 
-// Ställ frågan
-//TA BORT DETTA SEN NÄR ALLT ÄR KONTROLLERAT ATT DET FUNGERAR
-   // print "$searchQuery";
-
-
-// Ställ frågan till databasen, $searchQuery skapades i en inkluderad fil ovan
+// Ställ frågan till databasen, $searchQuery skapades i den inkluderade filen query.php ovan
     $result	= mysqli_query($connection, "$searchQuery");
 
 
 // Hämta hur många rader som funnits i resultatet om det inte funnits någon LIMIT
 // Måste göras direkt efter att frågan ställts eftersom det inte sparas annars
-// Detta behövs för att få fram om next-knappen ska visas eller ej, detta görs i en annan fil
+// Detta behövs för att få fram om next-knappen ska visas eller ej, detta görs i en annan fil, samt för att visa antalet resultat sökningen gav
 	$rowCountResult = mysqli_query($connection, "SELECT FOUND_ROWS()");
 	
 	$rowCount = mysqli_fetch_row($rowCountResult);
 	
 // Se om det gjorts en sökning genom att se om det definierats ett $where
-// Se om sökningen gett ett resultat genom att se om $rowCountär noll eller om det har ett värde
+// Se om sökningen gett ett resultat genom att se om $rowCount är noll eller om det har ett värde
 // Om sökningen inte ger något resultat så visa ett felmeddelande
 // Annars om en sökning gjorts och det finns ett resultat så inkludera filen som visar detta
 	if($rowCount[0] == 0 && $where) {
@@ -158,11 +148,11 @@
     }
     else if($rowCount[0] != 0 && $where) {
 		// Inkludera filen som skriver ut resultatet av sökningen
-        include "searchEngine/display.php";
+			include "searchEngine/display.php";
     }
 
 
-// Om en fråga ställdes så ska nu kopplingen till databasen stängas stängas
+// Om en fråga ställdes så ska nu kopplingen till databasen stängas
     if($where) {
         mysqli_close($connection);
     }
