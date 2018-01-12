@@ -3,24 +3,26 @@
     if($page == parts) {
         // Skriv ut tabellhuvudena
         print "<div id='searchSuccess'>Thank you for your patience. Your search generated $rowCount[0] results.</div>
-				<tr>
-                    <th>Image</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Color</th>
-                    <th>Included in sets</th>
-                    <th>Release year</th>
-                </tr>";
+				<table>
+					<tr>
+						<th>Image</th>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Color</th>
+						<th>Included in sets</th>
+						<th>Release year</th>
+					</tr>";
     }
     else if($page == sets) {
         // Skriv ut tabellhuvudena
         print "<div id='searchSuccess'>Thank you for your patience. Your search generated $rowCount[0] results.</div>
-				<tr>
-                    <th id='idColumn' class='dataColumn'>ID</th>
-                    <th class='dataColumn'>Name</th>
-                    <th class='dataColumn'>Release Year</th>
-                    <th id='histogramColumn' colspan='2'>Number of parts</th>
-                </tr>";
+				<table>
+					<tr>
+						<th id='idColumn' class='dataColumn'>ID</th>
+						<th class='dataColumn'>Name</th>
+						<th class='dataColumn'>Release Year</th>
+						<th id='histogramColumn' colspan='2'>Number of parts</th>
+					</tr>";
     }
 
 
@@ -90,5 +92,7 @@
                       <div class=\"histogram\" style=\"width: $percentage%\"></div></td></tr>";
         }
     }
+	
+	print "</table>";
 
 ?>
