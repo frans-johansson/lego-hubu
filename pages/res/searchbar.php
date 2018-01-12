@@ -39,6 +39,7 @@
 		</div>
 		
 		<input type="submit" class="button" id="searchButton" value="Search">
+		<p id="txt"></p>
 		
 		<!-- Samla taggar här med JS -->
 		<div id="tagContainer"></div>

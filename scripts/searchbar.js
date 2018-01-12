@@ -379,6 +379,21 @@ clearSearchTags = function() {
 	}
 }
 
+searchButtonDisable = function() {
+	var tagContainer = document.getElementById("tagContainer");
+	var numberOfTags = tagContainer.childElementCount;
+	
+	if (numberOfTags < 1) {
+		document.getElementById("searchButton").disabled = true;
+		document.getElementById("searchButton").style.color = 'gray';
+	} else {
+		document.getElementById("searchButton").disabled = false;
+		document.getElementById("searchButton").style.color = 'white';
+	}
+	return numberOfTags;
+}
+
+
 /* Kopplar funktioner till respektive event */
 window.addEventListener("click", activateTagOnClick);
 window.addEventListener("keydown", activateTagOnPress);
@@ -386,3 +401,5 @@ window.addEventListener("load", restoreTags);
 window.addEventListener("load", hideLoadBar);
 window.addEventListener("load", addHiddenInputs);
 window.addEventListener("keydown", navigateTagList);
+window.addEventListener("click", searchButtonDisable);
+window.addEventListener("keydown", searchButtonDisable);
