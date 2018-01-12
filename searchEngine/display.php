@@ -71,7 +71,7 @@
                 }
 
             // Skriv ut detta i tabellen
-                print "<tr><td><img src=\"$link\" alt=\"$name\"></td><td>$ID</td><td>$Partname</td>
+                print "<tr><td><img class='partpicture' src=\"$link\" alt=\"$name\"></td><td>$ID</td><td>$Partname</td>
                         <td>$Color</td><td>$numSets</td><td>$Year</td></tr>";
         }
         else if($page == sets) {

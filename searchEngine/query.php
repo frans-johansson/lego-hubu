@@ -21,7 +21,7 @@
 			sökt på, alltså bara en sats, och året blev även året då satsen kom istället för året då biten först kom, eftersom den sökte bara där satsen
 			var den eftersökta. Frågan ovan fungerar och visar rätt resultat, alltså rätt utgivningsår och rätt antal satser för bitarna so ingår i den
 			sats som man sökt på, men den tar över 30 minuter att ladda, vilket vi absolut inte upplever är rimligt, och vi har därför valt att ta bort
-			möjligheten att söka på satser på sidan parts. 
+			möjligheten att söka på satser på sidan parts. Frågan fungerar som sagt dock, den tar bara orimligt lång tid.
 			
 			*/
             // Skapa sökfrågan så som den ska se ut annars
