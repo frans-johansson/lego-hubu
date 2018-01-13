@@ -91,7 +91,7 @@ drawCanvas = function() {
 		if (rects[i].hasHover) {
 			rectInfo = 	"Year: " + rects[i].data.year +
 						"\nAmount: " + rects[i].data.amount;
-
+						
 			var textWidth = ctx.measureText(rectInfo);
 
 			ctx.rect(10, 30, textWidth, 30);
