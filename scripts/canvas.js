@@ -4,7 +4,8 @@ var ctx; // 2D-context för canvas-elementet
 var width, height; // Dimensioner för canvas-elementet
 var data = new Array(); // En array med DataEntry för varje stapel i diagrammet
 var rects = new Array(); // En array med Rect, innehåller alla staplar i diagrammet
-var maxAmount;
+var maxAmount; // Högsta antalet satser i diagrammet
+var infoBox; // Informationsruta för diagrammet
 
 /*	Definierar "klasser" för DataEntry (information från databasen)
 	och för Rect (en rektangel i canvas som motsvarar en stapel i diagrammet)
@@ -32,6 +33,7 @@ function Rect (x, y, w, h, data) {
 */
 initCanvas = function() {
 	c = document.getElementById("canvas");
+	infoBox = document.getElementById("diagramInformation");
 
 	setArray();
 	getMax();
@@ -56,7 +58,7 @@ stageCanvas = function() {
 	addRects(); //Lägger till alla staplar efter alla höjd- och breddparametrar har beräknats (då även onresize)
 }
 
-/* 	Beräknar rätt höjd och bredd för alla staplar och lägger till dessa som Rect i den globala arrayen rects.
+/* Beräknar rätt höjd och bredd för alla staplar och lägger till dessa som Rect i den globala arrayen rects.
 	Notera att eftersom canvas-elementet har sitt origo i det övre vänstra hörnet, så ser vi en del till synes underliga
 	minustecken i beräkningarna samt att y koordinaten för varje stapel blir hela höjden då vi vill att varje stapel ska börja
 	i underkanten av elementet.
@@ -80,29 +82,20 @@ addRects = function() {
 */
 drawCanvas = function() {
 	ctx = c.getContext("2d");
-	ctx.font = "30px Arial";
-
-	var rectInfo = "";
 
 	for (var i = 0; i < rects.length; i++) {
 		ctx.beginPath();
 
 		// Se om "onhover"-information borde visas
 		if (rects[i].hasHover) {
-			rectInfo = 	"Year: " + rects[i].data.year +
-						"\nAmount: " + rects[i].data.amount;
-
-			var textWidth = ctx.measureText(rectInfo);
-
-			ctx.rect(10, 30, textWidth, 30);
-			ctx.fillStyle = "#3872A9";
-			ctx.fill();
-
 			ctx.fillStyle = "#F0C247";
+
+			// Uppdatera informationsrutan
+			document.getElementById("diagramYear").innerHTML = rects[i].data.year;
+			document.getElementById("diagramAmount").innerHTML = rects[i].data.amount;
 		}
 		else {
 			ctx.fillStyle = "#fff";
-			rectInfo = ""; // ta bort
 		}
 
 		ctx.rect(rects[i].x, rects[i].y, rects[i].w, rects[i].h);
@@ -137,6 +130,21 @@ checkHover = function(pointer) {
 	// rita om diagrammet (borde kanske sättas inom en if-sats)
 	ctx.clearRect(0, 0, width, height);
 	drawCanvas();
+}
+
+/*	Visar/döljer informationsrutan för diagrammet. Kallas både vid mouseenter och mouseleave.
+	Variabeln isHovering reglerar om rutan ska visas eller döljas när funktionen kallas.
+*/
+var isHovering = false;
+toggleInformation = function() {
+	isHovering = !isHovering;
+
+	if (isHovering) {
+		infoBox.style.display = "block";
+	}
+	else {
+		infoBox.style.display = "none";
+	}
 }
 
 /*	Hämta information från den osynliga HTML-tabellen skapad med PHP vilken innehåller all nödvändig information från databasen

@@ -1,8 +1,8 @@
 <div id="page">
         <!--Inkludera fil med övre sidinnehållet-->
         <?php
-            include "upperHome.html"
-			
+            include "upperHome.php"
+
         ?>
 		<!--Inkludera informationen om satser per år-->
 		<table id="diagramData">

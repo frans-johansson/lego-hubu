@@ -1,30 +1,12 @@
-﻿	/* Fonts etc */
-p {
-    font-family: "Ubuntu";
-	font-size: 21px;
-
-}
-
-p.num{
-	font-size: 90px;
-	margin: 14px;
-}
-
-em {
-	font-style: inherit;
-	color: #EEE;;
-}
-
 	/* Nav */
-	
-	
+
 #header {
-    display: flex;
-    background: #3872A9;
-    height: 70px;
-    margin: 0;
-    align-items: center;
-	box-shadow: 0px 1px 3px #00000087;
+   display: flex;
+   background: #3872A9;
+   height: 70px;
+   margin: 0;
+   align-items: center;
+   box-shadow: 0px 1px 3px #00000087;
 }
 
 #logo {
@@ -41,11 +23,11 @@ em {
 }
 
 #nav {
-    display: flex;
-    width: 100vw;
-	height: 100%;
-    justify-content: flex-start;
-    align-items: center;
+   display: flex;
+   width: 100vw;
+   height: 100%;
+   justify-content: flex-start;
+   align-items: center;
 }
 
 /* För användare som ej har JS aktiverat */
@@ -62,10 +44,6 @@ em {
 #noCanvas {
 	display: block;
 	padding: 0 5px;
-}
-
-#noCanvas h2 {
-	text-align: center;
 }
 
 /* Länkarna i navigationsmenyn */
@@ -90,14 +68,14 @@ em {
 
 /* Profilrutan med finfin bild */
 #profile {
-    background: #F0C247;
-    height: 60px;
-    width: 60px;
-  
-    /* För att inte mosas med flex*/
-    flex-shrink: 0;
-	text-align: center;
-	
+   background: #F0C247;
+   height: 60px;
+   width: 60px;
+
+   /* För att inte mosas med flex*/
+   flex-shrink: 0;
+   text-align: center;
+
 }
 
 
@@ -113,11 +91,35 @@ body {
 }
 
 h1 {
-	width: 100%;
-    margin: 0px;
+   margin: 0px;
 	font-size: 30px;
-	text-align: center; 
-	font-family: "Ubuntu";
+	text-align: center;
+}
+
+h2 {
+   font-size: 25px;
+   padding: 5px 0;
+   text-align: center;
+}
+
+p {
+   margin: 13px 20px 30px 20px;
+	font-size: 21px;
+}
+
+em {
+   font-style: inherit;
+   color: #ffffff;
+   background: #49b55c;
+   padding: 2px 4px;
+   display: inline-block;
+   border-radius: 5px;
+   font-size: 19px;
+}
+
+a {
+   text-decoration: none;
+   color: #3872a9;
 }
 
 /* Rubrik för bitar eller satser */
@@ -149,24 +151,21 @@ h1 {
 }
 
 #textBox {
-	display: flex;
-	color: #1c4b79;
-	background: #9cc4eb;
-	height: 100%;
-	box-shadow: 0px 1px 3px #00000087;
+   color: #3c904c;
+   background: #e3fbe8;
+   height: 100%;
+   box-shadow: 0px 1px 3px #00000087;
+}
+
+#textBox a:hover {
+   text-decoration: underline;
 }
 
 #textHeader {
 	display: block;
-    background: #3871a9;
-    color: white;
+   background: #49b55c;
+   color: white;
 	box-shadow: 0px 1px 3px #00000087;
-}
-
-.textColumn {
-	flex-shrink: 1;
-	width: 100%;
-	margin: 5px 10px; 
 }
 
 .outerWrapper {
@@ -178,15 +177,15 @@ h1 {
 
 /* Antal bitar/satser */
 #amountsWrapper {
-    display: flex;
-    flex-direction: column;
+   display: flex;
+   flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
 
 .amountBox {
     color: #5f4400;
-    background: #f1c247;
+    background: #fbca43;
     width: 70%;
     margin-bottom: 50px;
     text-decoration: none;
@@ -195,18 +194,28 @@ h1 {
     box-shadow: 0px 1px 3px #00000087;
 }
 
+.amountBox:hover {
+   background: #f1c247;
+   text-decoration: none;
+}
+
 .amountBox h1 {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    box-shadow: 0 1px 3px #00000087;
-    color: white;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   box-shadow: 0 1px 3px #00000087;
+   color: white;
 	background: #ffca43;
 }
 
 .amountBox p {
 	font-size: 100px;
-    margin-top: 40px;
+   margin-top: 40px;
 	margin-bottom: 50px;
+}
+
+.num {
+	font-size: 90px;
+	margin: 14px;
 }
 
 /* Intressant och lärorik textruta */
@@ -229,24 +238,68 @@ h1 {
     display: none;
 }
 
-#diagrams {
-    background: #9CC4EA;
+#information {
+   background: #9CC4EA;
+   color: #183c5f;
 	width: 100%;
+   box-shadow: 0px 1px 3px #00000087;
 }
 
-#diagrams h1 {
+#information h1 {
     background: #3872A9;
     color: white;
+    box-shadow: 0px 1px 3px #00000087;
 }
 
+#information p {
+   margin: 10px 200px 30px 200px;
+}
+
+/* Vill inte påverka p-taggarna i div:ar i #information, bara de som ligger direkt i*/
+#information > p:first-of-type {
+   border-top: 2px solid;
+   padding-top: 10px;
+   margin-top: 25px;
+}
+
+#information > p:last-of-type {
+   border-bottom: 2px solid;
+   padding-bottom: 10px;
+   margin-bottom: 25px;
+}
+
+#diagram {
+   position: relative; /* Låter denna div agera som ett slags ankare för #diagramInformation */
+   background: #3872a9;
+   color: white;
+   margin: 0 50px 20px 50px;
+   border-radius: 10px;
+   box-shadow: 0 2px 3px 1px #00000087;
+}
+
+#diagramInformation {
+   position: absolute; /* Vill positionera informationen centrerad och "ovanför" resten av innehållet */
+   display: none; /* Görs synlig med JS */
+   left: 0;
+   right: 0;
+   background: #154573;
+   border-radius: inherit;
+   box-shadow: inherit;
+   text-align: center;
+   font-size: 24px;
+   padding: 10px 0;
+}
+
+#diagramInformation span {
+   color: #f0c247;
+}
 
 #canvas {
     /* Sätter bredd till 100% här för att tvinga korrekt storlek, skalningen sköts i JS */
     width: 100%;
     border: none;
-
+    z-index: 2;
 }
-
 
 	/* Sökfält för parts och sets	*/
 
@@ -484,7 +537,7 @@ label {
 #profileSets {
     width: 100%;
 	height: 120px;
-	
+
 }
 
 #profilepicture{
@@ -515,7 +568,7 @@ table {
 th, td {
 	padding: 15px;
 }
-	
+
 .dataColumn {
 	background: #1c4b79;
 	color: white;
@@ -536,14 +589,14 @@ th, td {
 	color: #1c4b79;
 	text-align: center;
 }
-	
+
 .histogram {
 	height: 20px;
 	display: block;
 	background: #1c4b79;
 	width: 100px;
 	padding: 0;
-	
+
 
 }
 
