@@ -379,6 +379,7 @@ clearSearchTags = function() {
 	}
 }
 
+/* Avaktiverar searchknappen om inga taggar är valda och vice versa */
 searchButtonDisable = function() {
 	var tagContainer = document.getElementById("tagContainer");
 	var numberOfTags = tagContainer.childElementCount;
@@ -390,7 +391,6 @@ searchButtonDisable = function() {
 		document.getElementById("searchButton").disabled = false;
 		document.getElementById("searchButton").style.color = 'white';
 	}
-	return numberOfTags;
 }
 
 
@@ -403,3 +403,4 @@ window.addEventListener("load", addHiddenInputs);
 window.addEventListener("keydown", navigateTagList);
 window.addEventListener("click", searchButtonDisable);
 window.addEventListener("keydown", searchButtonDisable);
+window.addEventListener("load", searchButtonDisable);
