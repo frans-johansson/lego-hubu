@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html>
+<html lang="en">
 	<head>
 		<?php
 			include "pages/res/head.php";
