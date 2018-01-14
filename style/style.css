@@ -251,17 +251,50 @@ a {
    margin: 10px 200px 30px 200px;
 }
 
+.toplist{
+	display: flex;
+	justify-content: center;
+}
+
+.toplist tr td:first-of-type {
+	background-color: #3872a9;
+    color: white;
+    border-radius: 100px;
+    text-align: center;
+}
+
+
+.toplist tr td:last-of-type {
+    text-align: center;
+}
+
+.toplist table {
+    border-spacing: 10px;
+}
+.toplist tr:first-of-type {
+	color: #1c4b79;
+}
+
+#topListInfo{
+	margin-top: 70px;
+	border-top: 2px solid #3872a95e;
+	border-bottom: 2px solid #3872a95e;
+}
+
+
 /* Vill inte påverka p-taggarna i div:ar i #information, bara de som ligger direkt i*/
 #information > p:first-of-type {
    border-top: 2px solid;
    padding-top: 10px;
    margin-top: 25px;
+  
 }
 
 #information > p:last-of-type {
    border-bottom: 2px solid;
    padding-bottom: 10px;
    margin-bottom: 25px;
+   text-align: center;
 }
 
 #diagram {
