@@ -1,3 +1,4 @@
+<!-- Alla länkar som behövs beroende på vilken sida av hemsidan man är på -->
 <meta charset="utf-8">
 <title>Legu Hubu</title>
 <link type="text/css" rel="stylesheet" href="style/style.css">

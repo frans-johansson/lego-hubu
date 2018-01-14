@@ -394,15 +394,6 @@ a {
 	align-self: initial;
 }
 
-/* Gör så att söktexten i tag-drop-downen inte går att klicka på
-
-.searchContent {
-	pointer-events: none;
-}
-
-Räknas dessvärre ej som CSS-standard och validerar ej
-*/
-
 .tagOption {
 	margin: 0;
     padding: 3px;
