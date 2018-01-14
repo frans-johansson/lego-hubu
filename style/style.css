@@ -43,7 +43,12 @@
 
 #noCanvas {
 	display: block;
-	padding: 0 5px;
+	background: #E43E3E;
+	color: white;
+	margin: 5px 50px;
+	padding: 5px 0;
+	border-radius: 10px;
+    box-shadow: 0 2px 3px 1px #00000087;
 }
 
 /* Länkarna i navigationsmenyn */
