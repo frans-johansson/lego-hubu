@@ -74,11 +74,11 @@
 	
 
 // Om antalet rader i resultatet är samma som antalet som ska visas så ska det finnas en next-knapp för att se resten
-	if($rowCount[0] > $displaylimit + $displayFrom) {
+	if($rowCount[0] > $displayLimit + $displayFrom) {
 		// Next-knappen skrivs ut och leder till sidan som kommer eefter den närvarande
 		$next = $pageNumber+1;
 		print "<button id='nextPage' type='submit' name='page' value='$next'>Next</button>";
-	} // TEST 3514-1
+	}
 
 ?>
 
