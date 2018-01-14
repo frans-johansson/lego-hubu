@@ -1,17 +1,17 @@
 <!-- Diagram som ritas upp med hjälp av canvas -->
 <div id="information">
    <h1>So what is Lego?</h1>
-	<p> Lego is a line of plastic construction toys that consists of interlocking bits, gears, minifigures and various other parts.
-	Lego can be assembled in many different ways and then disassembled and be used again. It is made by the lego group, a family owned
-	company based in denmark, billund founded by Ole Kirk Christiansen. Lego begun manufacturing in 1949 . Since then lego has become
-	something more than just plastic bits that you can build new creations with. Under the brand there have been several legoland amusement
-	parks, movies, games, competitions.
+	<p> Lego is a line of plastic construction toys that consist of interlocking bits, gears, mini-figures and various other parts.
+	Lego can be assembled in many different ways and then disassembled to be used again. It is made by the Lego Group, a family owned
+	company based in Billund, Denmark founded by Ole Kirk Christiansen. Lego begun manufacturing their products in 1949. Since then Lego has become
+	something more than just plastic bits that you can build new creations with. Under the brand there have been several,
+	movies, games, competitions as well as the Legoland amusement parks.
 	</p>
-	<p>The name lego was made by its founder Ole Kirk Christiansen. It comes from the danish word leg godt meaning “play well”.
+	<p>The name Lego comes from the Danish word "leg godt" meaning “play well”.
 	</p>
-	<p>Legoland is a chain of family theme parks, that is not fully owned by the lego group . The first legoland opened in 1968 in billund denmark.
-	Now you can find legolands in malaysia, japan, usa, United Arab Emirates, germany and england. One of the big attractions in legoland are models
-	of landmarks and scenes from around the world, made from millions of genuine Lego bricks.
+	<p>Legoland is a chain of family theme parks not fully owned by the Lego Group. The first Legoland opened in 1968 in Billund, Denmark.
+	Now the amusement parks can be found throughout the world, for example in Malaysia, Japan, the United States, the United Arab Emirates, Germany and The United Kingdom.
+	One of the big Legoland attractions are the models of landmarks and scenes from around the world, made from millions of genuine Lego bricks.
 	</p>
 
    <div id="diagram">
