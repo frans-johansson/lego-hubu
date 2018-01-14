@@ -486,11 +486,42 @@ label {
 }
 
 /* Page select */
+
 #pageSelect {
 	margin: 0 auto 30px auto;
 }
 
+.pageSelectButton {
+	border-radius: 5px;
+	border: none;
+}
 
+.firstNextPrevLastPage {
+	background: #f0c247;
+	margin: 0 10px 0 10px;
+}
+
+button.firstNextPrevLastPage:hover {
+	background: #d4a011;
+}
+
+.numberPage {
+	background: lightBlue;
+}
+
+.numberPage:hover {
+	background: #f0c247;
+}
+
+.pageSelectButton:hover {
+	border-radius: 5px;
+	border: none;
+	background: #f0c247;
+}
+
+#currentPageNumberButton {
+	background: #f0c247;
+}
 
 	/* Användarens pop-up */
 
