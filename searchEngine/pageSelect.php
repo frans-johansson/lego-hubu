@@ -124,7 +124,7 @@
 	}
 	
 // Last page knapp
-	if($pageNumber != $totalPages)
+	if($pageNumber != $totalPages && $rowCount[0] != 0)
 	print "<button class='pageSelectButton firstNextPrevLastPage' type='submit' name='page' value='$totalPages'>Last</button>";
 
 ?>
