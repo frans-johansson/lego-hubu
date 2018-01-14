@@ -57,28 +57,67 @@
 // Läs in vilken sida som användaren inne på, exemepel sida 1, sida 2 osv
 	$pageNumber = $_GET["page"];
 
-
-// Se om previous-knappen ska visas eller ej, alltså om användaren är inne på sida 0 eller inte
-	if($pageNumber > 0){
-		// Ange vilken sida som ska bytas till
-		$prev = $pageNumber-1;
-		print "<button id='prevPage' type='submit' name='page' value='$prev'>Previous</button>";
-	}
-
-// Läs in vilken sida användaren beifnner sig på, parts eller sets
+// Läs in vilken sida användaren befinner sig på, parts eller sets
 	$page = $_GET["p"];
 
 
 // Koppla upp mot databasen
 	include "searchEngine/connect.php";
 	
+// First page knapp
+	print "<button id='firstPage' type='submit' name='page' value=0>First</button>";
+	
+// Se om previous-knappen ska visas eller ej, alltså om användaren är inne på sida 0 eller inte
+	if($pageNumber > 0){
+		// Ange vilken sida som ska bytas till
+		$prev = $pageNumber-1;
+		print "<button id='prevPage' type='submit' name='page' value='$prev'>Previous</button>";
+	}
+	
+/* 
+	Välj sida med klickbara siffror
+*/
+
+// Skape array av nummer att välja sidor med
+	$totalPages = ceil($rowCount[0] / $displaylimit) - 1;
+	$amountPageSelectors = 9 - 1;
+	$pageSelectArray[0] = $pageNumber;
+	$fillLower = true;
+	$lowerPage = $pageNumber - 1;
+	$higherPage = $pageNumber + 1;
+	for($i = 1; $i <= $amountPageSelectors; $i++) {
+		if($lowerPage >= 0 && $fillLower) {
+			$pageSelectArray[$i] = $lowerPage;
+			$fillLower = false;
+			$lowerPage--;
+		} else if($higherPage < $totalPages) {
+			$pageSelectArray[$i] = $higherPage;
+			$fillLower = true;
+			$higherPage++;
+		} else if($fillLower > 0) {
+			$pageSelectArray[$i] = $lowerPage;
+		} else {
+			break;
+		}
+	}
+// Sortera arrayen i storleksordning
+	sort($pageSelectArray);
+	
+// Skriv ut alla knapparna
+	for($j = 0; $j < count($pageSelectArray); $j++) {
+		$pageSelectValue = $pageSelectArray[$j];
+		print "<button type='submit' name='page' value='$pageSelectValue'>$pageSelectValue</button>";
+	}
+	
 
 // Om antalet rader i resultatet är samma som antalet som ska visas så ska det finnas en next-knapp för att se resten
-	if($rowCount[0] > $displaylimit + $displayFrom) {
-		// Next-knappen skrivs ut och leder till sidan som kommer eefter den närvarande
-		$next = $pageNumber+1;
-		print "<button id='nextPage' type='submit' name='page' value='$next'>Next</button>";
+	if($page < $totalPages) {
+		// Next-knappen skrivs ut och leder till sidan som kommer efter den närvarande
+		print "<button id='nextPage' type='submit' name='page' value='$higherPage'>Next</button>";
 	} // TEST 3514-1
+	
+// Last page knapp
+	print "<button id='lastPage' type='submit' name='page' value='$totalPages'>Last</button>";
 
 ?>
 
