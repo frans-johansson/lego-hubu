@@ -79,7 +79,7 @@
 */
 
 // Skape array av nummer att välja sidor med
-	$totalPages = ceil($rowCount[0] / $displaylimit) - 1;
+	$totalPages = ceil($rowCount[0] / $displayLimit) - 1;
 	$amountPageSelectors = 9 - 1;
 	$pageSelectArray[0] = $pageNumber;
 	$fillLower = true;
@@ -111,6 +111,7 @@
 	
 
 // Om antalet rader i resultatet är samma som antalet som ska visas så ska det finnas en next-knapp för att se resten
+
 	if($page < $totalPages) {
 		// Next-knappen skrivs ut och leder till sidan som kommer efter den närvarande
 		print "<button id='nextPage' type='submit' name='page' value='$higherPage'>Next</button>";
@@ -118,6 +119,12 @@
 	
 // Last page knapp
 	print "<button id='lastPage' type='submit' name='page' value='$totalPages'>Last</button>";
+	if($rowCount[0] > $displayLimit + $displayFrom) {
+		// Next-knappen skrivs ut och leder till sidan som kommer eefter den närvarande
+		$next = $pageNumber+1;
+		print "<button id='nextPage' type='submit' name='page' value='$next'>Next</button>";
+	}
+
 
 ?>
 

@@ -37,4 +37,10 @@
 			with you having disabled it. </p>
 		<p>	We hope you will have a nice day despite not using JavaScript and thus not experiencing the Internet and all of its JavaScript-dependent content like most of us do. </p>
    </noscript>
+   
+   <?php
+		// Inkludera fil för att visa toplistor över antalet satser med flest bitar och antalet bitar som ingår i flest satser
+			include "toplist.php";
+	?>
+   
 </div>

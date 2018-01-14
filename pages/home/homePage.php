@@ -1,17 +1,15 @@
 <div id="page">
         <!--Inkludera fil med övre sidinnehållet-->
         <?php
-            include "upperHome.php"
-
+            include "upperHome.php";
+			include "diagram.php";
         ?>
+
 		<!--Inkludera informationen om satser per år-->
 		<table id="diagramData">
 		<?php
-			include "tableTime.php"
+			include "tableTime.php";
 		?>
 		</table>
         <!--Inkludera diagram-fil-->
-        <?php
-            include "diagram.html"
-        ?>
 </div>

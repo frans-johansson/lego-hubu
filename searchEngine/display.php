@@ -1,9 +1,11 @@
 <?php
 
+	// Skriv ut en div med meddelande om hur många sökresultat som sökningen genrerat
+		print "<div id='searchSuccess'>Thank you for your patience. Your search generated $rowCount[0] results.</div>";
+
     if($page == parts) {
         // Skriv ut tabellhuvudena
-        print "<div id='searchSuccess'>Thank you for your patience. Your search generated $rowCount[0] results.</div>
-				<table>
+        print "<table>
 					<tr>
 						<th>Image</th>
 						<th>ID</th>
@@ -15,8 +17,7 @@
     }
     else if($page == sets) {
         // Skriv ut tabellhuvudena
-        print "<div id='searchSuccess'>Thank you for your patience. Your search generated $rowCount[0] results.</div>
-				<table>
+        print "<table>
 					<tr>
 						<th id='idColumn' class='dataColumn'>ID</th>
 						<th class='dataColumn'>Name</th>
@@ -33,7 +34,7 @@
 // Hämta arrayen med resultatet igen, annars kör den inte igenom arrayen utan visar bara resultatet för samma bit om och om igen i alla evighet
     while($row = mysqli_fetch_array($result)) {
 
-        // Gå igenom och ändra i detta nu när bättre lösning funnen
+	// Läs in om sökningen är gjord på sidan parts eller sets och skriv ut den information som ska skrivas ut
         if($page == parts) {
             // Lägg informationen som ska visas i separata variabler
                 $ID = $row["PartID"];
@@ -73,8 +74,14 @@
                 }
 
             // Skriv ut detta i tabellen
-                print "<tr><td><img class='partpicture' src=\"$link\" alt=\"$name\"></td><td>$ID</td><td>$Partname</td>
-                        <td>$Color</td><td>$numSets</td><td>$Year</td></tr>";
+                print 	"<tr>
+							<td><img class='partpicture' src=\"$link\" alt=\"$name\"></td>
+							<td>$ID</td>
+							<td>$Partname</td>
+							<td>$Color</td>
+							<td>$numSets</td>
+							<td>$Year</td>
+						</tr>";
         }
         else if($page == sets) {
             // Lägg informationen som ska visas i separata variabler
@@ -88,11 +95,17 @@
 
 
             // Skriv ut detta i tabellen
-                print "<tr><td class=\"dataColumn\">$ID</td><td class=\"dataColumn\">$Setname</td><td class=\"dataColumn\">$Year</td><td class=\"partsAmount\">$numParts</td><td class=\"histogramCell\">
-                      <div class=\"histogram\" style=\"width: $percentage%\"></div></td></tr>";
+                print 	"<tr>
+							<td class=\"dataColumn\">$ID</td>
+							<td class=\"dataColumn\">$Setname</td>
+							<td class=\"dataColumn\">$Year</td>
+							<td class=\"partsAmount\">$numParts</td>
+							<td class=\"histogramCell\"><div class=\"histogram\" style=\"width: $percentage%\"></div></td>
+						</tr>";
         }
     }
 	
-	print "</table>";
+	// Stäng tabellen
+		print "</table>";
 
 ?>

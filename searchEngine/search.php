@@ -11,7 +11,7 @@
 
 
 // Den gräns vi valt för hur många sökresultat som visas i taget
-    $displaylimit = 20;
+    $displayLimit = 20;
 
 
 // Läs in om vi är inne på sidan parts eller sets
@@ -114,7 +114,7 @@
 
 // Om användaren är inne på sets och en sökning gjorts, ta fram antalet bitar hos det set som innehåller flest bitar av de set som matchar sökningen
 // Detta är nödvändig information för histogrammet och används när resultatet skrivs ut
-    if($where && $page == sets){
+    if($page == sets){
 
         // Ställ frågan och läs in resultatet
         $maxPartsResult = mysqli_query($connection, "$maxPartsQuery");
@@ -151,10 +151,7 @@
 			include "searchEngine/display.php";
     }
 
-
-// Om en fråga ställdes så ska nu kopplingen till databasen stängas
-    if($where) {
+// Stänger kopplingen till databasen som öppnads i den inkluderade filen condition.php 
         mysqli_close($connection);
-    }
 
 ?>

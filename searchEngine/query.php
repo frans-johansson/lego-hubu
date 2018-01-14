@@ -1,6 +1,6 @@
 <?php
 
-	$displayFrom = $lowerLimit * $displaylimit; 
+	$displayFrom = $lowerLimit * $displayLimit;
 
     if($page == parts) {
         /*if($_GET["set"]) {
@@ -10,7 +10,7 @@
                             AND ItemTypeID = 'P' AND inventory.SetID = sets.SetID AND (ItemID, Colorname) IN
                             (SELECT ItemID, Colorname FROM inventory, sets, colors WHERE sets.SetID = inventory.SetID
                             AND colors.ColorID = inventory.ColorID $where) GROUP BY $group
-                            ORDER BY $order LIMIT $displayFrom, $displaylimit";
+                            ORDER BY $order LIMIT $displayFrom, $displayLimit";
         }
         else {
 			
@@ -29,12 +29,12 @@
                             FROM parts, inventory, sets, colors $table WHERE PartID = ItemID AND
                             inventory.ColorID = colors.ColorID AND ItemTypeID = 'P' AND
                             inventory.SetID = sets.SetID $where GROUP BY $group
-                            ORDER BY $order LIMIT $displayFrom, $displaylimit";
+                            ORDER BY $order LIMIT $displayFrom, $displayLimit";
         //}
     }
     else if($page == sets) {
         $searchQuery = "SELECT SQL_CALC_FOUND_ROWS sets.SetID, Setname, MIN(Year), SUM(inventory.Quantity) FROM sets, inventory $table WHERE ItemTypeID = 'P'
-                        AND sets.SetID = inventory.SetID $where GROUP BY $group ORDER BY $order LIMIT $displayFrom, $displaylimit";
+                        AND sets.SetID = inventory.SetID $where GROUP BY $group ORDER BY $order LIMIT $displayFrom, $displayLimit";
 
         // Skapa en sökfråga för att få fram vilket set som innehåller flest bitar utav alla i resultatet
         // Detta är nödvändig information för hur histogrammet ska ritas upp
