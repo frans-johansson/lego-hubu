@@ -514,9 +514,30 @@ label {
 
 .table {
 	background: lightBlue;
+	color: #1c4b79;
+	font-size: 20px;
 	width: 100%;
 	height: 100%;
 }
+
+.leftTable {
+	background: #1c4b79;
+	color: white;
+}
+
+td:nth-of-type(3) {
+	padding-left: 30px; /* Lägger till lite mer utrymme efter den sista "mörka" kolonnen */
+}
+
+.leftTable img {
+	border-radius: 4px;
+}
+
+/* Sidnavigation i resultatet */
+#pageSelect {
+	margin: 0 auto 30px auto;
+}
+
 
 
 	/* Användarens pop-up */
@@ -626,8 +647,6 @@ th, td {
 	background: #1c4b79;
 	width: 100px;
 	padding: 0;
-
-
 }
 
 #histogramColumn {
@@ -637,7 +656,8 @@ th, td {
 .histogramCell {
 	width: 50%;
 }
-/* Media query */
+
+/* Media queries - För bättre responsivitet */
 @media screen and (max-width: 1300px){
 	.outerWrapper {
 		flex-direction: column;
