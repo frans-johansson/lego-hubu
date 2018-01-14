@@ -103,6 +103,16 @@ drawCanvas = function() {
 	}
 }
 
+/*	Avmarkerar alla staplar och ritar om diagrammet. Bunden till onmouseout för diagrammet.
+*/
+resetHover = function() {
+	for (var i = 0; i < rects.length; i++) {
+		rects[i].hasHover = false;
+	}
+	
+	drawCanvas();
+}
+
 /*	Flaggar en stapel om muspekaren befinner sig över den. Tar emot "pointer" vilket motsvarar muspekarens
  	och låter oss beräkna dess koordinater på canvas-elementet. Bunden till onmousemove i canvas.
 */

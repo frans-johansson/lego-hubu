@@ -24,7 +24,7 @@
       <p id="diagramInformation"><span id="diagramAmount"></span> new Lego sets were released in <span id="diagramYear"></span></p>
 
       <!-- Här ritas diagrammet -->
-      <canvas id="canvas" onmouseover="toggleInformation()" onmouseout="toggleInformation()"></canvas>
+      <canvas id="canvas" onmouseover="toggleInformation()" onmouseout="toggleInformation(); resetHover()"></canvas>
    </div>
 
    <!-- Visas för de som inte har JS aktiverat och därmed inte kan leka med diagrammet -->
@@ -37,12 +37,6 @@
 			with you having disabled it. </p>
 		<p>	We hope you will have a nice day despite not using JavaScript and thus not experiencing the Internet and all of its JavaScript-dependent content like most of us do. </p>
    </noscript>
-   
-   <div id="topListInfo">
-		<h2>
-			Top ten list over the largest sets lego has released according to our database
-		</h2>
-   </div>
    
    <?php
 		// Inkludera fil för att visa toplistor över antalet satser med flest bitar och antalet bitar som ingår i flest satser

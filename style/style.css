@@ -253,7 +253,15 @@ a {
 
 .toplist{
 	display: flex;
-	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.toplist h2 {
+	margin-top: 70px;
+	padding: 15px 10px;
+	border-top: 2px solid;
+	border-bottom: 2px solid; 
 }
 
 .toplist tr td:first-of-type {
@@ -262,7 +270,6 @@ a {
     border-radius: 100px;
     text-align: center;
 }
-
 
 .toplist tr td:last-of-type {
     text-align: center;
@@ -273,12 +280,6 @@ a {
 }
 .toplist tr:first-of-type {
 	color: #1c4b79;
-}
-
-#topListInfo{
-	margin-top: 70px;
-	border-top: 2px solid #3872a95e;
-	border-bottom: 2px solid #3872a95e;
 }
 
 
@@ -294,7 +295,6 @@ a {
    border-bottom: 2px solid;
    padding-bottom: 10px;
    margin-bottom: 25px;
-   text-align: center;
 }
 
 #diagram {
