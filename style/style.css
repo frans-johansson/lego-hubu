@@ -43,7 +43,12 @@
 
 #noCanvas {
 	display: block;
-	padding: 0 5px;
+	background: #E43E3E;
+	color: white;
+	margin: 5px 50px;
+	padding: 5px 0;
+	border-radius: 10px;
+    box-shadow: 0 2px 3px 1px #00000087;
 }
 
 /* Länkarna i navigationsmenyn */
@@ -251,11 +256,44 @@ a {
    margin: 10px 200px 30px 200px;
 }
 
+.toplist{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.toplist h2 {
+	margin-top: 70px;
+	padding: 15px 10px;
+	border-top: 2px solid;
+	border-bottom: 2px solid; 
+}
+
+.toplist tr td:first-of-type {
+	background-color: #3872a9;
+    color: white;
+    border-radius: 100px;
+    text-align: center;
+}
+
+.toplist tr td:last-of-type {
+    text-align: center;
+}
+
+.toplist table {
+    border-spacing: 10px;
+}
+.toplist tr:first-of-type {
+	color: #1c4b79;
+}
+
+
 /* Vill inte påverka p-taggarna i div:ar i #information, bara de som ligger direkt i*/
 #information > p:first-of-type {
    border-top: 2px solid;
    padding-top: 10px;
    margin-top: 25px;
+  
 }
 
 #information > p:last-of-type {
@@ -355,15 +393,6 @@ a {
 	overflow: hidden;
 	align-self: initial;
 }
-
-/* Gör så att söktexten i tag-drop-downen inte går att klicka på
-
-.searchContent {
-	pointer-events: none;
-}
-
-Räknas dessvärre ej som CSS-standard och validerar ej
-*/
 
 .tagOption {
     margin: 10px;
@@ -481,12 +510,26 @@ label {
 
 .table {
 	background: lightBlue;
+	color: #1c4b79;
+	font-size: 20px;
 	width: 100%;
 	height: 100%;
 }
 
-/* Page select */
+.leftTable {
+	background: #1c4b79;
+	color: white;
+}
 
+td:nth-of-type(3) {
+	padding-left: 30px; /* Lägger till lite mer utrymme efter den sista "mörka" kolonnen */
+}
+
+.leftTable img {
+	border-radius: 4px;
+}
+
+/* Sidnavigation i resultatet */
 #pageSelect {
 	margin: 0 auto 30px auto;
 }
@@ -630,8 +673,6 @@ th, td {
 	background: #1c4b79;
 	width: 100px;
 	padding: 0;
-
-
 }
 
 #histogramColumn {
@@ -641,7 +682,8 @@ th, td {
 .histogramCell {
 	width: 50%;
 }
-/* Media query */
+
+/* Media queries - För bättre responsivitet */
 @media screen and (max-width: 1300px){
 	.outerWrapper {
 		flex-direction: column;

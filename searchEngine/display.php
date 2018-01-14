@@ -7,9 +7,9 @@
         // Skriv ut tabellhuvudena
         print "<table>
 					<tr>
-						<th>Image</th>
-						<th>ID</th>
-						<th>Name</th>
+						<th class='leftTable'>Image</th>
+						<th class='leftTable'>ID</th>
+						<th class='leftTable'>Name</th>
 						<th>Color</th>
 						<th>Included in sets</th>
 						<th>Release year</th>
@@ -75,9 +75,9 @@
 
             // Skriv ut detta i tabellen
                 print 	"<tr>
-							<td><img class='partpicture' src=\"$link\" alt=\"$name\"></td>
-							<td>$ID</td>
-							<td>$Partname</td>
+							<td class='leftTable'><img class='partpicture' src=\"$link\" alt=\"$name\"></td>
+							<td class='leftTable'>$ID</td>
+							<td class='leftTable'>$Partname</td>
 							<td>$Color</td>
 							<td>$numSets</td>
 							<td>$Year</td>

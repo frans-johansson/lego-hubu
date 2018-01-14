@@ -13,6 +13,7 @@
 Tabellen ligger i en div och första tabellhuvudet spänner över två kolonner,
 en för vilket nummer satsen ligger på och en för namnet*/
 	print "<div class='toplist' id='setsList'>
+			<h2>Top ten list over the largest sets Lego has released according to our database</h2>
 			<table>
 				<tr>
 					<th colspan=2>Setname</th>
