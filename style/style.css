@@ -485,6 +485,12 @@ label {
 	height: 100%;
 }
 
+/* Page select */
+#pageSelect {
+	margin: 0 auto 30px auto;
+}
+
+
 
 	/* Användarens pop-up */
 
