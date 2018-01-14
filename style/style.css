@@ -481,11 +481,21 @@ label {
 
 .table {
 	background: lightBlue;
+	font-size: 20px;
 	width: 100%;
 	height: 100%;
 }
 
-/* Page select */
+.leftTable {
+	background: #1c4b79;
+	color: white;
+}
+
+td:nth-of-type(3) {
+	padding-left: 30px; /* Lägger till lite mer utrymme efter den sista "mörka" kolonnen */
+}
+
+/* Sidnavigation i resultatet */
 #pageSelect {
 	margin: 0 auto 30px auto;
 }
