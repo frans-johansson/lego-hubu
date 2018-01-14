@@ -604,7 +604,8 @@ th, td {
 .histogramCell {
 	width: 50%;
 }
-/* Media query */
+
+/* Media queries - För bättre responsivitet */
 @media screen and (max-width: 1300px){
 	.outerWrapper {
 		flex-direction: column;
