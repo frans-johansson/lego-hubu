@@ -126,6 +126,7 @@ a {
 .pageHeader {
 	color: white;
 	background: #3872A9;
+	width: 100%;
 	padding-top: 5px;
 	padding-bottom: 10px;
 	border-bottom: 2px solid #0000001c;
@@ -193,6 +194,7 @@ a {
     height: 40%;
     box-shadow: 0px 1px 3px #00000087;
 }
+
 
 .amountBox:hover {
    background: #f1c247;
@@ -370,7 +372,7 @@ Räknas dessvärre ej som CSS-standard och validerar ej
 */
 
 .tagOption {
-    /* Lägg till CSS för taggarna i dropdown-menyn */
+    margin: 10px;
 }
 
 /* Markerat tag-alternativ antingen med tangentbord eller mus (onhover) */
@@ -508,8 +510,7 @@ label {
 
 #profilePopup {
 	display: none;
-	width: 49%;
-	height: 280px;
+	height: 380px;
 	background: #3872A9;
 	text-align: center;
 	border-bottom: 29px solid #d6b14d;
@@ -525,7 +526,7 @@ label {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	margin: 3px 18px;
+	margin: 50px 18px;
 }
 
 #profileParts{
@@ -555,7 +556,14 @@ p.profileinfo{
 
 #profilePSwrapper{
 	float: left;
-	margin-left: 78px;
+	
+}
+
+#profilePartslarge{
+	height: 200px;
+    width: 200px;
+    margin: 0px;
+	
 }
 
 
@@ -607,3 +615,31 @@ th, td {
 .histogramCell {
 	width: 50%;
 }
+/* Media query */
+@media screen and (max-width: 1300px){
+	.outerWrapper {
+		flex-direction: column;
+	}
+}
+@media screen and (max-width: 1300px){
+	#profileWrapper {
+		flex-direction: column;
+		margin: 15px 18px;
+	}
+	#profilePopup{
+		height: 495px;
+	}
+	
+	#searchText{
+		    width: 180px;
+		
+	}
+}
+@media screen and (max-width: 800px){
+     #searchFilter {
+		width: 50px;
+	}
+	
+}
+}
+

@@ -21,21 +21,15 @@
 	<div class="wrapper">
 	<div id="textBox">
 		<h1 id="textHeader"> Welcome to Legu-Hubu </h1>
-			<p> This is a site for lego fans, the perfect place for you to satisfy your lego-curiosity! In sets you can search for lego by color, year, set and/or parts
-			and find which sets include what you searched for. In parts you can search for lego by color, year and/or parts and find out fascinating information about your
-			favourite parts, such as what year they were released, what colors they exist in or how many sets they're included in. To search you just write in the searchbar
-			and choose the tag you want to search by. You can search with more than one tag and choose in what order you want the search results to be displayed in. You can
+			<p> This is a site for lego fans, the perfect place for you to satisfy your lego-curiosity! In <em>sets</em> you can search for lego by color, year, set and/or parts
+			and find which sets include what you searched for. In <em>parts</em> you can search for lego by color, year and/or parts and find out fascinating information about your
+			favourite parts, such as what year they were released, what colors they exist in or how many sets they're included in. To search you just write in the <em>search bar</em>
+			and choose the <em>tag</em> you want to search by. You can search with more than one tag and choose in what order you want the search results to be displayed in. You can
 			even choose to see only the search results that match with what you have in your own collection!
              </p>
 			<p>
-				This is a site were Lego fans such as yourself can find information about your favorite pass-time.
-				If you are interested, for example, in knowing how many parts sets released in 1996 containing parts with "Volkswagen" in the name contains, why not head over to the <em>sets</em> section.
-				There you can find out how many parts sets contains based on release year, part or set name, part or set ID as well as color.
-				You can also look up individual parts based on color, release year as well as name or ID. To do this, head to the <em>parts</em> section.
-			</p>
-			<p>
 				Want find out how many parts and sets <em>your own collection</em> contains? Click your handsome-looking profile picture up in the right-hand corner of the website!
-             </p>
+            </p>
 			<p>
 				For the curious individual, generally interested in what these colorful pieces of plastic are all about, take a look at our brief summary down below. There you can also find an
 				<em>interactive diagram</em>, showing how many new Lego sets have been released each year going back all the way to the beginning of... this database.
@@ -47,4 +41,3 @@
 			</div>
 		</div>
 	</div>
-</div>
