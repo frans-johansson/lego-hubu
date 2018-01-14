@@ -37,7 +37,7 @@ en för vilket nummer satsen ligger på och en för namnet*/
 						<td>$toplistRow</td>
 						<td>$name</td>
 						<td>$quantity</td>
-					<tr>";
+					</tr>";
 					
 		// Öka variabeln med ett så att nästa sats visas med det efterföljande placeringsnumret
 			$toplistRow += 1;
