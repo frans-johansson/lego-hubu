@@ -404,7 +404,8 @@ Räknas dessvärre ej som CSS-standard och validerar ej
 */
 
 .tagOption {
-    margin: 10px;
+	margin: 0;
+    padding: 3px;
 }
 
 /* Markerat tag-alternativ antingen med tangentbord eller mus (onhover) */
